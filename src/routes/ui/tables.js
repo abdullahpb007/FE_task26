@@ -11,7 +11,6 @@ import classnames from "classnames";
 import DataTablePagination from "Components/DataTables/pagination";
 
 const dataTableData = productsData.data.slice(0, 20);
-console.log(dataTableData);
 const CustomTbodyComponent = props => (
   <div {...props} className={classnames("rt-tbody", props.className || [])}>
     <PerfectScrollbar option={{ suppressScrollX: true }}>

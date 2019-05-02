@@ -37,6 +37,7 @@ class DateDetails extends Component {
 
       dateData: [
         {
+          purchaseDate: "2019-01-01",
           estimatedDate: "2019-02-12",
           actualEstimatedDate: "2019-02-12",
           firstInstallmentDate: "2019-02-12",
@@ -110,13 +111,14 @@ class DateDetails extends Component {
 
       selectedDate: {},
 
-      purchaseDate: "2019-02-12",
+      purchaseDate: "2019-01-01",
 
-      estimatedDate: this.estimatedDateCal(this.purchaseDate),
+      //estimatedDate: this.estimatedDateCal(this.purchaseDate),
+      estimatedDate: "2019-02-21",
       actualEstimatedDate: "",
       firstInstallmentDate: "",
       secondInstallmentDate: "",
-      estimatedPetitionDate: "",
+      estimatedPetitionDate: "2019-03-01",
       petitionFiledDate: "",
       extentionDate: "",
       expirationDate: "",
@@ -150,12 +152,13 @@ class DateDetails extends Component {
     return `${month}-${date}-${year}`;
   };
 
-  estimatedDateCal = value => {
-    let startDate = new Date(value);
-    let incdate = 60 * 60 * 24 * 1000 * 125;
-    let endDate = new Date(startDate.getTime() + incdate);
-    return endDate;
-  };
+  //estimatedDateCal = value => {
+  //let startDate = new Date(value);
+  //let incdate = 60 * 60 * 24 * 1000 * 125;
+  //let endDate = new Date(startDate.getTime() + incdate);
+  //console.log(endDate);
+  //return endDate;
+  //};
 
   toggleAddDate = () => {
     this.setState({
