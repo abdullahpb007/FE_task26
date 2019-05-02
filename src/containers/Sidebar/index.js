@@ -444,6 +444,12 @@ class Sidebar extends Component {
                     <IntlMessages id="menu.content" />
                   </NavLink>
                 </NavItem>
+                <NavItem>
+                  <NavLink to="/app/dashboards/custom">
+                    <i className="simple-icon-doc" />{" "}
+                    <IntlMessages id="menu.custom" />
+                  </NavLink>
+                </NavItem>
               </Nav>
               <Nav
                 className={classnames({

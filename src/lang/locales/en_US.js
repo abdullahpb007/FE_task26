@@ -174,6 +174,18 @@ module.exports = {
   "menu.mailing": "Mailing",
   "menu.invoice": "Invoice",
 
+  //custom dashboard
+  "menu.custom": "Custom Dashboard",
+  "dashboards.pending-payments": "Pending Payments",
+  "dashboards.pending-payments-week": "Payments This Week",
+  "dashboards.upcomming-renewals": "Upcomming Renewals",
+  "dashboards.messages": "Messages from clients",
+  "dashboards.properties": "Total Properties",
+  "dashboards.to-do-list": "Pending To Do's",
+  "dashboards.assessee-added": "Total Assessee Added ",
+  "dashboards.bar-chart-title": "Payments in this year",
+  "dashboards.bar-chart-sub-title": "in %",
+
   /* 04.Dashboards */
   "dashboards.pending-orders": "Pending Orders",
   "dashboards.completed-orders": "Completed Orders",
