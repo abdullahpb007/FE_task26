@@ -56,6 +56,7 @@ module.exports = {
   "menu.propertyDetails": "Property Details",
   "property.add-modal-title": "Add New Property",
   "property.view-modal-title": "Property Details",
+  "property.edit-modal-title": "Edit Property Details",
   "property.propertyNumber": "Property Number",
   "property.county": "County",
   "property.pin": "Pin",
