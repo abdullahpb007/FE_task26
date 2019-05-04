@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from "react";
 import IntlMessages from "Util/IntlMessages";
-import { injectIntl} from 'react-intl';
+import { injectIntl } from 'react-intl';
 import {
   Row,
   Card,
@@ -67,7 +67,7 @@ import cakeData from "Data/dashboard.cakes.json";
 
 Chart.defaults.global.plugins.datalabels.display = false;
 
-const localizer = BigCalendar.momentLocalizer(moment) 
+const localizer = BigCalendar.momentLocalizer(moment)
 
 const selectData = [
   { label: "Chocolate", value: "chocolate", key: 0 },
@@ -138,7 +138,7 @@ class DefaultDashboard extends Component {
   };
 
   render() {
-    const {messages} = this.props.intl;
+    const { messages } = this.props.intl;
     return (
       <Fragment>
         <Row>
@@ -340,7 +340,7 @@ class DefaultDashboard extends Component {
                                 <span
                                   className={`log-indicator align-middle ${
                                     log.color
-                                  }`}
+                                    }`}
                                 />
                               </td>
                               <td>

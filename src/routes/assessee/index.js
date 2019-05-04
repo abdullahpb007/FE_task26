@@ -25,11 +25,11 @@ export default class ModalUi extends Component {
 
     this.state = {
       //Assessee Details
-      modalAddProperty: false,
-      modalEditProperty: false,
-      modalViewProperty: false,
+      modalAddassessee: false,
+      modalEditassessee: false,
+      modalViewassessee: false,
 
-      propertyData: [
+      assesseeData: [
         {
           name: "steve",
           pin: "6000",
@@ -48,7 +48,7 @@ export default class ModalUi extends Component {
         }
       ],
 
-      propertyColumn: [
+      assesseeColumn: [
         {
           Header: "Pin",
           accessor: "pin",
@@ -101,7 +101,7 @@ export default class ModalUi extends Component {
         }
       ],
 
-      selectedProperty: {},
+      selectedassessee: {},
 
       pin: "",
       name: "",
@@ -114,51 +114,35 @@ export default class ModalUi extends Component {
 
   //Assessee Details
 
-  toggleAddProperty = () => {
+  AddAssessee = () => {
     this.setState({
-      modalAddProperty: !this.state.modalAddProperty
+      modalAddassessee: !this.state.modalAddassessee
     });
   };
 
-  toggleViewProperty = () => {
+  viewAssessee = () => {
     this.setState({
-      modalViewProperty: !this.state.modalViewProperty
+      modalViewassessee: !this.state.modalViewassessee
     });
   };
 
-  toggleEditProperty = () => {
+  editAssessee = () => {
     this.setState({
-      modalEditProperty: !this.state.modalEditProperty
+      modalEditassessee: !this.state.modalEditassessee
     });
   };
 
-  viewBtnControl = property => {
-    const selectedProperty = { ...property };
-    this.setState({ selectedProperty });
-    this.toggleViewProperty();
+  viewBtnControl = assessee => {
+    const selectedassessee = { ...assessee };
+    this.setState({ selectedassessee });
+    this.viewAssessee();
   };
 
-  editBtnControl = property => {
-    const selectedProperty = { ...property };
-    this.setState({ selectedProperty });
-    this.toggleEditProperty();
+  editBtnControl = assessee => {
+    const selectedassessee = { ...assessee };
+    this.setState({ selectedassessee });
+    this.editAssessee();
   };
-
-  // handleSubmit = e => {
-  //     e.preventDefault();
-  //     // console.log(this.state.name);
-  //     // a.push({ name: this.state.name, address: this.state.address, city: this.state.city, states: this.state.states, zip: this.state.zip });
-  //     // this.setState(a);
-  //     console.log(a);
-  // }
-  // handleChange = ({ currentTarget: input }) => {
-  //     let a = [...this.state.values];
-  //     console.log(input .target.value);
-  //     // this.setState({ [e.target.name]: e.target.value });
-  //     a[input.name] = input.value;
-  //     this.setState({ a });
-
-  // }
 
   handleInputChange = event => {
     console.log(event.target.name, event.target.value);
@@ -169,52 +153,52 @@ export default class ModalUi extends Component {
 
   handleSubmit = event => {
     event.preventDefault();
-    const propertyData = [...this.state.propertyData];
+    const assesseeData = [...this.state.assesseeData];
 
-    propertyData.push({
+    assesseeData.push({
       name: this.state.name,
-      pin: propertyData.length + 6000,
+      pin: assesseeData.length + 6000,
       address: this.state.address,
       city: this.state.city,
       state: this.state.state,
       zip: this.state.zip
     });
-    this.toggleAddProperty();
-    this.setState({ propertyData });
+    this.AddAssessee();
+    this.setState({ assesseeData });
   };
 
   handleEditSubmit = event => {
     event.preventDefault();
-    const updatedProperty = {
+    const updatedassessee = {
       pin:
-        this.state.pin == "" ? this.state.selectedProperty.pin : this.state.pin,
+        this.state.pin == "" ? this.state.selectedassessee.pin : this.state.pin,
       name:
         this.state.name == ""
-          ? this.state.selectedProperty.name
+          ? this.state.selectedassessee.name
           : this.state.name,
       address:
         this.state.address == ""
-          ? this.state.selectedProperty.address
+          ? this.state.selectedassessee.address
           : this.state.address,
       city:
         this.state.city == ""
-          ? this.state.selectedProperty.city
+          ? this.state.selectedassessee.city
           : this.state.city,
       state:
         this.state.state == ""
-          ? this.state.selectedProperty.state
+          ? this.state.selectedassessee.state
           : this.state.state,
       zip:
-        this.state.zip == "" ? this.state.selectedProperty.zip : this.state.zip
+        this.state.zip == "" ? this.state.selectedassessee.zip : this.state.zip
     };
-    const propertyData = [...this.state.propertyData];
-    const index = propertyData.findIndex(p => {
-      return p.pin == this.state.selectedProperty.pin;
+    const assesseeData = [...this.state.assesseeData];
+    const index = assesseeData.findIndex(p => {
+      return p.pin == this.state.selectedassessee.pin;
     });
     console.log(index);
-    propertyData[index] = { ...updatedProperty };
-    this.toggleEditProperty();
-    this.setState({ propertyData });
+    assesseeData[index] = { ...updatedassessee };
+    this.editAssessee();
+    this.setState({ assesseeData });
   };
 
   render() {
@@ -233,11 +217,10 @@ export default class ModalUi extends Component {
                     color="success"
                     size="lg"
                     className="default"
-                    onClick={this.toggleAddProperty}
+                    onClick={this.AddAssessee}
                   >
                     <IntlMessages id="assessee.popup" />
                   </Button>
-                  {"  "}
                 </div>
 
                 <BreadcrumbItems match={this.props.match} />
@@ -250,8 +233,8 @@ export default class ModalUi extends Component {
               <div className="mb-4">
                 <Card>
                   <ReactTable
-                    data={this.state.propertyData}
-                    columns={this.state.propertyColumn}
+                    data={this.state.assesseeData}
+                    columns={this.state.assesseeColumn}
                     defaultPageSize={5}
                     className="mt-3 ml-3 mr-3"
                   />
@@ -261,11 +244,11 @@ export default class ModalUi extends Component {
           </Row>
         </div>
         <Modal
-          isOpen={this.state.modalAddProperty}
-          toggle={this.toggleAddProperty}
+          isOpen={this.state.modalAddassessee}
+          toggle={this.AddAssessee}
           size="lg"
         >
-          <ModalHeader toggle={this.toggleAddProperty}>
+          <ModalHeader toggle={this.AddAssessee}>
             <IntlMessages id="assessee.popupTitle" />
           </ModalHeader>
           <ModalBody>
@@ -323,7 +306,7 @@ export default class ModalUi extends Component {
             </Row>
           </ModalBody>
           <ModalFooter>
-            <Button color="secondary" outline onClick={this.toggleAddProperty}>
+            <Button color="secondary" outline onClick={this.AddAssessee}>
               <IntlMessages id="pages.cancel" />
             </Button>
             <Button color="primary" onClick={this.handleSubmit}>
@@ -333,11 +316,11 @@ export default class ModalUi extends Component {
         </Modal>
 
         <Modal
-          isOpen={this.state.modalViewProperty}
-          toggle={this.toggleViewProperty}
+          isOpen={this.state.modalViewassessee}
+          toggle={this.viewAssessee}
           size="lg"
         >
-          <ModalHeader toggle={this.toggleViewProperty}>
+          <ModalHeader toggle={this.viewAssessee}>
             <IntlMessages id="assessee.view" />
           </ModalHeader>
           <ModalBody>
@@ -347,23 +330,23 @@ export default class ModalUi extends Component {
                   <tbody>
                     <tr>
                       <th scope="row">Name</th>
-                      <th>{this.state.selectedProperty.name}</th>
+                      <th>{this.state.selectedassessee.name}</th>
                     </tr>
                     <tr>
                       <th scope="row">Address</th>
-                      <th>{this.state.selectedProperty.address}</th>
+                      <th>{this.state.selectedassessee.address}</th>
                     </tr>
                     <tr>
                       <th scope="row">City</th>
-                      <th>{this.state.selectedProperty.city}</th>
+                      <th>{this.state.selectedassessee.city}</th>
                     </tr>
                     <tr>
                       <th scope="row">State</th>
-                      <th>{this.state.selectedProperty.state}</th>
+                      <th>{this.state.selectedassessee.state}</th>
                     </tr>
                     <tr>
                       <th scope="row">Zip</th>
-                      <th>{this.state.selectedProperty.zip}</th>
+                      <th>{this.state.selectedassessee.zip}</th>
                     </tr>
                   </tbody>
                 </Table>
@@ -371,18 +354,18 @@ export default class ModalUi extends Component {
             </Row>
           </ModalBody>
           <ModalFooter>
-            <Button color="secondary" outline onClick={this.toggleViewProperty}>
+            <Button color="secondary" outline onClick={this.viewAssessee}>
               <IntlMessages id="pages.cancel" />
             </Button>{" "}
           </ModalFooter>
         </Modal>
 
         <Modal
-          isOpen={this.state.modalEditProperty}
-          toggle={this.toggleEditProperty}
+          isOpen={this.state.modalEditassessee}
+          toggle={this.editAssessee}
           size="lg"
         >
-          <ModalHeader toggle={this.toggleEditProperty}>
+          <ModalHeader toggle={this.editAssessee}>
             <IntlMessages id="assessee.edit" />
           </ModalHeader>
           <ModalBody>
@@ -394,7 +377,7 @@ export default class ModalUi extends Component {
                     type="text"
                     name="name"
                     onChange={this.handleInputChange}
-                    defaultValue={this.state.selectedProperty.name}
+                    defaultValue={this.state.selectedassessee.name}
                   />
                 </Label>
               </Colxx>
@@ -405,7 +388,7 @@ export default class ModalUi extends Component {
                     type="text"
                     name="address"
                     onChange={this.handleInputChange}
-                    defaultValue={this.state.selectedProperty.address}
+                    defaultValue={this.state.selectedassessee.address}
                   />
                 </Label>
               </Colxx>
@@ -416,7 +399,7 @@ export default class ModalUi extends Component {
                     type="text"
                     name="city"
                     onChange={this.handleInputChange}
-                    defaultValue={this.state.selectedProperty.city}
+                    defaultValue={this.state.selectedassessee.city}
                     required
                   />
                 </Label>
@@ -428,7 +411,7 @@ export default class ModalUi extends Component {
                     type="text"
                     name="state"
                     onChange={this.handleInputChange}
-                    defaultValue={this.state.selectedProperty.state}
+                    defaultValue={this.state.selectedassessee.state}
                     required
                   />
                 </Label>
@@ -440,7 +423,7 @@ export default class ModalUi extends Component {
                     type="number"
                     name="zip"
                     onChange={this.handleInputChange}
-                    defaultValue={this.state.selectedProperty.zip}
+                    defaultValue={this.state.selectedassessee.zip}
                     required
                   />
                 </Label>
@@ -448,7 +431,7 @@ export default class ModalUi extends Component {
             </Row>
           </ModalBody>
           <ModalFooter>
-            <Button color="secondary" outline onClick={this.toggleEditProperty}>
+            <Button color="secondary" outline onClick={this.editAssessee}>
               <IntlMessages id="pages.cancel" />
             </Button>
             <Button color="primary" onClick={this.handleEditSubmit}>
