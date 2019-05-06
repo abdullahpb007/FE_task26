@@ -28,78 +28,20 @@ class viewModal extends Component {
               <Table hover>
                 <tbody>
                   <tr>
-                    <th scope="row">Pin</th>
-                    <th>{this.props.details.pin}</th>
+                    <th scope="row">Property Number</th>
+                    <th>{this.props.details.propertyNumber}</th>
                   </tr>
                   <tr>
-                    <th scope="row">County</th>
-                    <th>{this.props.details.county}</th>
+                    <th scope="row">Creditor</th>
+                    <th>{this.props.details.creditor}</th>
                   </tr>
                   <tr>
-                    <th scope="row">Address</th>
-                    <th>{this.props.details.address}</th>
+                    <th scope="row">Amount</th>
+                    <th>{this.props.details.amount}</th>
                   </tr>
                   <tr>
-                    <th scope="row">City</th>
-                    <th>{this.props.details.city}</th>
-                  </tr>
-                  <tr>
-                    <th scope="row">State</th>
-                    <th>{this.props.details.state}</th>
-                  </tr>
-                  <tr>
-                    <th scope="row">Zip</th>
-                    <th>{this.props.details.zip}</th>
-                  </tr>
-                  <tr>
-                    <th scope="row">Township</th>
-                    <th>{this.props.details.township}</th>
-                  </tr>
-                  <tr>
-                    <th scope="row">Class Code</th>
-                    <th>{this.props.details.classCode}</th>
-                  </tr>
-                  <tr>
-                    <th scope="row">Legal Description</th>
-                    <th>{this.props.details.legalDescription}</th>
-                  </tr>
-                </tbody>
-              </Table>
-            </Colxx>
-            <Colxx xxs="6">
-              <Table hover>
-                <tbody>
-                  <tr>
-                    <th scope="row">Assessed Value</th>
-                    <th>{"$" + this.props.details.assessedValue}</th>
-                  </tr>
-                  <tr>
-                    <th scope="row">Market Value</th>
-                    <th>{"$" + this.props.details.marketValue}</th>
-                  </tr>
-                  <tr>
-                    <th scope="row">Taxes Per Year</th>
-                    <th>{"$" + this.props.details.taxesPerYear}</th>
-                  </tr>
-                  <tr>
-                    <th scope="row">PREEQEXM</th>
-                    <th>{"$" + this.props.details.preeqexm}</th>
-                  </tr>
-                  <tr>
-                    <th scope="row">Home Owner</th>
-                    <th>{"$" + this.props.details.homeOwner}</th>
-                  </tr>
-                  <tr>
-                    <th scope="row">Senior Exemption</th>
-                    <th>{"$" + this.props.details.seniorExemption}</th>
-                  </tr>
-                  <tr>
-                    <th scope="row">Senior Freeze</th>
-                    <th>{"$" + this.props.details.seniorFreeze}</th>
-                  </tr>
-                  <tr>
-                    <th scope="row">Total Acres</th>
-                    <th>{this.props.details.totalAcres}</th>
+                    <th scope="row">Payment Amount</th>
+                    <th>{this.props.details.paymentAmount}</th>
                   </tr>
                 </tbody>
               </Table>

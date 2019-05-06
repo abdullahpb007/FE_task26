@@ -20,7 +20,7 @@ class PropertyDetails extends Component {
     this.state = {
       modalAddLien: false,
       modalEditProperty: false,
-      modalViewProperty: false,
+      modalViewLien: false,
 
       lienData: [
         {
@@ -37,7 +37,7 @@ class PropertyDetails extends Component {
         }
       ],
 
-      selectedProperty: {}
+      selectedLien: {}
     };
   }
 
@@ -81,18 +81,24 @@ class PropertyDetails extends Component {
           toggleModalAdd={this.toggleAddLien}
           onSubmit={this.handleSubmit}
         />
+
+        <ViewModal
+          modalViewHandler={this.state.modalViewLien}
+          toggleModalView={this.toggleViewLien}
+          details={this.state.selectedLien}
+        />
       </Fragment>
     );
   }
 
   //PropertyDetails
   handleSubmit = values => {
-    const propertyData = [...this.state.propertyData];
+    const lienData = [...this.state.lienData];
     const payload = { ...values };
 
-    propertyData.push(payload);
+    lienData.push(payload);
     this.toggleAddLien();
-    this.setState({ propertyData });
+    this.setState({ lienData });
   };
 
   handleEditSubmit = values => {
@@ -113,9 +119,9 @@ class PropertyDetails extends Component {
     });
   };
 
-  toggleViewProperty = () => {
+  toggleViewLien = () => {
     this.setState({
-      modalViewProperty: !this.state.modalViewProperty
+      modalViewLien: !this.state.modalViewLien
     });
   };
 
@@ -128,7 +134,7 @@ class PropertyDetails extends Component {
   viewBtnControl = property => {
     const selectedProperty = { ...property };
     this.setState({ selectedProperty });
-    this.toggleViewProperty();
+    this.toggleViewLien();
   };
 
   editBtnControl = property => {
