@@ -6,10 +6,10 @@ import IntlMessages from "Util/IntlMessages";
 import { Colxx, Separator } from "Components/CustomBootstrap";
 import { BreadcrumbItems } from "Components/BreadcrumbContainer";
 
-import PropertyGrid from "./propertyGrid.jsx";
-import ViewModal from "./viewModal.jsx";
-import AddModal from "./addModal.jsx";
-import EditModal from "./editModal.jsx";
+import PropertyGrid from "./components/propertyGrid.jsx";
+import ViewModal from "./components/viewModal.jsx";
+import AddModal from "./components/addModal.jsx";
+import EditModal from "./components/editModal.jsx";
 
 import mouseTrap from "react-mousetrap";
 

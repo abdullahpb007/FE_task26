@@ -3,7 +3,7 @@ import { Provider } from "react-redux";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { configureStore } from "Redux/store";
 
-import ReactDOM from 'react-dom';
+import ReactDOM from "react-dom";
 
 import App from "Containers/App";
 
@@ -16,7 +16,4 @@ const MainApp = () => (
     </Router>
   </Provider>
 );
-export default  ReactDOM.render(
-  <MainApp />,
-  document.getElementById("root")
-);
+export default ReactDOM.render(<MainApp />, document.getElementById("root"));
