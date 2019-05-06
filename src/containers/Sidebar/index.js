@@ -306,11 +306,17 @@ class Sidebar extends Component {
 
                 <NavItem
                   className={classnames({
-                    active: this.state.selectedParentMenu == "propertyDetails"
+                    active:
+                      (this.state.selectedParentMenu == "propertyDetails" &&
+                        this.state.viewingParentMenu == "") ||
+                      this.state.viewingParentMenu == "propertyDetails"
                   })}
                 >
-                  <NavLink to="/app/propertyDetails">
-                    <i className="simple-icon-control-play" />
+                  <NavLink
+                    to="/app/propertyDetails/default"
+                    onClick={e => this.openSubMenu(e, "propertyDetails")}
+                  >
+                    <i className="iconsminds-shop-4" />{" "}
                     <IntlMessages id="menu.propertyDetails" />
                   </NavLink>
                 </NavItem>
@@ -448,6 +454,28 @@ class Sidebar extends Component {
                   <NavLink to="/app/dashboards/custom">
                     <i className="simple-icon-doc" />{" "}
                     <IntlMessages id="menu.custom" />
+                  </NavLink>
+                </NavItem>
+              </Nav>
+              <Nav
+                className={classnames({
+                  "d-block":
+                    (this.state.selectedParentMenu == "propertyDetails" &&
+                      this.state.viewingParentMenu == "") ||
+                    this.state.viewingParentMenu == "propertyDetails"
+                })}
+                data-parent="propertyDetails"
+              >
+                <NavItem>
+                  <NavLink to="/app/propertyDetails/details">
+                    <i className="simple-icon-briefcase" />{" "}
+                    <IntlMessages id="property.details" />
+                  </NavLink>
+                </NavItem>
+                <NavItem>
+                  <NavLink to="/app/propertyDetails/lieninfo">
+                    <i className="simple-icon-briefcase" />{" "}
+                    <IntlMessages id="property.lienInfo" />
                   </NavLink>
                 </NavItem>
               </Nav>

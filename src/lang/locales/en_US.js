@@ -77,6 +77,14 @@ module.exports = {
   "property.legalDescription": "Legal Description",
   "property.viewbtn": "View",
   "property.editbtn": "Edit",
+  "property.details": "Details",
+  "property.lienInfo": "Lien Information",
+
+  /* Lien Information */
+  "lien.add-modal-title": "Add New Lien",
+  "lien.amount": "Amount",
+  "lien.creditor": "Creditor",
+  "lien.paymentAmount": "Payment Amount",
 
   /* Dates Details */
   "dates.add-modal-title": "Add Dates",
@@ -176,6 +184,7 @@ module.exports = {
   "menu.videos": "Videos",
   "menu.mailing": "Mailing",
   "menu.invoice": "Invoice",
+  "menu.lieninfo": "Lien Information",
 
   //custom dashboard
   "menu.custom": "Custom Dashboard",
