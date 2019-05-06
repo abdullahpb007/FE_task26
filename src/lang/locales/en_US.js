@@ -80,6 +80,7 @@ module.exports = {
 
   /* Dates Details */
   "dates.add-modal-title": "Add Dates",
+  "dates.edit-modal-title": "Edit Dates",
   "dates.estimatedDate": "Estimated Date",
   "dates.actualEstimatedDate": "Actual Estimated Date",
   "dates.firstInstallmentDate": "First Installment Date",
@@ -91,6 +92,7 @@ module.exports = {
   "dates.assignmentCallDate": "Assignment Call Date",
   "dates.proveUpDate": "Prove Up Date",
   "dates.orderOfDate": "Order Of Date",
+  "dates.dateOfTaxDeed": "Date Of Tax Deed",
 
   /* Assessee */
   "assessee.title": "Assessee",

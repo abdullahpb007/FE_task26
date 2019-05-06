@@ -22,6 +22,49 @@ class PropertyDetails extends Component {
       modalEditProperty: false,
       modalViewProperty: false,
 
+      propertyData: [
+        {
+          propertyNumber: "1409276022Sans",
+          pin: "6000",
+          county: "San Francisco",
+          address: "600 Guerrero St",
+          city: "Poblacion Makati",
+          state: "California",
+          zip: "94110",
+          township: "Coahuila",
+          classCode: "40",
+          assessedValue: "200000",
+          marketValue: "180000",
+          taxesPerYear: "3200",
+          preeqexm: "0",
+          homeOwner: "6000",
+          seniorExemption: "0",
+          seniorFreeze: "0",
+          totalAcres: "1",
+          legalDescription: "Strafford Woods - Lot 2"
+        },
+        {
+          propertyNumber: "1409276022Sans",
+          pin: "6001",
+          county: "San Francisco",
+          address: "519 Guerrero St",
+          city: "Poblacion Makati",
+          state: "California",
+          zip: "94110",
+          township: "Coahuila",
+          classCode: "41",
+          assessedValue: "302000",
+          marketValue: "210000",
+          taxesPerYear: "1200",
+          preeqexm: "0",
+          homeOwner: "3000",
+          seniorExemption: "0",
+          seniorFreeze: "0",
+          totalAcres: "1.5",
+          legalDescription: "Strafford Woods - Lot 2"
+        }
+      ],
+
       selectedProperty: {}
     };
   }
@@ -55,6 +98,7 @@ class PropertyDetails extends Component {
             </Colxx>
           </Row>
           <PropertyGrid
+            data={this.state.propertyData}
             viewBtnHandler={this.viewBtnControl}
             editBtnHandler={this.editBtnControl}
           />

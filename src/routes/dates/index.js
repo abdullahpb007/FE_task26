@@ -1,39 +1,26 @@
 import React, { Component, Fragment } from "react";
 import { injectIntl } from "react-intl";
-import {
-  Row,
-  Card,
-  Button,
-  ButtonGroup,
-  Modal,
-  ModalHeader,
-  ModalBody,
-  ModalFooter,
-  Input,
-  Label,
-  Table
-} from "reactstrap";
-
-import ReactTable from "react-table";
+import { Row, Button } from "reactstrap";
 
 import IntlMessages from "Util/IntlMessages";
 import { Colxx, Separator } from "Components/CustomBootstrap";
 import { BreadcrumbItems } from "Components/BreadcrumbContainer";
 
-import DataTablePagination from "Components/DataTables/pagination";
+import DatesGrid from "./datesGrid.jsx";
+import ViewModal from "./viewModal.jsx";
+import AddModal from "./addModal.jsx";
+import EditModal from "./editModal.jsx";
 
 import mouseTrap from "react-mousetrap";
 
-class DateDetails extends Component {
+class PropertyDetails extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      //Property Details
-
-      modalAddDate: false,
-      modalEditDate: false,
-      modalViewDate: false,
+      modalAddDates: false,
+      modalEditDates: false,
+      modalViewDates: false,
 
       dateData: [
         {
@@ -65,207 +52,9 @@ class DateDetails extends Component {
         }
       ],
 
-      dateColumn: [
-        {
-          Header: "Estimated Date",
-          accessor: "estimatedDate",
-          sortable: true,
-          style: {
-            margin: "auto"
-          }
-        },
-        {
-          Header: "Actual Estimated Date",
-          accessor: "actualEstimatedDate",
-          sortable: true,
-          style: {
-            margin: "auto"
-          }
-        },
-        {
-          Header: "",
-          Cell: props => {
-            return (
-              <ButtonGroup className="m-auto">
-                <Button
-                  outline
-                  color="primary"
-                  size="sm"
-                  onClick={() => this.viewBtnControl(props.original)}
-                >
-                  <IntlMessages id="property.viewbtn" />
-                </Button>
-                <Button
-                  outline
-                  color="secondary"
-                  size="sm"
-                  onClick={() => this.editBtnControl(props.original)}
-                >
-                  <IntlMessages id="property.editbtn" />
-                </Button>
-              </ButtonGroup>
-            );
-          }
-        }
-      ],
-
-      selectedDate: {},
-
-      purchaseDate: "2019-01-01",
-
-      //estimatedDate: this.estimatedDateCal(this.purchaseDate),
-      estimatedDate: "2019-02-21",
-      actualEstimatedDate: "",
-      firstInstallmentDate: "",
-      secondInstallmentDate: "",
-      estimatedPetitionDate: "2019-03-01",
-      petitionFiledDate: "",
-      extentionDate: "",
-      expirationDate: "",
-      assignmentCallDate: "",
-      proveUpDate: "",
-      orderOfDate: ""
+      selectedDate: {}
     };
   }
-
-  //DatesDetails
-
-  dateDisplay = value => {
-    let req = new Date(value);
-    let months = [
-      "Jan",
-      "Feb",
-      "Mar",
-      "Apr",
-      "May",
-      "Jun",
-      "Jul",
-      "Aug",
-      "Sep",
-      "Oct",
-      "Nov",
-      "Dec"
-    ];
-    let month = months[req.getMonth()];
-    let date = req.getDate();
-    let year = req.getFullYear();
-    return `${month}-${date}-${year}`;
-  };
-
-  //estimatedDateCal = value => {
-  //let startDate = new Date(value);
-  //let incdate = 60 * 60 * 24 * 1000 * 125;
-  //let endDate = new Date(startDate.getTime() + incdate);
-  //console.log(endDate);
-  //return endDate;
-  //};
-
-  toggleAddDate = () => {
-    this.setState({
-      modalAddDate: !this.state.modalAddDate
-    });
-  };
-
-  toggleViewDate = () => {
-    this.setState({
-      modalViewDate: !this.state.modalViewDate
-    });
-  };
-
-  toggleEditDate = () => {
-    this.setState({
-      modalEditDate: !this.state.modalEditDate
-    });
-  };
-
-  viewBtnControl = dateP => {
-    const selectedDate = { ...dateP };
-    this.setState({ selectedDate });
-    this.toggleViewDate();
-  };
-
-  editBtnControl = dateP => {
-    const selectedDate = { ...dateP };
-    this.setState({ selectedDate });
-    this.toggleEditDate();
-  };
-
-  handleInputChange = event => {
-    console.log(event.target.name, event.target.value);
-    this.setState({
-      [event.target.name]: event.target.value
-    });
-  };
-
-  handleSubmit = event => {
-    event.preventDefault();
-    const dateData = [...this.state.dateData];
-
-    dateData.push({
-      estimatedDate: this.state.estimatedDate,
-      actualEstimatedDate: this.state.actualEstimatedDate,
-      firstInstallmentDate: this.state.firstInstallmentDate,
-      secondInstallmentDate: this.state.secondInstallmentDate,
-      estimatedPetitionDate: this.state.estimatedPetitionDate,
-      petitionFiledDate: this.state.petitionFiledDate,
-      extentionDate: this.state.extentionDate,
-      expirationDate: this.state.expirationDate,
-      assignmentCallDate: this.state.assignmentCallDate,
-      proveUpDate: this.state.proveUpDate,
-      orderOfDate: this.state.orderOfDate
-    });
-    this.toggleAddDate();
-    this.setState({ dateData });
-  };
-
-  handleEditSubmit = event => {
-    event.preventDefault();
-    const updatedDate = {
-      actualEstimatedDate:
-        this.state.actualEstimatedDate == ""
-          ? this.state.selectedDate.actualEstimatedDate
-          : this.state.actualEstimatedDate,
-      firstInstallmentDate:
-        this.state.firstInstallmentDate == ""
-          ? this.state.selectedDate.firstInstallmentDate
-          : this.state.firstInstallmentDate,
-      secondInstallmentDate:
-        this.state.secondInstallmentDate == ""
-          ? this.state.selectedDate.secondInstallmentDate
-          : this.state.secondInstallmentDate,
-      petitionFiledDate:
-        this.state.petitionFiledDate == ""
-          ? this.state.selectedDate.petitionFiledDate
-          : this.state.petitionFiledDate,
-      extentionDate:
-        this.state.extentionDate == ""
-          ? this.state.selectedDate.extentionDate
-          : this.state.extentionDate,
-      expirationDate:
-        this.state.expirationDate == ""
-          ? this.state.selectedDate.expirationDate
-          : this.state.expirationDate,
-      assignmentCallDate:
-        this.state.assignmentCallDate == ""
-          ? this.state.selectedDate.assignmentCallDate
-          : this.state.assignmentCallDate,
-      proveUpDate:
-        this.state.proveUpDate == ""
-          ? this.state.selectedDate.proveUpDate
-          : this.state.proveUpDate,
-      orderOfDate:
-        this.state.orderOfDate == ""
-          ? this.state.selectedDate.orderOfDate
-          : this.state.orderOfDate
-    };
-    const dateData = [...this.state.dateData];
-    const index = dateData.findIndex(d => {
-      return d.estimatedDate == this.state.selectedDate.estimatedDate;
-    });
-    dateData[index] = { ...updatedDate };
-    this.toggleEditDate();
-    this.setState({ dateData });
-  };
 
   render() {
     return (
@@ -295,341 +84,93 @@ class DateDetails extends Component {
               <Separator className="mb-5" />
             </Colxx>
           </Row>
-          <Row>
-            <Colxx xxs="12" className="mb-3">
-              <Card className="d-flex flex-row">
-                <div className="pl-2 d-flex flex-grow-1 min-width-zero">
-                  <div className="card-body align-self-center d-flex flex-column flex-lg-row justify-content-between min-width-zero align-items-lg-center">
-                    <ReactTable
-                      className="w-100"
-                      data={this.state.dateData}
-                      columns={this.state.dateColumn}
-                      noDataText={"Loading Data..."}
-                      defaultPageSize={5}
-                      showPageSizeOptions={true}
-                      PaginationComponent={DataTablePagination}
-                      defaultFilterMethod={(filter, row) => {
-                        return row[filter.id]
-                          .toLowerCase()
-                          .includes(filter.value.toLowerCase());
-                      }}
-                    />
-                  </div>
-                </div>
-              </Card>
-            </Colxx>
-          </Row>
+          <DatesGrid
+            data={this.state.dateData}
+            viewBtnHandler={this.viewBtnControl}
+            editBtnHandler={this.editBtnControl}
+          />
         </div>
 
-        <Modal
-          isOpen={this.state.modalAddDate}
-          toggle={this.toggleAddDate}
-          size="lg"
-        >
-          <ModalHeader toggle={this.toggleAddDate}>
-            <IntlMessages id="dates.add-modal-title" />
-          </ModalHeader>
-          <ModalBody>
-            <Row>
-              <Colxx xxs="4">
-                <Label className="form-group has-top-label">
-                  <Input
-                    type="date"
-                    name="actualEstimatedDate"
-                    onChange={this.handleInputChange}
-                  />
-                  <IntlMessages id="dates.actualEstimatedDate" />
-                </Label>
-              </Colxx>
-              <Colxx xxs="4">
-                <Label className="form-group has-top-label">
-                  <Input
-                    type="date"
-                    name="firstInstallmentDate"
-                    onChange={this.handleInputChange}
-                  />
-                  <IntlMessages id="dates.firstInstallmentDate" />
-                </Label>
-              </Colxx>
-              <Colxx xxs="4">
-                <Label className="form-group has-top-label">
-                  <Input
-                    type="date"
-                    name="secondInstallmentDate"
-                    onChange={this.handleInputChange}
-                  />
-                  <IntlMessages id="dates.secondInstallmentDate" />
-                </Label>
-              </Colxx>
-              <Colxx xxs="4">
-                <Label className="form-group has-top-label">
-                  <Input
-                    type="date"
-                    name="petitionFiledDate"
-                    onChange={this.handleInputChange}
-                  />
-                  <IntlMessages id="dates.petitionFiledDate" />
-                </Label>
-              </Colxx>
-              <Colxx xxs="4">
-                <Label className="form-group has-top-label">
-                  <Input
-                    type="date"
-                    name="extentionDate"
-                    onChange={this.handleInputChange}
-                  />
-                  <IntlMessages id="dates.extentionDate" />
-                </Label>
-              </Colxx>
-              <Colxx xxs="4">
-                <Label className="form-group has-top-label">
-                  <Input
-                    type="date"
-                    name="expirationDate"
-                    onChange={this.handleInputChange}
-                  />
-                  <IntlMessages id="dates.expirationDate" />
-                </Label>
-              </Colxx>
-              <Colxx xxs="4">
-                <Label className="form-group has-top-label">
-                  <Input
-                    type="date"
-                    name="assignmentCallDate"
-                    onChange={this.handleInputChange}
-                  />
-                  <IntlMessages id="dates.assignmentCallDate" />
-                </Label>
-              </Colxx>
-              <Colxx xxs="4">
-                <Label className="form-group has-top-label">
-                  <Input
-                    type="date"
-                    name="proveUpDate"
-                    onChange={this.handleInputChange}
-                  />
-                  <IntlMessages id="dates.proveUpDate" />
-                </Label>
-              </Colxx>
-              <Colxx xxs="4">
-                <Label className="form-group has-top-label">
-                  <Input
-                    type="date"
-                    name="orderOfDate"
-                    onChange={this.handleInputChange}
-                  />
-                  <IntlMessages id="dates.orderOfDate" />
-                </Label>
-              </Colxx>
-            </Row>
-          </ModalBody>
-          <ModalFooter>
-            <Button color="secondary" outline onClick={this.toggleAddDate}>
-              <IntlMessages id="pages.cancel" />
-            </Button>
-            <Button color="primary" onClick={this.handleSubmit}>
-              <IntlMessages id="pages.submit" />
-            </Button>{" "}
-          </ModalFooter>
-        </Modal>
+        <AddModal
+          modalAddHandler={this.state.modalAddDates}
+          toggleModalAdd={this.toggleAddDate}
+          onSubmit={this.handleSubmit}
+        />
 
-        <Modal
-          isOpen={this.state.modalViewDate}
-          toggle={this.toggleViewDate}
-          size="lg"
-        >
-          <ModalHeader toggle={this.toggleViewDate}>
-            <IntlMessages id="property.view-modal-title" />
-          </ModalHeader>
-          <ModalBody>
-            <Row>
-              <Colxx xxs="6">
-                <Table hover>
-                  <tbody>
-                    <tr>
-                      <th scope="row">Estimated Date</th>
-                      <th>{this.state.selectedDate.estimatedDate}</th>
-                    </tr>
-                    <tr>
-                      <th scope="row">Actual Estimated Date</th>
-                      <th>{this.state.selectedDate.actualEstimatedDate}</th>
-                    </tr>
-                    <tr>
-                      <th scope="row">First Installment Date</th>
-                      <th>{this.state.selectedDate.firstInstallmentDate}</th>
-                    </tr>
-                    <tr>
-                      <th scope="row">Second Installment Date</th>
-                      <th>{this.state.selectedDate.secondInstallmentDate}</th>
-                    </tr>
-                    <tr>
-                      <th scope="row">Estimated Petition Date</th>
-                      <th>{this.state.selectedDate.estimatedPetitionDate}</th>
-                    </tr>
-                    <tr>
-                      <th scope="row">Petition Filed Date</th>
-                      <th>{this.state.selectedDate.petitionFiledDate}</th>
-                    </tr>
-                  </tbody>
-                </Table>
-              </Colxx>
-              <Colxx xxs="6">
-                <Table hover>
-                  <tbody>
-                    <tr>
-                      <th scope="row">Extention Date</th>
-                      <th>{this.state.selectedDate.extentionDate}</th>
-                    </tr>
-                    <tr>
-                      <th scope="row">Expiration Date</th>
-                      <th>{this.state.selectedDate.expirationDate}</th>
-                    </tr>
-                    <tr>
-                      <th scope="row">Assignment Call Date</th>
-                      <th>{this.state.selectedDate.assignmentCallDate}</th>
-                    </tr>
-                    <tr>
-                      <th scope="row">Prove Up Date</th>
-                      <th>{this.state.selectedDate.proveUpDate}</th>
-                    </tr>
-                    <tr>
-                      <th scope="row">Order Of Date</th>
-                      <th>{this.state.selectedDate.orderOfDate}</th>
-                    </tr>
-                  </tbody>
-                </Table>
-              </Colxx>
-            </Row>
-          </ModalBody>
-          <ModalFooter>
-            <Button color="secondary" outline onClick={this.toggleViewDate}>
-              <IntlMessages id="pages.close" />
-            </Button>{" "}
-          </ModalFooter>
-        </Modal>
+        <EditModal
+          modalEditHandler={this.state.modalEditDates}
+          toggleModalEdit={this.toggleEditDate}
+          onSubmit={this.handleEditSubmit}
+          details={this.state.selectedDate}
+        />
 
-        <Modal
-          isOpen={this.state.modalEditDate}
-          toggle={this.toggleEditDate}
-          size="lg"
-        >
-          <ModalHeader toggle={this.toggleEditDate}>
-            <IntlMessages id="property.add-modal-title" />
-          </ModalHeader>
-          <ModalBody>
-            <Row>
-              <Colxx xxs="4">
-                <Label className="form-group has-top-label">
-                  <Input
-                    type="date"
-                    name="actualEstimatedDate"
-                    onChange={this.handleInputChange}
-                    defaultValue={this.state.selectedDate.actualEstimatedDate}
-                  />
-                  <IntlMessages id="dates.actualEstimatedDate" />
-                </Label>
-              </Colxx>
-              <Colxx xxs="4">
-                <Label className="form-group has-top-label">
-                  <Input
-                    type="date"
-                    name="firstInstallmentDate"
-                    onChange={this.handleInputChange}
-                    defaultValue={this.state.selectedDate.firstInstallmentDate}
-                  />
-                  <IntlMessages id="dates.firstInstallmentDate" />
-                </Label>
-              </Colxx>
-              <Colxx xxs="4">
-                <Label className="form-group has-top-label">
-                  <Input
-                    type="date"
-                    name="secondInstallmentDate"
-                    onChange={this.handleInputChange}
-                    defaultValue={this.state.selectedDate.secondInstallmentDate}
-                  />
-                  <IntlMessages id="dates.secondInstallmentDate" />
-                </Label>
-              </Colxx>
-              <Colxx xxs="4">
-                <Label className="form-group has-top-label">
-                  <Input
-                    type="date"
-                    name="petitionFiledDate"
-                    onChange={this.handleInputChange}
-                    defaultValue={this.state.selectedDate.petitionFiledDate}
-                  />
-                  <IntlMessages id="dates.petitionFiledDate" />
-                </Label>
-              </Colxx>
-              <Colxx xxs="4">
-                <Label className="form-group has-top-label">
-                  <Input
-                    type="date"
-                    name="extentionDate"
-                    onChange={this.handleInputChange}
-                    defaultValue={this.state.selectedDate.extentionDate}
-                  />
-                  <IntlMessages id="dates.extentionDate" />
-                </Label>
-              </Colxx>
-              <Colxx xxs="4">
-                <Label className="form-group has-top-label">
-                  <Input
-                    type="date"
-                    name="expirationDate"
-                    onChange={this.handleInputChange}
-                    defaultValue={this.state.selectedDate.expirationDate}
-                  />
-                  <IntlMessages id="dates.expirationDate" />
-                </Label>
-              </Colxx>
-              <Colxx xxs="4">
-                <Label className="form-group has-top-label">
-                  <Input
-                    type="date"
-                    name="assignmentCallDate"
-                    onChange={this.handleInputChange}
-                    defaultValue={this.state.selectedDate.assignmentCallDate}
-                  />
-                  <IntlMessages id="dates.assignmentCallDate" />
-                </Label>
-              </Colxx>
-              <Colxx xxs="4">
-                <Label className="form-group has-top-label">
-                  <Input
-                    type="date"
-                    name="proveUpDate"
-                    onChange={this.handleInputChange}
-                    defaultValue={this.state.selectedDate.proveUpDate}
-                  />
-                  <IntlMessages id="dates.proveUpDate" />
-                </Label>
-              </Colxx>
-              <Colxx xxs="4">
-                <Label className="form-group has-top-label">
-                  <Input
-                    type="date"
-                    name="orderOfDate"
-                    onChange={this.handleInputChange}
-                    defaultValue={this.state.selectedDate.orderOfDate}
-                  />
-                  <IntlMessages id="dates.orderOfDate" />
-                </Label>
-              </Colxx>
-            </Row>
-          </ModalBody>
-          <ModalFooter>
-            <Button color="secondary" outline onClick={this.toggleEditDate}>
-              <IntlMessages id="pages.cancel" />
-            </Button>
-            <Button color="primary" onClick={this.handleEditSubmit}>
-              <IntlMessages id="pages.submit" />
-            </Button>{" "}
-          </ModalFooter>
-        </Modal>
+        <ViewModal
+          modalViewHandler={this.state.modalViewDates}
+          toggleModalView={this.toggleViewDate}
+          details={this.state.selectedDate}
+        />
       </Fragment>
     );
   }
+
+  //PropertyDetails
+  handleSubmit = values => {
+    const dateData = [...this.state.dateData];
+    const payload = { ...values };
+
+    dateData.push(payload);
+    this.toggleAddDate();
+    this.setState({ dateData });
+  };
+
+  handleEditSubmit = values => {
+    event.preventDefault();
+    const updatedDate = { ...values };
+    const dateData = [...this.state.dateData];
+    const index = dateData.findIndex(p => {
+      //return p.orderOfDate == this.state.selectedDate.orderOfDate;
+      return 1;
+    });
+    dateData[index] = { ...updatedDate };
+    this.toggleEditDate();
+    this.setState({ dateData });
+  };
+
+  toggleAddDate = () => {
+    this.setState({
+      modalAddDates: !this.state.modalAddDates
+    });
+  };
+
+  toggleViewDate = () => {
+    this.setState({
+      modalViewDates: !this.state.modalViewDates
+    });
+  };
+
+  toggleEditDate = () => {
+    this.setState({
+      modalEditDates: !this.state.modalEditDates
+    });
+  };
+
+  viewBtnControl = date => {
+    const selectedDate = { ...date };
+    this.setState({ selectedDate });
+    this.toggleViewDate();
+  };
+
+  editBtnControl = date => {
+    const selectedDate = { ...date };
+    this.setState({ selectedDate });
+    this.toggleEditDate();
+  };
+
+  handleInputChange = event => {
+    console.log(event.target.name, event.target.value);
+    this.setState({
+      [event.target.name]: event.target.value
+    });
+  };
 }
-export default injectIntl(mouseTrap(DateDetails));
+export default injectIntl(mouseTrap(PropertyDetails));

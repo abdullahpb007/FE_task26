@@ -304,30 +304,34 @@ class Sidebar extends Component {
                   </NavLink>
                 </NavItem>
 
-
-                <NavItem className={classnames({ active: ((this.state.selectedParentMenu == 'propertyDetails' && this.state.viewingParentMenu == "") || this.state.viewingParentMenu == "propertyDetails") })}>
-                  <NavLink to="/app/propertyDetails"
-                    onClick={e => this.changeSelectedParentHasNoSubmenu(e, 'propertyDetails')}
-                    data-flag="propertyDetails">
+                <NavItem
+                  className={classnames({
+                    active: this.state.selectedParentMenu == "propertyDetails"
+                  })}
+                >
+                  <NavLink to="/app/propertyDetails">
                     <i className="simple-icon-control-play" />
                     <IntlMessages id="menu.propertyDetails" />
                   </NavLink>
                 </NavItem>
 
-                <NavItem className={classnames({ active: ((this.state.selectedParentMenu == 'modalUi' && this.state.viewingParentMenu == "") || this.state.viewingParentMenu == "modalUi") })}>
-                  <NavLink to="/app/assessee"
-                    onClick={e => this.changeSelectedParentHasNoSubmenu(e, 'modalUi')}
-                    data-flag="Assessee">
+                <NavItem
+                  className={classnames({
+                    active: this.state.selectedParentMenu == "modalUi"
+                  })}
+                >
+                  <NavLink to="/app/assessee">
                     <i className="simple-icon-control-play" />
                     <IntlMessages id="menu.assessee" />
                   </NavLink>
                 </NavItem>
 
-
-                <NavItem className={classnames({ active: ((this.state.selectedParentMenu == 'datesModule' && this.state.viewingParentMenu == "") || this.state.viewingParentMenu == "datesModule") })}>
-                  <NavLink to="/app/dates"
-                    onClick={e => this.changeSelectedParentHasNoSubmenu(e, 'datesModule')}
-                    data-flag="datesModule">
+                <NavItem
+                  className={classnames({
+                    active: this.state.selectedParentMenu == "datesModule"
+                  })}
+                >
+                  <NavLink to="/app/dates">
                     <i className="simple-icon-control-play" />
                     <IntlMessages id="menu.dates" />
                   </NavLink>

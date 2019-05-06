@@ -8,48 +8,19 @@ import DataTablePagination from "Components/DataTables/pagination";
 
 class PropertyGrid extends Component {
   state = {
-    propertyColumn: [
+    dateColumn: [
       {
-        Header: "Pin",
-        accessor: "pin",
+        Header: "Estimated Date",
+        accessor: "estimatedDate",
         sortable: true,
-        filterable: true,
         style: {
           margin: "auto"
         }
       },
       {
-        Header: "Address",
-        accessor: "address",
+        Header: "Actual Estimated Date",
+        accessor: "actualEstimatedDate",
         sortable: true,
-        filterable: true,
-        style: {
-          margin: "auto"
-        }
-      },
-      {
-        Header: "City",
-        accessor: "city",
-        sortable: true,
-        filterable: true,
-        style: {
-          margin: "auto"
-        }
-      },
-      {
-        Header: "State",
-        accessor: "state",
-        sortable: true,
-        filterable: true,
-        style: {
-          margin: "auto"
-        }
-      },
-      {
-        Header: "County",
-        accessor: "county",
-        sortable: true,
-        filterable: true,
         style: {
           margin: "auto"
         }
@@ -91,7 +62,7 @@ class PropertyGrid extends Component {
                 <ReactTable
                   className="w-100"
                   data={this.props.data}
-                  columns={this.state.propertyColumn}
+                  columns={this.state.dateColumn}
                   noDataText={"Loading Data..."}
                   defaultPageSize={5}
                   showPageSizeOptions={true}
