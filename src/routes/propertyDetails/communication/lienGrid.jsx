@@ -6,7 +6,7 @@ import { Colxx } from "Components/CustomBootstrap";
 import ReactTable from "react-table";
 import DataTablePagination from "Components/DataTables/pagination";
 
-class PropertyGrid extends Component {
+class LienGrid extends Component {
   state = {
     lienColumn: [
       {
@@ -83,7 +83,7 @@ class PropertyGrid extends Component {
                   className="w-100"
                   data={this.props.data}
                   columns={this.state.lienColumn}
-                  noDataText={"Loading Data..."}
+                  noDataText={"No Records Found !"}
                   defaultPageSize={5}
                   showPageSizeOptions={true}
                   PaginationComponent={DataTablePagination}
@@ -102,4 +102,4 @@ class PropertyGrid extends Component {
   }
 }
 
-export default PropertyGrid;
+export default LienGrid;

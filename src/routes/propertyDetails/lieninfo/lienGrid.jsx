@@ -6,12 +6,12 @@ import { Colxx } from "Components/CustomBootstrap";
 import ReactTable from "react-table";
 import DataTablePagination from "Components/DataTables/pagination";
 
-class PropertyGrid extends Component {
+class LienGrid extends Component {
   state = {
-    propertyColumn: [
+    lienColumn: [
       {
-        Header: "Pin",
-        accessor: "pin",
+        Header: "Property Number",
+        accessor: "propertyNumber",
         sortable: true,
         filterable: true,
         style: {
@@ -19,8 +19,8 @@ class PropertyGrid extends Component {
         }
       },
       {
-        Header: "Address",
-        accessor: "address",
+        Header: "Creditor",
+        accessor: "creditor",
         sortable: true,
         filterable: true,
         style: {
@@ -28,28 +28,19 @@ class PropertyGrid extends Component {
         }
       },
       {
-        Header: "City",
-        accessor: "city",
-        sortable: true,
-        filterable: true,
+        Header: "Amount",
+        accessor: "amount",
+        sortable: false,
+        filterable: false,
         style: {
           margin: "auto"
         }
       },
       {
-        Header: "State",
-        accessor: "state",
-        sortable: true,
-        filterable: true,
-        style: {
-          margin: "auto"
-        }
-      },
-      {
-        Header: "County",
-        accessor: "county",
-        sortable: true,
-        filterable: true,
+        Header: "Payment Amount",
+        accessor: "paymentAmount",
+        sortable: false,
+        filterable: false,
         style: {
           margin: "auto"
         }
@@ -91,7 +82,7 @@ class PropertyGrid extends Component {
                 <ReactTable
                   className="w-100"
                   data={this.props.data}
-                  columns={this.state.propertyColumn}
+                  columns={this.state.lienColumn}
                   noDataText={"No Records Found !"}
                   defaultPageSize={5}
                   showPageSizeOptions={true}
@@ -111,4 +102,4 @@ class PropertyGrid extends Component {
   }
 }
 
-export default PropertyGrid;
+export default LienGrid;

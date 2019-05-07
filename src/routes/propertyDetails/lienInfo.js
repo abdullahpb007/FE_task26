@@ -6,7 +6,7 @@ import IntlMessages from "Util/IntlMessages";
 import { Colxx, Separator } from "Components/CustomBootstrap";
 import { BreadcrumbItems } from "Components/BreadcrumbContainer";
 
-import PropertyGrid from "./lieninfo/propertyGrid.jsx";
+import LienGrid from "./lieninfo/lienGrid.jsx";
 import ViewModal from "./lieninfo/viewModal.jsx";
 import AddModal from "./lieninfo/addModal.jsx";
 import EditModal from "./lieninfo/editModal.jsx";
@@ -69,7 +69,7 @@ class PropertyDetails extends Component {
               <Separator className="mb-5" />
             </Colxx>
           </Row>
-          <PropertyGrid
+          <LienGrid
             data={this.state.lienData}
             viewBtnHandler={this.viewBtnControl}
             editBtnHandler={this.editBtnControl}
