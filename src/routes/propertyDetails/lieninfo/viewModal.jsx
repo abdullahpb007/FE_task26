@@ -19,7 +19,7 @@ class viewModal extends Component {
         toggle={this.props.toggleModalView}
       >
         <ModalHeader toggle={this.props.toggleModalView}>
-          <IntlMessages id="property.view-modal-title" />
+          <IntlMessages id="lien.view-modal-title" />
         </ModalHeader>
         <ModalBody>
           <Row>

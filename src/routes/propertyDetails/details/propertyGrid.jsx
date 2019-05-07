@@ -92,7 +92,7 @@ class PropertyGrid extends Component {
                   className="w-100"
                   data={this.props.data}
                   columns={this.state.propertyColumn}
-                  noDataText={"Loading Data..."}
+                  noDataText={"No Records Found !"}
                   defaultPageSize={5}
                   showPageSizeOptions={true}
                   PaginationComponent={DataTablePagination}

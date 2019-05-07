@@ -22,9 +22,9 @@ export default class ReactAutosuggest extends React.Component {
     };
   }
 
-  getSuggestionValue = suggestion => suggestion.name;
+  getSuggestionValue = suggestion => suggestion.propertyNumber;
 
-  renderSuggestion = suggestion => <div>{suggestion.name}</div>;
+  renderSuggestion = suggestion => <div>{suggestion.propertyNumber}</div>;
 
   getSuggestions = value => {
     const inputValue = value.trim().toLowerCase();
@@ -33,7 +33,9 @@ export default class ReactAutosuggest extends React.Component {
     return inputLength === 0
       ? []
       : this.state.data.filter(
-          lang => lang.name.toLowerCase().slice(0, inputLength) === inputValue
+          lang =>
+            lang.propertyNumber.toLowerCase().slice(0, inputLength) ===
+            inputValue
         );
   };
 

@@ -79,12 +79,17 @@ module.exports = {
   "property.editbtn": "Edit",
   "property.details": "Details",
   "property.lienInfo": "Lien Information",
+  "property.communication": "Communication",
 
   /* Lien Information */
   "lien.add-modal-title": "Add New Lien",
   "lien.amount": "Amount",
   "lien.creditor": "Creditor",
   "lien.paymentAmount": "Payment Amount",
+  "lien.view-modal-title": "Lien Details",
+  "lien.edit-modal-title": "Edit Lien Information",
+
+  /* Communication */
 
   // ESCROW ACCOUNT ACTIVITY
   "escrow.title": "Escrow Account Activity",
@@ -197,6 +202,7 @@ module.exports = {
   "menu.mailing": "Mailing",
   "menu.invoice": "Invoice",
   "menu.lieninfo": "Lien Information",
+  "menu.communication": "Communication",
 
   //custom dashboard
   "menu.custom": "Custom Dashboard",

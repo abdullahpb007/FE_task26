@@ -482,323 +482,326 @@ class Sidebar extends Component {
                   <NavLink to="/app/propertyDetails/escrow">
                     <i className="simple-icon-briefcase" />{" "}
                     <IntlMessages id="escrow.title" />
-                  </NavLink>
+                    <NavLink to="/app/propertyDetails/communication">
+                      <i className="simple-icon-briefcase" />{" "}
+                      <IntlMessages id="property.communication" />
+                    </NavLink>
                 </NavItem>
               </Nav>
-              <Nav
-                className={classnames({
-                  "d-block":
-                    (this.state.selectedParentMenu == "pages" &&
-                      this.state.viewingParentMenu == "") ||
-                    this.state.viewingParentMenu == "pages"
-                })}
-                data-parent="pages"
-              >
-                <NavItem>
-                  <NavLink to="/app/pages/data-list">
-                    <i className="simple-icon-credit-card" />{" "}
-                    <IntlMessages id="menu.data-list" />
-                  </NavLink>
-                </NavItem>
-                <NavItem>
-                  <NavLink to="/app/pages/thumb-list">
-                    <i className="simple-icon-list" />{" "}
-                    <IntlMessages id="menu.thumb-list" />
-                  </NavLink>
-                </NavItem>
-                <NavItem>
-                  <NavLink to="/app/pages/image-list">
-                    <i className="simple-icon-grid" />{" "}
-                    <IntlMessages id="menu.image-list" />
-                  </NavLink>
-                </NavItem>
-                <NavItem>
-                  <NavLink to="/app/pages/details">
-                    <i className="simple-icon-book-open" />{" "}
-                    <IntlMessages id="menu.details" />
-                  </NavLink>
-                </NavItem>
-                <NavItem>
-                  <NavLink to="/app/pages/search">
-                    <i className="simple-icon-magnifier" />{" "}
-                    <IntlMessages id="menu.search" />
-                  </NavLink>
-                </NavItem>
+                <Nav
+                  className={classnames({
+                    "d-block":
+                      (this.state.selectedParentMenu == "pages" &&
+                        this.state.viewingParentMenu == "") ||
+                      this.state.viewingParentMenu == "pages"
+                  })}
+                  data-parent="pages"
+                >
+                  <NavItem>
+                    <NavLink to="/app/pages/data-list">
+                      <i className="simple-icon-credit-card" />{" "}
+                      <IntlMessages id="menu.data-list" />
+                    </NavLink>
+                  </NavItem>
+                  <NavItem>
+                    <NavLink to="/app/pages/thumb-list">
+                      <i className="simple-icon-list" />{" "}
+                      <IntlMessages id="menu.thumb-list" />
+                    </NavLink>
+                  </NavItem>
+                  <NavItem>
+                    <NavLink to="/app/pages/image-list">
+                      <i className="simple-icon-grid" />{" "}
+                      <IntlMessages id="menu.image-list" />
+                    </NavLink>
+                  </NavItem>
+                  <NavItem>
+                    <NavLink to="/app/pages/details">
+                      <i className="simple-icon-book-open" />{" "}
+                      <IntlMessages id="menu.details" />
+                    </NavLink>
+                  </NavItem>
+                  <NavItem>
+                    <NavLink to="/app/pages/search">
+                      <i className="simple-icon-magnifier" />{" "}
+                      <IntlMessages id="menu.search" />
+                    </NavLink>
+                  </NavItem>
 
-                <NavItem>
-                  <NavLink to="/app/pages/mailing">
-                    <i className="simple-icon-envelope-open" />{" "}
-                    <IntlMessages id="menu.mailing" />
-                  </NavLink>
-                </NavItem>
+                  <NavItem>
+                    <NavLink to="/app/pages/mailing">
+                      <i className="simple-icon-envelope-open" />{" "}
+                      <IntlMessages id="menu.mailing" />
+                    </NavLink>
+                  </NavItem>
 
-                <NavItem>
-                  <NavLink to="/app/pages/invoice">
-                    <i className="simple-icon-bag" />{" "}
-                    <IntlMessages id="menu.invoice" />
-                  </NavLink>
-                </NavItem>
+                  <NavItem>
+                    <NavLink to="/app/pages/invoice">
+                      <i className="simple-icon-bag" />{" "}
+                      <IntlMessages id="menu.invoice" />
+                    </NavLink>
+                  </NavItem>
 
-                <NavItem>
-                  <a href="/login" target="_blank">
-                    <i className="simple-icon-user-following" />{" "}
-                    <IntlMessages id="menu.login" />
-                  </a>
-                </NavItem>
-                <NavItem>
-                  <a href="/register" target="_blank">
-                    <i className="simple-icon-user-follow" />{" "}
-                    <IntlMessages id="menu.register" />
-                  </a>
-                </NavItem>
-                <NavItem>
-                  <a href="/forgot-password" target="_blank">
-                    <i className="simple-icon-user-unfollow" />{" "}
-                    <IntlMessages id="menu.forgot-password" />
-                  </a>
-                </NavItem>
-                <NavItem>
-                  <a href="/error" target="_blank">
-                    <i className="simple-icon-exclamation" />{" "}
-                    <IntlMessages id="menu.error" />
-                  </a>
-                </NavItem>
-              </Nav>
-              <Nav
-                className={classnames({
-                  "d-block":
-                    (this.state.selectedParentMenu == "applications" &&
-                      this.state.viewingParentMenu == "") ||
-                    this.state.viewingParentMenu == "applications"
-                })}
-                data-parent="applications"
-              >
-                <NavItem>
-                  <NavLink to="/app/applications/todo">
-                    <i className="simple-icon-check" />{" "}
-                    <IntlMessages id="menu.todo" />
-                  </NavLink>
-                </NavItem>
-                <NavItem>
-                  <NavLink to="/app/applications/survey">
-                    <i className="simple-icon-calculator" />{" "}
-                    <IntlMessages id="menu.survey" />
-                  </NavLink>
-                </NavItem>
-                <NavItem>
-                  <NavLink to="/app/applications/chat">
-                    <i className="simple-icon-bubbles" />{" "}
-                    <IntlMessages id="menu.chat" />
-                  </NavLink>
-                </NavItem>
-              </Nav>
-              <Nav
-                className={classnames({
-                  "d-block":
-                    (this.state.selectedParentMenu == "ui" &&
-                      this.state.viewingParentMenu == "") ||
-                    this.state.viewingParentMenu == "ui"
-                })}
-                data-parent="ui"
-              >
-                <NavItem>
-                  <NavLink to="/app/ui/alerts">
-                    <i className="simple-icon-bell" />{" "}
-                    <IntlMessages id="menu.alerts" />
-                  </NavLink>
-                </NavItem>
-                <NavItem>
-                  <NavLink to="/app/ui/badges">
-                    <i className="simple-icon-badge" />{" "}
-                    <IntlMessages id="menu.badges" />
-                  </NavLink>
-                </NavItem>
-                <NavItem>
-                  <NavLink to="/app/ui/buttons">
-                    <i className="simple-icon-control-play" />{" "}
-                    <IntlMessages id="menu.buttons" />
-                  </NavLink>
-                </NavItem>
-                <NavItem>
-                  <NavLink to="/app/ui/cards">
-                    <i className="simple-icon-layers" />{" "}
-                    <IntlMessages id="menu.cards" />
-                  </NavLink>
-                </NavItem>
-                <NavItem>
-                  <NavLink to="/app/ui/carousel">
-                    <i className="simple-icon-picture" />{" "}
-                    <IntlMessages id="menu.carousel" />
-                  </NavLink>
-                </NavItem>
-                <NavItem>
-                  <NavLink to="/app/ui/charts">
-                    <i className="simple-icon-chart" />{" "}
-                    <IntlMessages id="menu.charts" />
-                  </NavLink>
-                </NavItem>
-                <NavItem>
-                  <NavLink to="/app/ui/collapse">
-                    <i className="simple-icon-arrow-up" />{" "}
-                    <IntlMessages id="menu.collapse" />
-                  </NavLink>
-                </NavItem>
-                <NavItem>
-                  <NavLink to="/app/ui/dropdowns">
-                    <i className="simple-icon-arrow-down" />{" "}
-                    <IntlMessages id="menu.dropdowns" />
-                  </NavLink>
-                </NavItem>
-                <NavItem>
-                  <NavLink to="/app/ui/editors">
-                    <i className="simple-icon-book-open" />{" "}
-                    <IntlMessages id="menu.editors" />
-                  </NavLink>
-                </NavItem>
-                <NavItem>
-                  <NavLink to="/app/ui/form-layouts">
-                    <i className="simple-icon-notebook" />{" "}
-                    <IntlMessages id="menu.form-layouts" />
-                  </NavLink>
-                </NavItem>
-                <NavItem>
-                  <NavLink to="/app/ui/form-components">
-                    <i className="simple-icon-puzzle" />{" "}
-                    <IntlMessages id="menu.form-components" />
-                  </NavLink>
-                </NavItem>
-                <NavItem>
-                  <NavLink to="/app/ui/form-validations">
-                    <i className="simple-icon-check" />{" "}
-                    <IntlMessages id="menu.form-validations" />
-                  </NavLink>
-                </NavItem>
-                <NavItem>
-                  <NavLink to="/app/ui/icons">
-                    <i className="simple-icon-star" />{" "}
-                    <IntlMessages id="menu.icons" />
-                  </NavLink>
-                </NavItem>
-                <NavItem>
-                  <NavLink to="/app/ui/input-groups">
-                    <i className="simple-icon-note" />{" "}
-                    <IntlMessages id="menu.input-groups" />
-                  </NavLink>
-                </NavItem>
-                <NavItem>
-                  <NavLink to="/app/ui/jumbotron">
-                    <i className="simple-icon-screen-desktop" />{" "}
-                    <IntlMessages id="menu.jumbotron" />
-                  </NavLink>
-                </NavItem>
-                <NavItem>
-                  <NavLink to="/app/ui/maps">
-                    <i className="simple-icon-map" />{" "}
-                    <IntlMessages id="menu.maps" />
-                  </NavLink>
-                </NavItem>
-                <NavItem>
-                  <NavLink to="/app/ui/modal">
-                    <i className="simple-icon-docs" />{" "}
-                    <IntlMessages id="menu.modal" />
-                  </NavLink>
-                </NavItem>
-                <NavItem>
-                  <NavLink to="/app/ui/navigation">
-                    <i className="simple-icon-cursor" />{" "}
-                    <IntlMessages id="menu.navigation" />
-                  </NavLink>
-                </NavItem>
-                <NavItem>
-                  <NavLink to="/app/ui/popover-tooltip">
-                    <i className="simple-icon-pin" />{" "}
-                    <IntlMessages id="menu.popover-tooltip" />
-                  </NavLink>
-                </NavItem>
-                <NavItem>
-                  <NavLink to="/app/ui/sortable">
-                    <i className="simple-icon-shuffle" />{" "}
-                    <IntlMessages id="menu.sortable" />
-                  </NavLink>
-                </NavItem>
-                <NavItem>
-                  <NavLink to="/app/ui/tables">
-                    <i className="simple-icon-grid" />{" "}
-                    <IntlMessages id="menu.tables" />
-                  </NavLink>
-                </NavItem>
-              </Nav>
-              <Nav
-                className={classnames({
-                  "d-block":
-                    (this.state.selectedParentMenu == "menu" &&
-                      this.state.viewingParentMenu == "") ||
-                    this.state.viewingParentMenu == "menu"
-                })}
-                data-parent="menu"
-              >
-                <NavItem>
-                  <NavLink
-                    to="#"
-                    onClick={e => this.changeDefaultMenuType(e, "menu-default")}
-                  >
-                    <i className="simple-icon-control-pause" />{" "}
-                    <IntlMessages id="menu.default" />
-                  </NavLink>
-                </NavItem>
-                <NavItem>
-                  <NavLink
-                    to="#"
-                    onClick={e =>
-                      this.changeDefaultMenuType(e, "menu-sub-hidden")
-                    }
-                  >
-                    <i className="simple-icon-arrow-left" />{" "}
-                    <IntlMessages id="menu.subhidden" />
-                  </NavLink>
-                </NavItem>
-                <NavItem>
-                  <NavLink
-                    to="#"
-                    onClick={e => this.changeDefaultMenuType(e, "menu-hidden")}
-                  >
-                    <i className="simple-icon-control-start" />{" "}
-                    <IntlMessages id="menu.hidden" />
-                  </NavLink>
-                </NavItem>
-              </Nav>
+                  <NavItem>
+                    <a href="/login" target="_blank">
+                      <i className="simple-icon-user-following" />{" "}
+                      <IntlMessages id="menu.login" />
+                    </a>
+                  </NavItem>
+                  <NavItem>
+                    <a href="/register" target="_blank">
+                      <i className="simple-icon-user-follow" />{" "}
+                      <IntlMessages id="menu.register" />
+                    </a>
+                  </NavItem>
+                  <NavItem>
+                    <a href="/forgot-password" target="_blank">
+                      <i className="simple-icon-user-unfollow" />{" "}
+                      <IntlMessages id="menu.forgot-password" />
+                    </a>
+                  </NavItem>
+                  <NavItem>
+                    <a href="/error" target="_blank">
+                      <i className="simple-icon-exclamation" />{" "}
+                      <IntlMessages id="menu.error" />
+                    </a>
+                  </NavItem>
+                </Nav>
+                <Nav
+                  className={classnames({
+                    "d-block":
+                      (this.state.selectedParentMenu == "applications" &&
+                        this.state.viewingParentMenu == "") ||
+                      this.state.viewingParentMenu == "applications"
+                  })}
+                  data-parent="applications"
+                >
+                  <NavItem>
+                    <NavLink to="/app/applications/todo">
+                      <i className="simple-icon-check" />{" "}
+                      <IntlMessages id="menu.todo" />
+                    </NavLink>
+                  </NavItem>
+                  <NavItem>
+                    <NavLink to="/app/applications/survey">
+                      <i className="simple-icon-calculator" />{" "}
+                      <IntlMessages id="menu.survey" />
+                    </NavLink>
+                  </NavItem>
+                  <NavItem>
+                    <NavLink to="/app/applications/chat">
+                      <i className="simple-icon-bubbles" />{" "}
+                      <IntlMessages id="menu.chat" />
+                    </NavLink>
+                  </NavItem>
+                </Nav>
+                <Nav
+                  className={classnames({
+                    "d-block":
+                      (this.state.selectedParentMenu == "ui" &&
+                        this.state.viewingParentMenu == "") ||
+                      this.state.viewingParentMenu == "ui"
+                  })}
+                  data-parent="ui"
+                >
+                  <NavItem>
+                    <NavLink to="/app/ui/alerts">
+                      <i className="simple-icon-bell" />{" "}
+                      <IntlMessages id="menu.alerts" />
+                    </NavLink>
+                  </NavItem>
+                  <NavItem>
+                    <NavLink to="/app/ui/badges">
+                      <i className="simple-icon-badge" />{" "}
+                      <IntlMessages id="menu.badges" />
+                    </NavLink>
+                  </NavItem>
+                  <NavItem>
+                    <NavLink to="/app/ui/buttons">
+                      <i className="simple-icon-control-play" />{" "}
+                      <IntlMessages id="menu.buttons" />
+                    </NavLink>
+                  </NavItem>
+                  <NavItem>
+                    <NavLink to="/app/ui/cards">
+                      <i className="simple-icon-layers" />{" "}
+                      <IntlMessages id="menu.cards" />
+                    </NavLink>
+                  </NavItem>
+                  <NavItem>
+                    <NavLink to="/app/ui/carousel">
+                      <i className="simple-icon-picture" />{" "}
+                      <IntlMessages id="menu.carousel" />
+                    </NavLink>
+                  </NavItem>
+                  <NavItem>
+                    <NavLink to="/app/ui/charts">
+                      <i className="simple-icon-chart" />{" "}
+                      <IntlMessages id="menu.charts" />
+                    </NavLink>
+                  </NavItem>
+                  <NavItem>
+                    <NavLink to="/app/ui/collapse">
+                      <i className="simple-icon-arrow-up" />{" "}
+                      <IntlMessages id="menu.collapse" />
+                    </NavLink>
+                  </NavItem>
+                  <NavItem>
+                    <NavLink to="/app/ui/dropdowns">
+                      <i className="simple-icon-arrow-down" />{" "}
+                      <IntlMessages id="menu.dropdowns" />
+                    </NavLink>
+                  </NavItem>
+                  <NavItem>
+                    <NavLink to="/app/ui/editors">
+                      <i className="simple-icon-book-open" />{" "}
+                      <IntlMessages id="menu.editors" />
+                    </NavLink>
+                  </NavItem>
+                  <NavItem>
+                    <NavLink to="/app/ui/form-layouts">
+                      <i className="simple-icon-notebook" />{" "}
+                      <IntlMessages id="menu.form-layouts" />
+                    </NavLink>
+                  </NavItem>
+                  <NavItem>
+                    <NavLink to="/app/ui/form-components">
+                      <i className="simple-icon-puzzle" />{" "}
+                      <IntlMessages id="menu.form-components" />
+                    </NavLink>
+                  </NavItem>
+                  <NavItem>
+                    <NavLink to="/app/ui/form-validations">
+                      <i className="simple-icon-check" />{" "}
+                      <IntlMessages id="menu.form-validations" />
+                    </NavLink>
+                  </NavItem>
+                  <NavItem>
+                    <NavLink to="/app/ui/icons">
+                      <i className="simple-icon-star" />{" "}
+                      <IntlMessages id="menu.icons" />
+                    </NavLink>
+                  </NavItem>
+                  <NavItem>
+                    <NavLink to="/app/ui/input-groups">
+                      <i className="simple-icon-note" />{" "}
+                      <IntlMessages id="menu.input-groups" />
+                    </NavLink>
+                  </NavItem>
+                  <NavItem>
+                    <NavLink to="/app/ui/jumbotron">
+                      <i className="simple-icon-screen-desktop" />{" "}
+                      <IntlMessages id="menu.jumbotron" />
+                    </NavLink>
+                  </NavItem>
+                  <NavItem>
+                    <NavLink to="/app/ui/maps">
+                      <i className="simple-icon-map" />{" "}
+                      <IntlMessages id="menu.maps" />
+                    </NavLink>
+                  </NavItem>
+                  <NavItem>
+                    <NavLink to="/app/ui/modal">
+                      <i className="simple-icon-docs" />{" "}
+                      <IntlMessages id="menu.modal" />
+                    </NavLink>
+                  </NavItem>
+                  <NavItem>
+                    <NavLink to="/app/ui/navigation">
+                      <i className="simple-icon-cursor" />{" "}
+                      <IntlMessages id="menu.navigation" />
+                    </NavLink>
+                  </NavItem>
+                  <NavItem>
+                    <NavLink to="/app/ui/popover-tooltip">
+                      <i className="simple-icon-pin" />{" "}
+                      <IntlMessages id="menu.popover-tooltip" />
+                    </NavLink>
+                  </NavItem>
+                  <NavItem>
+                    <NavLink to="/app/ui/sortable">
+                      <i className="simple-icon-shuffle" />{" "}
+                      <IntlMessages id="menu.sortable" />
+                    </NavLink>
+                  </NavItem>
+                  <NavItem>
+                    <NavLink to="/app/ui/tables">
+                      <i className="simple-icon-grid" />{" "}
+                      <IntlMessages id="menu.tables" />
+                    </NavLink>
+                  </NavItem>
+                </Nav>
+                <Nav
+                  className={classnames({
+                    "d-block":
+                      (this.state.selectedParentMenu == "menu" &&
+                        this.state.viewingParentMenu == "") ||
+                      this.state.viewingParentMenu == "menu"
+                  })}
+                  data-parent="menu"
+                >
+                  <NavItem>
+                    <NavLink
+                      to="#"
+                      onClick={e => this.changeDefaultMenuType(e, "menu-default")}
+                    >
+                      <i className="simple-icon-control-pause" />{" "}
+                      <IntlMessages id="menu.default" />
+                    </NavLink>
+                  </NavItem>
+                  <NavItem>
+                    <NavLink
+                      to="#"
+                      onClick={e =>
+                        this.changeDefaultMenuType(e, "menu-sub-hidden")
+                      }
+                    >
+                      <i className="simple-icon-arrow-left" />{" "}
+                      <IntlMessages id="menu.subhidden" />
+                    </NavLink>
+                  </NavItem>
+                  <NavItem>
+                    <NavLink
+                      to="#"
+                      onClick={e => this.changeDefaultMenuType(e, "menu-hidden")}
+                    >
+                      <i className="simple-icon-control-start" />{" "}
+                      <IntlMessages id="menu.hidden" />
+                    </NavLink>
+                  </NavItem>
+                </Nav>
             </PerfectScrollbar>
           </div>
+          </div>
         </div>
-      </div>
-    );
-  }
-}
-
-const mapStateToProps = ({ menu }) => {
-  const {
-    containerClassnames,
-    subHiddenBreakpoint,
-    menuHiddenBreakpoint,
-    menuClickCount,
-    selectedMenuHasSubItems
-  } = menu;
-  return {
-    containerClassnames,
-    subHiddenBreakpoint,
-    menuHiddenBreakpoint,
-    menuClickCount,
-    selectedMenuHasSubItems
-  };
-};
-export default withRouter(
-  connect(
-    mapStateToProps,
-    {
-      setContainerClassnames,
-      addContainerClassname,
-      changeDefaultClassnames,
-      changeSelectedMenuHasSubItems
+        );
+      }
     }
-  )(Sidebar)
-);
+    
+const mapStateToProps = ({menu}) => {
+  const {
+          containerClassnames,
+        subHiddenBreakpoint,
+        menuHiddenBreakpoint,
+        menuClickCount,
+        selectedMenuHasSubItems
+      } = menu;
+  return {
+          containerClassnames,
+        subHiddenBreakpoint,
+        menuHiddenBreakpoint,
+        menuClickCount,
+        selectedMenuHasSubItems
+      };
+    };
+    export default withRouter(
+      connect(
+        mapStateToProps,
+    {
+          setContainerClassnames,
+        addContainerClassname,
+        changeDefaultClassnames,
+        changeSelectedMenuHasSubItems
+      }
+    )(Sidebar)
+  );

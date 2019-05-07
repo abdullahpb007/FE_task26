@@ -32,7 +32,7 @@ class AddModal extends Component {
         size="lg"
       >
         <ModalHeader toggle={this.props.toggleModalAdd}>
-          <IntlMessages id="property.add-modal-title" />
+          <IntlMessages id="lien.add-modal-title" />
         </ModalHeader>
 
         <Formik

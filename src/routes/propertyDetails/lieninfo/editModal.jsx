@@ -32,7 +32,7 @@ class EditModal extends Component {
         size="lg"
       >
         <ModalHeader toggle={this.props.toggleModalEdit}>
-          <IntlMessages id="property.edit-modal-title" />
+          <IntlMessages id="lien.edit-modal-title" />
         </ModalHeader>
 
         <Formik
