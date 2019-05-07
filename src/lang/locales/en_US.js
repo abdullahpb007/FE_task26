@@ -104,6 +104,7 @@ module.exports = {
 
   /* Assessee */
   "assessee.title": "Assessee",
+  "assessee.edit-title": "Edit Assessee",
   "assessee.popup": "Add New",
   "assessee.popupTitle": "Add New",
   "assessee.view": "View",
