@@ -17,6 +17,7 @@ import IntlMessages from "Util/IntlMessages";
 import { Colxx } from "Components/CustomBootstrap";
 
 const addDateSchema = Yup.object().shape({
+  propertyNumber: Yup.string().required("Required"),
   actualEstimatedDate: Yup.string().required("Required"),
   firstInstallmentDate: Yup.string().required("Required"),
   secondInstallmentDate: Yup.string().required("Required"),
@@ -43,6 +44,7 @@ class AddModal extends Component {
 
         <Formik
           initialValues={{
+            propertyNumber: "",
             actualEstimatedDate: "",
             firstInstallmentDate: "",
             secondInstallmentDate: "",
@@ -63,6 +65,39 @@ class AddModal extends Component {
             <Form>
               <ModalBody>
                 <Row>
+                  <Colxx xxs="8">
+                    <FormGroup className="form-group has-top-label">
+                      <Label
+                        className={
+                          errors.actualEstimatedDate &&
+                          touched.actualEstimatedDate
+                            ? "text-danger"
+                            : ""
+                        }
+                      >
+                        <IntlMessages id="dates.propertyNumber" />
+                      </Label>
+                      <Field
+                        className={
+                          "form-control" +
+                          (errors.actualEstimatedDate &&
+                          touched.actualEstimatedDate
+                            ? " border-danger"
+                            : "")
+                        }
+                        type="text"
+                        name="propertyNumber"
+                      />
+                      {errors.actualEstimatedDate &&
+                      touched.actualEstimatedDate ? (
+                        <small className="text-danger">
+                          {errors.actualEstimatedDate}
+                        </small>
+                      ) : (
+                        ""
+                      )}
+                    </FormGroup>
+                  </Colxx>
                   <Colxx xxs="4">
                     <FormGroup className="form-group has-top-label">
                       <Label

@@ -28,6 +28,10 @@ class viewModal extends Component {
               <Table hover>
                 <tbody>
                   <tr>
+                    <th scope="row">Property Number</th>
+                    <th>{this.props.details.propertyNumber}</th>
+                  </tr>
+                  <tr>
                     <th scope="row">Estimated Date</th>
                     <th>{this.props.details.estimatedDate}</th>
                   </tr>
@@ -47,16 +51,16 @@ class viewModal extends Component {
                     <th scope="row">Estimated Petition Date</th>
                     <th>{this.props.details.estimatedPetitionDate}</th>
                   </tr>
-                  <tr>
-                    <th scope="row">Petition Filed Date</th>
-                    <th>{this.props.details.petitionFiledDate}</th>
-                  </tr>
                 </tbody>
               </Table>
             </Colxx>
             <Colxx xxs="6">
               <Table hover>
                 <tbody>
+                  <tr>
+                    <th scope="row">Petition Filed Date</th>
+                    <th>{this.props.details.petitionFiledDate}</th>
+                  </tr>
                   <tr>
                     <th scope="row">Extention Date</th>
                     <th>{this.props.details.extentionDate}</th>

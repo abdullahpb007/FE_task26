@@ -17,14 +17,13 @@ class viewModal extends Component {
       <Modal
         isOpen={this.props.modalViewHandler}
         toggle={this.props.toggleModalView}
-        size="lg"
       >
         <ModalHeader toggle={this.props.toggleModalView}>
           <IntlMessages id="property.view-modal-title" />
         </ModalHeader>
         <ModalBody>
           <Row>
-            <Colxx xxs="6">
+            <Colxx xxs="12">
               <Table hover>
                 <tbody>
                   <tr>

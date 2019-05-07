@@ -24,7 +24,7 @@ class PropertyDetails extends Component {
 
       dateData: [
         {
-          purchaseDate: "2019-01-01",
+          propertyNumber: "1409276022Sans",
           estimatedDate: "2019-02-12",
           actualEstimatedDate: "2019-02-12",
           firstInstallmentDate: "2019-02-12",
@@ -38,6 +38,7 @@ class PropertyDetails extends Component {
           orderOfDate: "2019-02-12"
         },
         {
+          propertyNumber: "1409276022Kane",
           estimatedDate: "2019-02-12",
           actualEstimatedDate: "2019-02-12",
           firstInstallmentDate: "2019-02-12",
