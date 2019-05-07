@@ -478,6 +478,12 @@ class Sidebar extends Component {
                     <IntlMessages id="property.lienInfo" />
                   </NavLink>
                 </NavItem>
+                <NavItem>
+                  <NavLink to="/app/propertyDetails/escrow">
+                    <i className="simple-icon-briefcase" />{" "}
+                    <IntlMessages id="escrow.title" />
+                  </NavLink>
+                </NavItem>
               </Nav>
               <Nav
                 className={classnames({

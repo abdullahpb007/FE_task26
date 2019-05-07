@@ -86,6 +86,16 @@ module.exports = {
   "lien.creditor": "Creditor",
   "lien.paymentAmount": "Payment Amount",
 
+  // ESCROW ACCOUNT ACTIVITY
+  "escrow.title": "Escrow Account Activity",
+  "escrow.property-number": "Property Number",
+  "escrow.ballance": "Escrow Ballance",
+  "escrow.amount": "Payment Ammount",
+  "escrow.due": "Payment Due",
+  "escrow.pay-day": "Client's Monthly Pay Day",
+  "menu.escrow": "Escrow",
+  "escrow.submit": "Submit",
+
   /* Dates Details */
   "dates.add-modal-title": "Add Dates",
   "dates.edit-modal-title": "Edit Dates",

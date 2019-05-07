@@ -1,27 +1,13 @@
 import React, { Component, Fragment } from "react";
 import {
   Row,
-  Card,
   Button,
-  ButtonGroup,
-  Modal,
-  ModalHeader,
-  ModalBody,
-  ModalFooter,
-  Input,
-  Label,
-  Table
 } from "reactstrap";
-
-import ReactTable from "react-table";
-
 import IntlMessages from "Util/IntlMessages";
 import { Colxx, Separator } from "Components/CustomBootstrap";
 import { BreadcrumbItems } from "Components/BreadcrumbContainer";
-import DataTablePagination from "Components/DataTables/pagination";
 import mouseTrap from "react-mousetrap";
 import { injectIntl } from "react-intl";
-
 import AssesseeGrid from './assesseeGrid';
 import AddModal from './addModal';
 import ViewModal from './viewModal';
