@@ -19,7 +19,7 @@ class PropertyDetails extends Component {
 
     this.state = {
       modalAddLien: false,
-      modalEditProperty: false,
+      modalEditLien: false,
       modalViewLien: false,
 
       lienData: [
@@ -87,6 +87,13 @@ class PropertyDetails extends Component {
           toggleModalView={this.toggleViewLien}
           details={this.state.selectedLien}
         />
+
+        <EditModal
+          modalEditHandler={this.state.modalEditLien}
+          toggleModalEdit={this.toggleEditLien}
+          onSubmit={this.handleEditSubmit}
+          details={this.state.selectedLien}
+        />
       </Fragment>
     );
   }
@@ -103,14 +110,15 @@ class PropertyDetails extends Component {
 
   handleEditSubmit = values => {
     event.preventDefault();
-    const updatedProperty = { ...values };
-    const propertyData = [...this.state.propertyData];
-    const index = propertyData.findIndex(p => {
-      return p.pin == this.state.selectedProperty.pin;
+    const updatedLien = { ...values };
+    const lienData = [...this.state.lienData];
+    const index = lienData.findIndex(p => {
+      //return p.pin == this.state.selectedProperty.pin;
+      return 1;
     });
-    propertyData[index] = { ...updatedProperty };
-    this.toggleEditProperty();
-    this.setState({ propertyData });
+    lienData[index] = { ...updatedLien };
+    this.toggleEditLien();
+    this.setState({ lienData });
   };
 
   toggleAddLien = () => {
@@ -125,22 +133,22 @@ class PropertyDetails extends Component {
     });
   };
 
-  toggleEditProperty = () => {
+  toggleEditLien = () => {
     this.setState({
-      modalEditProperty: !this.state.modalEditProperty
+      modalEditLien: !this.state.modalEditLien
     });
   };
 
-  viewBtnControl = property => {
-    const selectedProperty = { ...property };
-    this.setState({ selectedProperty });
+  viewBtnControl = lien => {
+    const selectedLien = { ...lien };
+    this.setState({ selectedLien });
     this.toggleViewLien();
   };
 
-  editBtnControl = property => {
-    const selectedProperty = { ...property };
-    this.setState({ selectedProperty });
-    this.toggleEditProperty();
+  editBtnControl = lien => {
+    const selectedLien = { ...lien };
+    this.setState({ selectedLien });
+    this.toggleEditLien();
   };
 
   handleInputChange = event => {

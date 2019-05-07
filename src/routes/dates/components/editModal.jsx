@@ -42,6 +42,7 @@ class EditModal extends Component {
 
         <Formik
           initialValues={{
+            propertyNumber: this.props.details.propertyNumber,
             actualEstimatedDate: this.props.details.actualEstimatedDate,
             firstInstallmentDate: this.props.details.firstInstallmentDate,
             secondInstallmentDate: this.props.details.secondInstallmentDate,
@@ -61,6 +62,39 @@ class EditModal extends Component {
             <Form>
               <ModalBody>
                 <Row>
+                  <Colxx xxs="8">
+                    <FormGroup className="form-group has-top-label">
+                      <Label
+                        className={
+                          errors.actualEstimatedDate &&
+                          touched.actualEstimatedDate
+                            ? "text-danger"
+                            : ""
+                        }
+                      >
+                        <IntlMessages id="dates.propertyNumber" />
+                      </Label>
+                      <Field
+                        className={
+                          "form-control" +
+                          (errors.actualEstimatedDate &&
+                          touched.actualEstimatedDate
+                            ? " border-danger"
+                            : "")
+                        }
+                        type="text"
+                        name="propertyNumber"
+                      />
+                      {errors.actualEstimatedDate &&
+                      touched.actualEstimatedDate ? (
+                        <small className="text-danger">
+                          {errors.actualEstimatedDate}
+                        </small>
+                      ) : (
+                        ""
+                      )}
+                    </FormGroup>
+                  </Colxx>
                   <Colxx xxs="4">
                     <FormGroup className="form-group has-top-label">
                       <Label

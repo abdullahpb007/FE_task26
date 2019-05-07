@@ -28,6 +28,10 @@ class viewModal extends Component {
               <Table hover>
                 <tbody>
                   <tr>
+                    <th scope="row">Property Number</th>
+                    <th>{this.props.details.propertyNumber}</th>
+                  </tr>
+                  <tr>
                     <th scope="row">Pin</th>
                     <th>{this.props.details.pin}</th>
                   </tr>
@@ -59,16 +63,16 @@ class viewModal extends Component {
                     <th scope="row">Class Code</th>
                     <th>{this.props.details.classCode}</th>
                   </tr>
-                  <tr>
-                    <th scope="row">Legal Description</th>
-                    <th>{this.props.details.legalDescription}</th>
-                  </tr>
                 </tbody>
               </Table>
             </Colxx>
             <Colxx xxs="6">
               <Table hover>
                 <tbody>
+                  <tr>
+                    <th scope="row">Legal Description</th>
+                    <th>{this.props.details.legalDescription}</th>
+                  </tr>
                   <tr>
                     <th scope="row">Assessed Value</th>
                     <th>{"$" + this.props.details.assessedValue}</th>

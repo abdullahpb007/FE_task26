@@ -353,7 +353,7 @@ class AddModal extends Component {
                     </FormGroup>
                   </Colxx>
 
-                  <Colxx xxs="4">
+                  <Colxx xxs="6">
                     <FormGroup className="form-group has-top-label">
                       <Label>
                         <IntlMessages id="property.seniorFreeze" />
@@ -371,7 +371,7 @@ class AddModal extends Component {
                     </FormGroup>
                   </Colxx>
 
-                  <Colxx xxs="4">
+                  <Colxx xxs="6">
                     <FormGroup className="form-group has-top-label">
                       <Label>
                         <IntlMessages id="property.totalAcres" />
@@ -389,7 +389,7 @@ class AddModal extends Component {
                     </FormGroup>
                   </Colxx>
 
-                  <Colxx xxs="8">
+                  <Colxx xxs="12">
                     <FormGroup className="form-group has-top-label">
                       <Label>
                         <IntlMessages id="property.legalDescription" />

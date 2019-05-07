@@ -90,6 +90,7 @@ module.exports = {
   "dates.add-modal-title": "Add Dates",
   "dates.edit-modal-title": "Edit Dates",
   "dates.estimatedDate": "Estimated Date",
+  "dates.propertyNumber": "Property Number",
   "dates.actualEstimatedDate": "Actual Estimated Date",
   "dates.firstInstallmentDate": "First Installment Date",
   "dates.secondInstallmentDate": "Second Installment Date",
