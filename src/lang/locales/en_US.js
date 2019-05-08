@@ -101,6 +101,10 @@ module.exports = {
   "escrow.pay-day": "Client's Monthly Pay Day",
   "menu.escrow": "Escrow",
   "escrow.submit": "Submit",
+  "escrow.payments-in": "Payments Into Escrow",
+  "escrow.payments-out": "Payments Out Of Escrow",
+  "escrow.pay": "Easy Pay",
+
 
   /* Dates Details */
   "dates.add-modal-title": "Add Dates",
