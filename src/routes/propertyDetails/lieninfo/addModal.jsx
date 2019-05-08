@@ -37,6 +37,7 @@ class AddModal extends Component {
 
         <Formik
           initialValues={{
+            id: this.props.details.length,
             propertyNumber: "",
             creditor: "",
             amount: "",
