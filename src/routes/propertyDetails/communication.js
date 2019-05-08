@@ -3,6 +3,7 @@ import { injectIntl } from "react-intl";
 import {
   Card,
   CardBody,
+  Badge,
   Form,
   Row,
   Button,
@@ -10,6 +11,42 @@ import {
   InputGroup,
   InputGroupAddon
 } from "reactstrap";
+
+import classnames from "classnames";
+import ReactTable from "react-table";
+import PerfectScrollbar from "react-perfect-scrollbar";
+
+const CustomTbodyComponent = props => (
+  <div {...props} className={classnames("rt-tbody", props.className || [])}>
+    <PerfectScrollbar option={{ suppressScrollX: true }}>
+      {props.children}
+    </PerfectScrollbar>
+  </div>
+);
+
+const dataTableColumns = [
+  {
+    Header: "Date/Time",
+    accessor: "timestamp"
+  },
+  {
+    Header: "Alert Type",
+    accessor: "alertType",
+    Cell: props => (
+      <Badge color={props.value == "Email" ? "primary" : "secondary"} pill>
+        {props.value}
+      </Badge>
+    )
+  },
+  {
+    Header: "Contact",
+    accessor: "contact"
+  },
+  {
+    Header: "Description",
+    accessor: "description"
+  }
+];
 
 import IntlMessages from "Util/IntlMessages";
 import { Colxx, Separator } from "Components/CustomBootstrap";
@@ -37,8 +74,9 @@ class PropertyDetails extends Component {
     event.preventDefault();
     clientDetails.find(e => {
       if (this.state.propertyNumber == e.propertyNumber) {
-        const selectedData = e;
+        const selectedData = e.alert;
         this.setState({ selectedData });
+        console.log(this.state.selectedData);
       }
     });
   };
@@ -47,8 +85,9 @@ class PropertyDetails extends Component {
     event.preventDefault();
     clientDetails.find(e => {
       if (this.state.phone == e.phone) {
-        const selectedData = e;
+        const selectedData = e.alert;
         this.setState({ selectedData });
+        console.log(this.state.selectedData);
       }
     });
   };
@@ -57,7 +96,7 @@ class PropertyDetails extends Component {
     event.preventDefault();
     clientDetails.find(e => {
       if (this.state.email == e.email) {
-        const selectedData = e;
+        const selectedData = e.alert;
         this.setState({ selectedData });
         console.log(this.state.selectedData);
       }
@@ -141,7 +180,22 @@ class PropertyDetails extends Component {
                   </Form>
                 </div>
               </Row>
-              <EmailAlert details={clientDetails} />
+            </Colxx>
+            <Colxx xxs="12" className="mt-1">
+              <Card>
+                <CardBody>
+                  <ReactTable
+                    data={this.state.selectedData}
+                    TbodyComponent={CustomTbodyComponent}
+                    columns={dataTableColumns}
+                    defaultPageSize={5}
+                    showPageJump={false}
+                    showPageSizeOptions={false}
+                    showPagination={false}
+                    className={"react-table-fixed-height"}
+                  />
+                </CardBody>
+              </Card>
             </Colxx>
           </Row>
         </div>
@@ -157,24 +211,18 @@ const clientDetails = [
     propertyNumber: "1409276022Sans",
     phone: "12345678912",
     email: "abdul@mail.com",
-    emailAlert: [
+    alert: [
       {
-        date: "20/12/2019",
-        time: "9:00",
-        email: "abdul@mail.com",
-        attachment: "None"
+        timestamp: "20/12/2019 9:00",
+        alertType: "Email",
+        contact: "abdul@mail.com",
+        description: "None"
       },
       {
-        date: "22/12/2019",
-        time: "9:20",
-        email: "abdul@mail.com",
-        attachment: "None"
-      },
-      {
-        date: "23/12/2019",
-        time: "9:30",
-        email: "abdul@mail.com",
-        attachment: "None"
+        timestamp: "20/12/2019 9:00",
+        alertType: "Text",
+        contact: "12345678912",
+        description: "None"
       }
     ]
   },
@@ -182,24 +230,18 @@ const clientDetails = [
     propertyNumber: "1401026022Sans",
     phone: "23456789123",
     email: "abdul@garena.com",
-    emailAlert: [
+    alert: [
       {
-        date: "20/12/2019",
-        time: "9:00",
-        email: "abdul@garena.com",
-        attachment: "None"
+        timestamp: "20/12/2019 9:00",
+        alertType: "Email",
+        contact: "abdul@garena.com",
+        description: "None"
       },
       {
-        date: "22/12/2019",
-        time: "9:20",
-        email: "abdul@garena.com",
-        attachment: "None"
-      },
-      {
-        date: "23/12/2019",
-        time: "9:30",
-        email: "abdul@garena.com",
-        attachment: "None"
+        timestamp: "20/12/2019 9:00",
+        alertType: "Text",
+        contact: "23456789123",
+        description: "None"
       }
     ]
   },
@@ -207,24 +249,18 @@ const clientDetails = [
     propertyNumber: "1409273201Kane",
     phone: "34567891234",
     email: "abdul@zohomail.com",
-    emailAlert: [
+    alert: [
       {
-        date: "20/12/2019",
-        time: "9:00",
-        email: "abdul@zohomail.com",
-        attachment: "None"
+        timestamp: "20/12/2019 9:00",
+        alertType: "Email",
+        contact: "abdul@zohomail.com",
+        description: "None"
       },
       {
-        date: "22/12/2019",
-        time: "9:20",
-        email: "abdul@zohomail.com",
-        attachment: "None"
-      },
-      {
-        date: "23/12/2019",
-        time: "9:30",
-        email: "abdul@zohomail.com",
-        attachment: "None"
+        timestamp: "20/12/2019 9:00",
+        alertType: "Text",
+        contact: "34567891234",
+        description: "None"
       }
     ]
   },
@@ -232,24 +268,18 @@ const clientDetails = [
     propertyNumber: "1420316022Kane",
     phone: "45678912345",
     email: "abdul@yahoomail.com",
-    emailAlert: [
+    alert: [
       {
-        date: "20/12/2019",
-        time: "9:00",
-        email: "abdul@yahoomail.com",
-        attachment: "None"
+        timestamp: "20/12/2019 9:00",
+        alertType: "Email",
+        contact: "abdul@yahoomail.com",
+        description: "None"
       },
       {
-        date: "22/12/2019",
-        time: "9:20",
-        email: "abdul@yahoomail.com",
-        attachment: "None"
-      },
-      {
-        date: "23/12/2019",
-        time: "9:30",
-        email: "abdul@yahoomail.com",
-        attachment: "None"
+        timestamp: "20/12/2019 9:00",
+        alertType: "Text",
+        contact: "45678912345",
+        description: "None"
       }
     ]
   },
@@ -257,24 +287,18 @@ const clientDetails = [
     propertyNumber: "1203276022Sans",
     phone: "56789123456",
     email: "abdullah@gmail.com",
-    emailAlert: [
+    alert: [
       {
-        date: "20/12/2019",
-        time: "9:00",
-        email: "abdullah@gmail.com",
-        attachment: "None"
+        timestamp: "20/12/2019 9:00",
+        alertType: "Email",
+        contact: "abdullah@gmail.com",
+        description: "None"
       },
       {
-        date: "22/12/2019",
-        time: "9:20",
-        email: "abdullah@gmail.com",
-        attachment: "None"
-      },
-      {
-        date: "23/12/2019",
-        time: "9:30",
-        email: "abdullah@gmail.com",
-        attachment: "None"
+        timestamp: "20/12/2019 9:00",
+        alertType: "Text",
+        contact: "56789123456",
+        description: "None"
       }
     ]
   }
