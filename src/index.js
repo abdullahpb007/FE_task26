@@ -6,15 +6,16 @@ color options :
 	 'light.orange'		'dark.orange'
 	 'light.red'		  'dark.red'
 */
-var color = 'light.purple';
-if (localStorage.getItem('themeColor')) {
-  color = localStorage.getItem('themeColor');
+var color = "light.blue";
+if (localStorage.getItem("themeColor")) {
+  color = localStorage.getItem("themeColor");
 }
 
 let render = () => {
-  const css = import('./assets/css/sass/themes/gogo.' + color + '.scss').then(x => {
-    const MainApp = require('./App');
-  });
-
+  const css = import("./assets/css/sass/themes/gogo." + color + ".scss").then(
+    x => {
+      const MainApp = require("./App");
+    }
+  );
 };
 render();
