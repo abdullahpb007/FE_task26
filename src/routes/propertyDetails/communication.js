@@ -1,9 +1,6 @@
 import React, { Component, Fragment } from "react";
 import { injectIntl } from "react-intl";
 import {
-  Card,
-  CardBody,
-  Badge,
   Form,
   Row,
   Button,
@@ -12,48 +9,12 @@ import {
   InputGroupAddon
 } from "reactstrap";
 
-import classnames from "classnames";
-import ReactTable from "react-table";
-import PerfectScrollbar from "react-perfect-scrollbar";
-
-const CustomTbodyComponent = props => (
-  <div {...props} className={classnames("rt-tbody", props.className || [])}>
-    <PerfectScrollbar option={{ suppressScrollX: true }}>
-      {props.children}
-    </PerfectScrollbar>
-  </div>
-);
-
-const dataTableColumns = [
-  {
-    Header: "Date/Time",
-    accessor: "timestamp"
-  },
-  {
-    Header: "Alert Type",
-    accessor: "alertType",
-    Cell: props => (
-      <Badge color={props.value == "Email" ? "primary" : "secondary"} pill>
-        {props.value}
-      </Badge>
-    )
-  },
-  {
-    Header: "Contact",
-    accessor: "contact"
-  },
-  {
-    Header: "Description",
-    accessor: "description"
-  }
-];
+import ComGrid from "./communication/comGrid.jsx";
 
 import IntlMessages from "Util/IntlMessages";
 import { Colxx, Separator } from "Components/CustomBootstrap";
 import { BreadcrumbItems } from "Components/BreadcrumbContainer";
 import ReactAutosuggest from "Components/ReactAutosuggest";
-
-import EmailAlert from "./communication/emailAlert.jsx";
 
 import mouseTrap from "react-mousetrap";
 
@@ -181,22 +142,7 @@ class PropertyDetails extends Component {
                 </div>
               </Row>
             </Colxx>
-            <Colxx xxs="12" className="mt-1">
-              <Card>
-                <CardBody>
-                  <ReactTable
-                    data={this.state.selectedData}
-                    TbodyComponent={CustomTbodyComponent}
-                    columns={dataTableColumns}
-                    defaultPageSize={5}
-                    showPageJump={false}
-                    showPageSizeOptions={false}
-                    showPagination={false}
-                    className={"react-table-fixed-height"}
-                  />
-                </CardBody>
-              </Card>
-            </Colxx>
+            <ComGrid details={this.state.selectedData} />
           </Row>
         </div>
       </Fragment>
@@ -219,10 +165,10 @@ const clientDetails = [
         description: "None"
       },
       {
-        timestamp: "20/12/2019 9:00",
+        timestamp: "22/12/2019 9:00",
         alertType: "Text",
         contact: "12345678912",
-        description: "None"
+        description: "Auto Payment Alert"
       }
     ]
   },
@@ -241,7 +187,7 @@ const clientDetails = [
         timestamp: "20/12/2019 9:00",
         alertType: "Text",
         contact: "23456789123",
-        description: "None"
+        description: "Payment Due Alert"
       }
     ]
   },
@@ -260,7 +206,7 @@ const clientDetails = [
         timestamp: "20/12/2019 9:00",
         alertType: "Text",
         contact: "34567891234",
-        description: "None"
+        description: "Payment OverDue Alert"
       }
     ]
   },
@@ -279,7 +225,7 @@ const clientDetails = [
         timestamp: "20/12/2019 9:00",
         alertType: "Text",
         contact: "45678912345",
-        description: "None"
+        description: "Auto Payment Alert"
       }
     ]
   },
