@@ -24,12 +24,14 @@ class PropertyDetails extends Component {
 
       lienData: [
         {
+          id: 1,
           propertyNumber: "1409276022Sans",
           creditor: "Jay Pvt",
           amount: "20000",
           paymentAmount: "12000"
         },
         {
+          id: 2,
           propertyNumber: "1409276022Kane",
           creditor: "Macro",
           amount: "25000",
@@ -77,6 +79,7 @@ class PropertyDetails extends Component {
         </div>
 
         <AddModal
+          details={this.state.selectedLien}
           modalAddHandler={this.state.modalAddLien}
           toggleModalAdd={this.toggleAddLien}
           onSubmit={this.handleSubmit}
@@ -113,8 +116,7 @@ class PropertyDetails extends Component {
     const updatedLien = { ...values };
     const lienData = [...this.state.lienData];
     const index = lienData.findIndex(p => {
-      //return p.propertyNumber == this.state.selectedProperty.propertyNumber;
-      return 1;
+      return p.id == updatedLien.id;
     });
     lienData[index] = { ...updatedLien };
     this.toggleEditLien();
