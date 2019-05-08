@@ -113,7 +113,7 @@ class PropertyDetails extends Component {
     const updatedLien = { ...values };
     const lienData = [...this.state.lienData];
     const index = lienData.findIndex(p => {
-      //return p.pin == this.state.selectedProperty.pin;
+      //return p.propertyNumber == this.state.selectedProperty.propertyNumber;
       return 1;
     });
     lienData[index] = { ...updatedLien };

@@ -90,6 +90,7 @@ module.exports = {
   "lien.edit-modal-title": "Edit Lien Information",
 
   /* Communication */
+  "communication.attachments": "Attachments",
 
   // ESCROW ACCOUNT ACTIVITY
   "escrow.title": "Escrow Account Activity",

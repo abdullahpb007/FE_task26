@@ -1,6 +1,8 @@
 import React, { Component, Fragment } from "react";
 import { injectIntl } from "react-intl";
 import {
+  Card,
+  CardBody,
   Form,
   Row,
   Button,
@@ -27,7 +29,8 @@ class PropertyDetails extends Component {
       phone: "",
       email: "",
 
-      selectedData: []
+      selectedData: [],
+      selectedAttachment: []
     };
   }
 
@@ -36,8 +39,8 @@ class PropertyDetails extends Component {
     clientDetails.find(e => {
       if (this.state.propertyNumber == e.propertyNumber) {
         const selectedData = e.alert;
-        this.setState({ selectedData });
-        console.log(this.state.selectedData);
+        const selectedAttachment = e.attachments;
+        this.setState({ selectedData, selectedAttachment });
       }
     });
   };
@@ -47,8 +50,8 @@ class PropertyDetails extends Component {
     clientDetails.find(e => {
       if (this.state.phone == e.phone) {
         const selectedData = e.alert;
-        this.setState({ selectedData });
-        console.log(this.state.selectedData);
+        const selectedAttachment = e.attachments;
+        this.setState({ selectedData, selectedAttachment });
       }
     });
   };
@@ -58,14 +61,13 @@ class PropertyDetails extends Component {
     clientDetails.find(e => {
       if (this.state.email == e.email) {
         const selectedData = e.alert;
-        this.setState({ selectedData });
-        console.log(this.state.selectedData);
+        const selectedAttachment = e.attachments;
+        this.setState({ selectedData, selectedAttachment });
       }
     });
   };
 
   handleInputChange = event => {
-    console.log(event.target.name, event.target.value);
     this.setState({
       [event.target.name]: event.target.value
     });
@@ -142,7 +144,29 @@ class PropertyDetails extends Component {
                 </div>
               </Row>
             </Colxx>
-            <ComGrid details={this.state.selectedData} />
+            <Colxx xxs="8" className="mt-2">
+              <ComGrid details={this.state.selectedData} />
+            </Colxx>
+            <Colxx xxs="4" className="mt-2">
+              <Card className="h-100">
+                <CardBody>
+                  <h4>
+                    <IntlMessages id="communication.attachments" />
+                  </h4>
+                  {this.state.selectedAttachment.map((e, i) => {
+                    return (
+                      <button
+                        key={i}
+                        type="button"
+                        className="btn btn-outline-primary m-1"
+                      >
+                        {e.fileName + " +"}
+                      </button>
+                    );
+                  })}
+                </CardBody>
+              </Card>
+            </Colxx>
           </Row>
         </div>
       </Fragment>
@@ -170,6 +194,11 @@ const clientDetails = [
         contact: "12345678912",
         description: "Auto Payment Alert"
       }
+    ],
+    attachments: [
+      { fileName: "Doc1.pdf" },
+      { fileName: "Doc2.pdf" },
+      { fileName: "Doc3.pdf" }
     ]
   },
   {
@@ -189,6 +218,11 @@ const clientDetails = [
         contact: "23456789123",
         description: "Payment Due Alert"
       }
+    ],
+    attachments: [
+      { fileName: "documents1.pdf" },
+      { fileName: "property.pdf" },
+      { fileName: "ownership.pdf" }
     ]
   },
   {
@@ -208,6 +242,11 @@ const clientDetails = [
         contact: "34567891234",
         description: "Payment OverDue Alert"
       }
+    ],
+    attachments: [
+      { fileName: "payment.pdf" },
+      { fileName: "proof.pdf" },
+      { fileName: "address.pdf" }
     ]
   },
   {
@@ -227,6 +266,11 @@ const clientDetails = [
         contact: "45678912345",
         description: "Auto Payment Alert"
       }
+    ],
+    attachments: [
+      { fileName: "Doc1.pdf" },
+      { fileName: "county.pdf" },
+      { fileName: "identity.pdf" }
     ]
   },
   {
@@ -246,6 +290,11 @@ const clientDetails = [
         contact: "56789123456",
         description: "None"
       }
+    ],
+    attachments: [
+      { fileName: "countyDetails.pdf" },
+      { fileName: "county.pdf" },
+      { fileName: "assessee.pdf" }
     ]
   }
 ];

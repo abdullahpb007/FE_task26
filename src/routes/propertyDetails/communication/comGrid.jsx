@@ -8,23 +8,21 @@ import { Colxx } from "Components/CustomBootstrap";
 class ComGrid extends Component {
   render() {
     return (
-      <Colxx xxs="12" className="mt-1">
-        <Card>
-          <CardBody>
-            <ReactTable
-              data={this.props.details}
-              TbodyComponent={CustomTbodyComponent}
-              noDataText={"No Records Found !"}
-              columns={dataColumns}
-              defaultPageSize={5}
-              showPageJump={false}
-              showPageSizeOptions={false}
-              showPagination={false}
-              className={"react-table-fixed-height"}
-            />
-          </CardBody>
-        </Card>
-      </Colxx>
+      <Card>
+        <CardBody>
+          <ReactTable
+            data={this.props.details}
+            TbodyComponent={CustomTbodyComponent}
+            noDataText={"No Records Found !"}
+            columns={dataColumns}
+            defaultPageSize={5}
+            showPageJump={false}
+            showPageSizeOptions={false}
+            showPagination={false}
+            className={"react-table-fixed-height"}
+          />
+        </CardBody>
+      </Card>
     );
   }
 }
