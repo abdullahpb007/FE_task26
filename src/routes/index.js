@@ -11,7 +11,7 @@ import ui from "./ui";
 import propertyDetails from "./propertyDetails";
 import datesDetails from "./dates";
 import modalUi from "./assessee";
-
+import county from './county';
 import { connect } from "react-redux";
 
 class MainApp extends Component {
@@ -37,6 +37,7 @@ class MainApp extends Component {
               />
               <Route path={`${match.url}/dates`} component={datesDetails} />
               <Route path={`${match.url}/assessee`} component={modalUi} />
+              <Route path={`${match.url}/county`} component={county} />
               <Redirect to="/error" />
             </Switch>
           </div>

@@ -343,6 +343,15 @@ class Sidebar extends Component {
                   </NavLink>
                 </NavItem>
 
+                <NavItem className={classnames({ "active": this.state.selectedParentMenu == 'County' })}>
+                  <NavLink to="/app/county">
+                    <i className="simple-icon-control-play" />
+                    <IntlMessages id="County" />
+                  </NavLink>
+                </NavItem>
+
+
+
                 <NavItem
                   className={classnames({
                     active:
