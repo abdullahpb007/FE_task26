@@ -343,14 +343,16 @@ class Sidebar extends Component {
                   </NavLink>
                 </NavItem>
 
-                <NavItem className={classnames({ "active": this.state.selectedParentMenu == 'County' })}>
+                <NavItem
+                  className={classnames({
+                    active: this.state.selectedParentMenu == "County"
+                  })}
+                >
                   <NavLink to="/app/county">
                     <i className="simple-icon-control-play" />
                     <IntlMessages id="County" />
                   </NavLink>
                 </NavItem>
-
-
 
                 <NavItem
                   className={classnames({
@@ -463,6 +465,12 @@ class Sidebar extends Component {
                   <NavLink to="/app/dashboards/custom">
                     <i className="simple-icon-doc" />{" "}
                     <IntlMessages id="menu.custom" />
+                  </NavLink>
+                </NavItem>
+                <NavItem>
+                  <NavLink to="/app/dashboards/reportgenerator">
+                    <i className="simple-icon-doc" />{" "}
+                    <IntlMessages id="menu.reportgenerator" />
                   </NavLink>
                 </NavItem>
               </Nav>
