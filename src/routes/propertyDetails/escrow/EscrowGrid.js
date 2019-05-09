@@ -6,55 +6,6 @@ import ReactTable from "react-table";
 import DataTablePagination from "Components/DataTables/pagination";
 
 class EscrowGrid extends Component {
-    state = {
-        assesseeColumn: [
-            {
-                Header: "Name",
-                accessor: "name",
-                filterable: "true"
-            },
-            {
-                Header: "Address",
-                accessor: "address",
-                filterable: "true"
-            },
-            {
-                Header: "City",
-                accessor: "city",
-                filterable: "true"
-            },
-            {
-                Header: "State",
-                accessor: "state",
-                filterable: "true"
-            },
-            {
-                Header: "",
-                Cell: props => {
-                    return (
-                        <ButtonGroup className="m-auto">
-                            <Button
-                                outline
-                                color="primary"
-                                size="sm"
-                                onClick={() => this.props.viewBtnHandler(props.original)}
-                            >
-                                <IntlMessages id="assessee.view" />
-                            </Button>
-                            <Button
-                                outline
-                                color="secondary"
-                                size="sm"
-                                onClick={() => this.props.editBtnHandler(props.original)}
-                            >
-                                <IntlMessages id="assessee.edit" />
-                            </Button>
-                        </ButtonGroup>
-                    );
-                }
-            }
-        ]
-    }
     render() {
         return (
             <Row>
