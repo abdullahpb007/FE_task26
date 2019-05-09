@@ -354,7 +354,7 @@ class Sidebar extends Component {
                   </NavLink>
                 </NavItem>
 
-                <NavItem
+                {/*<NavItem
                   className={classnames({
                     active:
                       (this.state.selectedParentMenu == "pages" &&
@@ -417,7 +417,7 @@ class Sidebar extends Component {
                     <i className="iconsminds-three-arrow-fork" />{" "}
                     <IntlMessages id="menu.menu" />
                   </NavLink>
-                </NavItem>
+                </NavItem> */}
               </Nav>
             </PerfectScrollbar>
           </div>
@@ -437,7 +437,7 @@ class Sidebar extends Component {
                 })}
                 data-parent="dashboards"
               >
-                <NavItem>
+                {/*<NavItem>
                   <NavLink to="/app/dashboards/default">
                     <i className="simple-icon-briefcase" />{" "}
                     <IntlMessages id="menu.default" />
@@ -460,7 +460,7 @@ class Sidebar extends Component {
                     <i className="simple-icon-doc" />{" "}
                     <IntlMessages id="menu.content" />
                   </NavLink>
-                </NavItem>
+                </NavItem> */}
                 <NavItem>
                   <NavLink to="/app/dashboards/custom">
                     <i className="simple-icon-doc" />{" "}

@@ -42,6 +42,7 @@ class EditModal extends Component {
 
         <Formik
           initialValues={{
+            id: this.props.details.id,
             propertyNumber: this.props.details.propertyNumber,
             actualEstimatedDate: this.props.details.actualEstimatedDate,
             firstInstallmentDate: this.props.details.firstInstallmentDate,
