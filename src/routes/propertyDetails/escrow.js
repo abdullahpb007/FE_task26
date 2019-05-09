@@ -13,51 +13,10 @@ import {
 import ReactAutosuggest from "Components/ReactAutosuggest";
 import { BreadcrumbItems } from "Components/BreadcrumbContainer";
 import IntlMessages from "Util/IntlMessages";
-import PerfectScrollbar from "react-perfect-scrollbar";
-import classnames from "classnames";
 import { Colxx, Separator } from "Components/CustomBootstrap";
 import ReactTable from "react-table";
-
-const CustomTbodyComponent = props => (
-    <div {...props} className={classnames("rt-tbody", props.className || [])}>
-        <PerfectScrollbar option={{ suppressScrollX: true }}>
-            {props.children}
-        </PerfectScrollbar>
-    </div>
-);
-
-const dataTableData = [
-    {
-        amount: '$5,000',
-        date: '02/01/2019',
-        billingCode: 'Deposit',
-        appPaymentNumber: '1409276011KANE'
-    },
-    {
-        amount: '$5,000',
-        date: '02/02/2019',
-        billingCode: 'Deposit',
-        appPaymentNumber: '1409276011KANE'
-    },
-    {
-        amount: '$5,000',
-        date: '12/02/2019',
-        billingCode: 'Deposit',
-        appPaymentNumber: '1409276011KANE'
-    },
-    {
-        amount: '$5,000',
-        date: '11/02/2019',
-        billingCode: 'Deposit',
-        appPaymentNumber: '1409276011KANE'
-    },
-    {
-        amount: '$5,000',
-        date: '10/02/2019',
-        billingCode: 'Deposit',
-        appPaymentNumber: '1409276011KANE'
-    }
-]
+import EscrowGrid from './escrow/EscrowGrid';
+import dataTableData from './escrow/dataTableData.json';
 
 const dataTableColumns = [
     {
@@ -82,43 +41,6 @@ const dataTableColumns = [
     }
 ];
 
-const dataOutTableData = [
-    {
-        amount: '$ 5,000.00 ',
-        date: '02/01/2019',
-        billingCode: 'DEPOSIT',
-        paymentTo: 'SURE PAY, LLC',
-        reason: 'Monthly fee'
-    },
-    {
-        amount: '$ 5,000.00 ',
-        date: '02/02/2019',
-        billingCode: 'DEPOSIT',
-        paymentTo: 'SURE PAY, LLC',
-        reason: 'Monthly fee'
-    },
-    {
-        amount: '$ 5,000.00 ',
-        date: '12/02/2019',
-        billingCode: 'DEPOSIT',
-        paymentTo: 'KANE COUNTY',
-        reason: 'PAYMENT OF TAXES'
-    },
-    {
-        amount: '$ 5,000.00 ',
-        date: '11/02/2019',
-        billingCode: 'DEPOSIT',
-        paymentTo: 'SURE PAY, LLC',
-        reason: 'Estimate of Redemption'
-    },
-    {
-        amount: '$ 5,000.00 ',
-        date: '10/02/2019',
-        billingCode: 'DEPOSIT',
-        paymentTo: 'SURE PAY, LLC',
-        reason: 'Overnight Mailing'
-    }
-]
 
 const dataOutTableColumns = [
     {
@@ -154,9 +76,23 @@ class Escrow extends Component {
         super(props);
         this.state = {
             property: '',
-            selectedProperty: '',
-            enteredValue: '',
+            escrowBalance: '',
+            selectedInProperty: [],
+            selectedOutProperty: [],
         }
+    }
+
+    checkProperty = () => {
+        event.preventDefault();
+        dataTableData.find(e => {
+            if (this.state.property == e.propertyNumber) {
+                const selectedInProperty = e.dataIn;
+                const selectedOutProperty = e.dataOut;
+                const escrowBalance = e.EscrowBalance;
+                this.setState({ selectedInProperty, selectedOutProperty, escrowBalance });
+                console.log(this.state.selectedInProperty, this.state.selectedOutProperty, escrowBalance);
+            }
+        });
     }
 
     render() {
@@ -182,13 +118,15 @@ class Escrow extends Component {
                                     <IntlMessages id="escrow.property-number" /> </b>
                                 <Row className="mt-3">
                                     <Colxx xxs="12" sm="10">
-                                        <ReactAutosuggest
-                                            placeholder="Search By Property Number"
-                                            data={propertyData}
-                                            onChange={values => {
-                                                this.state.property = values;
-                                            }}
-                                        />
+                                        <Form onSubmit={this.checkProperty}>
+                                            <ReactAutosuggest
+                                                placeholder="Search By Property Number"
+                                                data={propertyData}
+                                                onChange={values => {
+                                                    this.state.property = values;
+                                                }}
+                                            />
+                                        </Form>
                                     </Colxx>
                                 </Row>
                             </CardBody>
@@ -240,7 +178,7 @@ class Escrow extends Component {
 
                                 <Form>
                                     <Label className="form-group has-top-label" >
-                                        <Input type="text" disabled value='8000' />
+                                        <Input type="text" disabled value={this.state.escrowBalance} />
                                         <IntlMessages id="escrow.ballance" />
                                     </Label>
                                     <Label className="form-group has-top-label">
@@ -265,64 +203,21 @@ class Escrow extends Component {
                 </Row>
                 <Row>
                     <Colxx xxs="12" lg="5">
-                        <Card className="mb-4 escrow-width h-100">
-                            <CardBody>
-                                <CardTitle>
-                                    <IntlMessages id="escrow.payments-in" />
-                                </CardTitle>
-                                <ReactTable
-                                    data={dataTableData}
-                                    TbodyComponent={CustomTbodyComponent}
-                                    columns={dataTableColumns}
-                                    defaultPageSize={8}
-                                    showPageJump={false}
-                                    showPageSizeOptions={false}
-                                    showPagination={false}
-                                    className={"react-table-fixed-height"}
-                                />
-                            </CardBody>
-                        </Card>
+                        <EscrowGrid
+                            Data={this.state.selectedInProperty}
+                            columns={dataTableColumns}
+                        />
                     </Colxx>
                     <Colxx xxs="12" lg="7">
-                        <Card className="mb-4 escrow-width h-100">
-                            <CardBody>
-                                <CardTitle>
-                                    <IntlMessages id="escrow.payments-out" />
-                                </CardTitle>
-                                <ReactTable
-                                    data={dataOutTableData}
-                                    TbodyComponent={CustomTbodyComponent}
-                                    columns={dataOutTableColumns}
-                                    defaultPageSize={8}
-                                    showPageJump={false}
-                                    showPageSizeOptions={false}
-                                    showPagination={false}
-                                    className={"react-table-fixed-height"}
-                                />
-                            </CardBody>
-                        </Card>
+                        <EscrowGrid
+                            Data={this.state.selectedOutProperty}
+                            columns={dataOutTableColumns}
+                        />
                     </Colxx>
                 </Row>
 
             </Fragment>
         );
-    }
-    handleSubmit = values => {
-        const propertyNum = this.state.autoCompleate;
-        this.state.autoCompleate.map((name, index) => {
-            console.log(name);
-        })
-        console.log(propertyNum);
-        console.log(allProperty);
-
-    }
-    checkProperty = () => {
-        console.log(this.state.enteredValue);
-    }
-    showForms = () => {
-        return (
-            <h1>Form Compiled</h1>
-        )
     }
 }
 
