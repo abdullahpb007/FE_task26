@@ -90,7 +90,7 @@ class PropertyDetails extends Component {
                 <div className="col-6">
                   <Form onSubmit={this.handlePropertySearch}>
                     <ReactAutosuggest
-                      placeholder="Search By Property Number"
+                      placeholder="Search By Property Number ex: 1409276022Sans"
                       data={clientDetails}
                       onChange={value => {
                         this.state.propertyNumber = value;
