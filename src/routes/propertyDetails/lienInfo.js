@@ -25,17 +25,61 @@ class PropertyDetails extends Component {
       lienData: [
         {
           id: 1,
-          propertyNumber: "1409276022Sans",
-          creditor: "Jay Pvt",
+          propertyNumber: "0326302355BOONE",
+
+          propertyNumber: "0302178049BOONE",
+          creditor: "Jay",
           amount: "20000",
           paymentAmount: "12000"
         },
         {
           id: 2,
-          propertyNumber: "1409276022Kane",
-          creditor: "Macro",
+          propertyNumber: "0326306351BOONE",
+          creditor: "Mark",
           amount: "25000",
           paymentAmount: "18000"
+        },
+        {
+          id: 3,
+          propertyNumber: "0326304563BOONE",
+          creditor: "Saf",
+          amount: "30000",
+          paymentAmount: "22000"
+        },
+        {
+          id: 4,
+          propertyNumber: "0526401266BOONE",
+          creditor: "Lafos",
+          amount: "100000",
+          paymentAmount: "30000"
+        },
+        {
+          id: 5,
+          propertyNumber: "0526479863BOONE",
+          creditor: "Simon",
+          amount: "250000",
+          paymentAmount: "108000"
+        },
+        {
+          id: 6,
+          propertyNumber: "0526477521BOONE",
+          creditor: "Loki",
+          amount: "25000",
+          paymentAmount: "18000"
+        },
+        {
+          id: 7,
+          propertyNumber: "0321278030BOONE",
+          creditor: "Saff",
+          amount: "310000",
+          paymentAmount: "12000"
+        },
+        {
+          id: 8,
+          propertyNumber: "0321278030BOONE",
+          creditor: "Mary",
+          amount: "50000",
+          paymentAmount: "10000"
         }
       ],
 

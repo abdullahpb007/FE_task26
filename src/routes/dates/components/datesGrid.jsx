@@ -10,16 +10,32 @@ class PropertyGrid extends Component {
   state = {
     dateColumn: [
       {
-        Header: "Estimated Date",
-        accessor: "estimatedDate",
+        Header: "Property Number",
+        accessor: "propertyNumber",
         sortable: true,
         style: {
           margin: "auto"
         }
       },
       {
-        Header: "Actual Estimated Date",
-        accessor: "actualEstimatedDate",
+        Header: "First Installment Date",
+        accessor: "firstInstallmentDate",
+        sortable: true,
+        style: {
+          margin: "auto"
+        }
+      },
+      {
+        Header: "Second Installment Date",
+        accessor: "secondInstallmentDate",
+        sortable: true,
+        style: {
+          margin: "auto"
+        }
+      },
+      {
+        Header: "Expiration Date",
+        accessor: "expirationDate",
         sortable: true,
         style: {
           margin: "auto"

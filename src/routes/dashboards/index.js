@@ -6,6 +6,7 @@ import contentDash from "./content";
 import analyticsDash from "./analytics";
 import ecommerceDash from "./ecommerce";
 import custom from "./custom";
+import reportGenerator from "./reportGenerator";
 
 const Dashboards = ({ match }) => (
   <div className="dashboard-wrapper">
@@ -16,6 +17,10 @@ const Dashboards = ({ match }) => (
       <Route path={`${match.url}/ecommerce`} component={ecommerceDash} />
       <Route path={`${match.url}/analytics`} component={analyticsDash} />
       <Route path={`${match.url}/custom`} component={custom} />
+      <Route
+        path={`${match.url}/reportgenerator`}
+        component={reportGenerator}
+      />
       <Redirect to="/error" />
     </Switch>
   </div>

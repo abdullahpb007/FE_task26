@@ -24,31 +24,63 @@ class PropertyDetails extends Component {
 
       dateData: [
         {
-          propertyNumber: "1409276022Sans",
+          id: 1,
+          propertyNumber: "0326302355BOONE",
           estimatedDate: "2019-02-12",
-          actualEstimatedDate: "2019-02-12",
-          firstInstallmentDate: "2019-02-12",
-          secondInstallmentDate: "2019-02-12",
-          estimatedPetitionDate: "2019-02-12",
-          petitionFiledDate: "2019-02-12",
-          extentionDate: "2019-02-12",
-          expirationDate: "2019-02-12",
-          assignmentCallDate: "2019-02-12",
-          proveUpDate: "2019-02-12",
-          orderOfDate: "2019-02-12"
+          actualEstimatedDate: "2019-02-18",
+          firstInstallmentDate: "2019-02-19",
+          secondInstallmentDate: "2019-02-22",
+          estimatedPetitionDate: "2019-02-28",
+          petitionFiledDate: "2019-02-30",
+          extentionDate: "2019-03-02",
+          expirationDate: "2019-03-06",
+          assignmentCallDate: "2019-03-11",
+          proveUpDate: "2019-03-18",
+          orderOfDate: "2019-03-19"
         },
         {
-          propertyNumber: "1409276022Kane",
-          estimatedDate: "2019-02-12",
-          actualEstimatedDate: "2019-02-12",
-          firstInstallmentDate: "2019-02-12",
-          secondInstallmentDate: "2019-02-12",
-          estimatedPetitionDate: "2019-02-12",
-          petitionFiledDate: "2019-02-12",
-          extentionDate: "2019-02-12",
-          expirationDate: "2019-02-12",
-          assignmentCallDate: "2019-02-12",
-          proveUpDate: "2019-02-12",
+          id: 2,
+          propertyNumber: "0326306351BOONE",
+          estimatedDate: "2019-05-02",
+          actualEstimatedDate: "2019-05-23",
+          firstInstallmentDate: "2019-05-25",
+          secondInstallmentDate: "2019-05-28",
+          estimatedPetitionDate: "2019-05-30",
+          petitionFiledDate: "2019-06-01",
+          extentionDate: "2019-06-03",
+          expirationDate: "2019-06-05",
+          assignmentCallDate: "2019-06-08",
+          proveUpDate: "2019-06-10",
+          orderOfDate: "2019-06-11"
+        },
+        {
+          id: 3,
+          propertyNumber: "0326304563BOONE",
+          estimatedDate: "2019-08-12",
+          actualEstimatedDate: "2019-08-15",
+          firstInstallmentDate: "2019-08-16",
+          secondInstallmentDate: "2019-08-18",
+          estimatedPetitionDate: "2019-08-20",
+          petitionFiledDate: "2019-08-22",
+          extentionDate: "2019-08-23",
+          expirationDate: "2019-08-25",
+          assignmentCallDate: "2019-08-29",
+          proveUpDate: "2019-08-30",
+          orderOfDate: "2019-09-05"
+        },
+        {
+          id: 4,
+          propertyNumber: "0526401266BOONE",
+          estimatedDate: "2019-01-12",
+          actualEstimatedDate: "2019-01-15",
+          firstInstallmentDate: "2019-01-17",
+          secondInstallmentDate: "2019-01-18",
+          estimatedPetitionDate: "2019-01-20",
+          petitionFiledDate: "2019-01-23",
+          extentionDate: "2019-01-25",
+          expirationDate: "2019-01-28",
+          assignmentCallDate: "2019-01-30",
+          proveUpDate: "2019-02-01",
           orderOfDate: "2019-02-12"
         }
       ],
@@ -129,8 +161,7 @@ class PropertyDetails extends Component {
     const updatedDate = { ...values };
     const dateData = [...this.state.dateData];
     const index = dateData.findIndex(p => {
-      //return p.orderOfDate == this.state.selectedDate.orderOfDate;
-      return 1;
+      return p.id == updatedDate.id;
     });
     dateData[index] = { ...updatedDate };
     this.toggleEditDate();

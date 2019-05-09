@@ -105,7 +105,6 @@ module.exports = {
   "escrow.payments-out": "Payments Out Of Escrow",
   "escrow.pay": "Easy Pay",
 
-
   /* Dates Details */
   "dates.add-modal-title": "Add Dates",
   "dates.edit-modal-title": "Edit Dates",
@@ -212,6 +211,15 @@ module.exports = {
   "menu.invoice": "Invoice",
   "menu.lieninfo": "Lien Information",
   "menu.communication": "Communication",
+  "menu.reportgenerator": "Report Generator",
+
+  /* Report Generator */
+  "report.fullCertificateJournal": "Full Certificate Journal",
+  "report.clientEscrowJournal": "Client Escrow Journal",
+  "report.incomeExpenseJournal": "Income Expense Journal",
+  "report.depositJournal": "Deposit Journal",
+  "report.withdrawJournal": "Withdraw Journal",
+  "report.escrowAccountSurePay": "Escrow Account Sure Pay",
 
   //custom dashboard
   "menu.custom": "Custom Dashboard",
