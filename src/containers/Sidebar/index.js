@@ -316,7 +316,7 @@ class Sidebar extends Component {
                     to="/app/propertyDetails/details"
                     onClick={e => this.openSubMenu(e, "propertyDetails")}
                   >
-                    <i className="iconsminds-hotel" />{" "}
+                    <i className="iconsminds-shop-4" />{" "}
                     <IntlMessages id="menu.propertyDetails" />
                   </NavLink>
                 </NavItem>
@@ -327,7 +327,7 @@ class Sidebar extends Component {
                   })}
                 >
                   <NavLink to="/app/assessee">
-                    <i className="iconsminds-bank" />
+                    <i className="simple-icon-control-play" />
                     <IntlMessages id="menu.assessee" />
                   </NavLink>
                 </NavItem>
@@ -338,7 +338,7 @@ class Sidebar extends Component {
                   })}
                 >
                   <NavLink to="/app/dates">
-                    <i className="iconsminds-calendar-4" />
+                    <i className="simple-icon-control-play" />
                     <IntlMessages id="menu.dates" />
                   </NavLink>
                 </NavItem>
@@ -349,7 +349,7 @@ class Sidebar extends Component {
                   })}
                 >
                   <NavLink to="/app/county">
-                    <i className="iconsminds-city-hall" />
+                    <i className="simple-icon-control-play" />
                     <IntlMessages id="menu.county" />
                   </NavLink>
                 </NavItem>
