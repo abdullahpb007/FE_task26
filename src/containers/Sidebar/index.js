@@ -350,7 +350,7 @@ class Sidebar extends Component {
                 >
                   <NavLink to="/app/county">
                     <i className="simple-icon-control-play" />
-                    <IntlMessages id="County" />
+                    <IntlMessages id="menu.county" />
                   </NavLink>
                 </NavItem>
 

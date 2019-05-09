@@ -95,8 +95,8 @@ module.exports = {
   // ESCROW ACCOUNT ACTIVITY
   "escrow.title": "Escrow Account Activity",
   "escrow.property-number": "Property Number",
-  "escrow.ballance": "Escrow Ballance",
-  "escrow.amount": "Payment Ammount",
+  "escrow.ballance": "Escrow Balance",
+  "escrow.amount": "Payment Amount",
   "escrow.due": "Payment Due",
   "escrow.pay-day": "Client's Monthly Pay Day",
   "menu.escrow": "Escrow",
@@ -138,8 +138,12 @@ module.exports = {
   "assessee.email": "Email",
   "assessee.overallAddress": "Final Address",
 
+  //county
+  "county.title": "County",
+
   /* 03.Menu */
   "menu.app": "Home",
+  "menu.county": "County",
   "menu.dashboards": "Dashboards",
   "menu.dates": "Dates",
   "menu.assessee": "Assessee",

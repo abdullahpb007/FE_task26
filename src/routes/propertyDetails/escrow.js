@@ -181,24 +181,15 @@ class Escrow extends Component {
                                 <b>
                                     <IntlMessages id="escrow.property-number" /> </b>
                                 <Row className="mt-3">
-                                    <Colxx xxs="12" sm="6">
+                                    <Colxx xxs="12" sm="10">
                                         <ReactAutosuggest
-                                            placeholder="Enter The Property Number"
+                                            placeholder="Search By Property Number"
                                             data={propertyData}
                                             onChange={values => {
                                                 this.state.property = values;
                                             }}
                                         />
                                     </Colxx>
-                                    <div className="float-sm-right">
-                                        <Button
-                                            color="success"
-                                            size="lg"
-                                            className="default"
-                                        >
-                                            <IntlMessages id="escrow.submit" />
-                                        </Button>
-                                    </div>
                                 </Row>
                             </CardBody>
                         </Card>
@@ -244,7 +235,7 @@ class Escrow extends Component {
                         <Card className="mb-4">
                             <CardBody>
                                 <CardTitle>
-                                    <IntlMessages id="Ballance" />
+                                    <IntlMessages id="escrow.ballance" />
                                 </CardTitle>
 
                                 <Form>
