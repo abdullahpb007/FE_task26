@@ -18,6 +18,8 @@ import { Colxx, Separator } from "Components/CustomBootstrap";
 import { BreadcrumbItems } from "Components/BreadcrumbContainer";
 import ReactAutosuggest from "Components/ReactAutosuggest";
 
+import { NotificationManager } from "Components/ReactNotifications";
+
 import mouseTrap from "react-mousetrap";
 
 class PropertyDetails extends Component {
@@ -41,6 +43,8 @@ class PropertyDetails extends Component {
         const selectedData = e.alert;
         const selectedAttachment = e.attachments;
         this.setState({ selectedData, selectedAttachment });
+      } else {
+        console.log("ee");
       }
     });
   };
@@ -52,6 +56,17 @@ class PropertyDetails extends Component {
         const selectedData = e.alert;
         const selectedAttachment = e.attachments;
         this.setState({ selectedData, selectedAttachment });
+      } else {
+        NotificationManager.error(
+          "",
+          "Please Enter Valid Details",
+          5000,
+          () => {
+            alert("callback");
+          },
+          null,
+          cName
+        );
       }
     });
   };
@@ -63,6 +78,17 @@ class PropertyDetails extends Component {
         const selectedData = e.alert;
         const selectedAttachment = e.attachments;
         this.setState({ selectedData, selectedAttachment });
+      } else {
+        NotificationManager.error(
+          "",
+          "Please Enter Valid Details",
+          5000,
+          () => {
+            alert("callback");
+          },
+          null,
+          cName
+        );
       }
     });
   };

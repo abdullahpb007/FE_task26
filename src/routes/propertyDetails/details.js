@@ -11,6 +11,7 @@ import ViewModal from "./details/viewModal.jsx";
 import AddModal from "./details/addModal.jsx";
 import EditModal from "./details/editModal.jsx";
 
+import { NotificationManager } from "Components/ReactNotifications";
 import mouseTrap from "react-mousetrap";
 
 class PropertyDetails extends Component {
@@ -255,11 +256,19 @@ class PropertyDetails extends Component {
     propertyData.push(payload);
     this.toggleAddProperty();
     this.setState({ propertyData });
+    NotificationManager.success(
+      "",
+      "New Property Added",
+      3000,
+      null,
+      null,
+      "primary filled"
+    );
   };
 
   handleEditSubmit = values => {
     event.preventDefault();
-    console.log(this.props);
+    //console.log(this.props);
     const updatedProperty = { ...values };
     const propertyData = [...this.state.propertyData];
     const index = propertyData.findIndex(p => {
@@ -268,6 +277,14 @@ class PropertyDetails extends Component {
     propertyData[index] = { ...updatedProperty };
     this.toggleEditProperty();
     this.setState({ propertyData });
+    NotificationManager.info(
+      "",
+      "Changes Successfully Updated",
+      3000,
+      null,
+      null,
+      "info filled"
+    );
   };
 
   toggleAddProperty = () => {
