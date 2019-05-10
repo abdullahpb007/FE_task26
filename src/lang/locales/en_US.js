@@ -110,6 +110,21 @@ module.exports = {
   "menu.tax": "Tax Details",
   "tax.certificate-number": "Certificate Number",
   "tax.fees": "Fees",
+  "tax.info": "Tax Information",
+  "tax.year": "Tax Year",
+  "tax.pin": "Pin Number",
+  "tax.date": "Date Of Sale",
+  "tax.intrest": "Intrest Rate",
+  "tax.buyer": "Buyer's Name",
+  "tax.face": "Face Amount",
+  "tax.rate": "Rate",
+  "tax.accured": "Accrued Intrest",
+  "tax.total": "Total",
+  "tax.estimate": "Estimate Needed to Redeme",
+  "tax.redemption": "Redemption Amount",
+  "tax.increase-change": "Next Change Increase Date",
+  "tax.certificate": "Certificate Status",
+
 
   /* Dates Details */
   "dates.add-modal-title": "Add Dates",

@@ -16,59 +16,36 @@ import IntlMessages from "Util/IntlMessages";
 import { Colxx, Separator } from "Components/CustomBootstrap";
 import ReactTable from "react-table";
 import EscrowGrid from './escrow/EscrowGrid';
-import dataTableData from './escrow/dataTableData.json';
-
-const dataTableColumns = [
-    {
-        Header: "Amount",
-        accessor: "amount",
-        Cell: props => <p className="text-muted">{props.value}</p>
-    },
-    {
-        Header: "Date",
-        accessor: "date",
-        Cell: props => <p className="text-muted">{props.value}</p>
-    },
-    {
-        Header: "Bill",
-        accessor: "billingCode",
-        Cell: props => <p className="text-muted">{props.value}</p>
-    },
-    {
-        Header: "Payment",
-        accessor: "appPaymentNumber",
-        Cell: props => <p className="text-muted">{props.value}</p>
-    }
-];
-
+import dataTableData from './tax/dataTableData.json';
 
 const dataOutTableColumns = [
     {
-        Header: "Date",
-        accessor: "date",
+        Header: "Sub Date",
+        accessor: "subDate",
         Cell: props => <p className="text-muted">{props.value}</p>
     },
     {
-        Header: "Amount",
+        Header: "Sub Amount",
         accessor: "amount",
         Cell: props => <p className="text-muted">{props.value}</p>
     },
     {
-        Header: "Blling Code",
-        accessor: "billingCode",
+        Header: "Intrest Changed",
+        accessor: "intrestChanged",
         Cell: props => <p className="text-muted">{props.value}</p>
     },
     {
-        Header: "Payment To",
-        accessor: "paymentTo",
+        Header: "Accured Intrest",
+        accessor: "accuredIntrest",
         Cell: props => <p className="text-muted">{props.value}</p>
     },
     {
-        Header: "Reason",
-        accessor: "reason",
+        Header: "Sub Total",
+        accessor: "subTotal",
         Cell: props => <p className="text-muted">{props.value}</p>
-    }
+    },
 ];
+
 
 class Tax extends Component {
 
@@ -76,7 +53,9 @@ class Tax extends Component {
         super(props);
         this.state = {
             property: '',
-            escrowBalance: '',
+            taxBalance: '',
+            dateOfSale: '',
+            faceAmount: '',
             selectedInProperty: [],
             selectedOutProperty: [],
         }
@@ -86,11 +65,19 @@ class Tax extends Component {
         event.preventDefault();
         dataTableData.find(e => {
             if (this.state.property == e.propertyNumber) {
-                const selectedInProperty = e.dataIn;
-                const selectedOutProperty = e.dataOut;
-                const escrowBalance = e.EscrowBalance;
-                this.setState({ selectedInProperty, selectedOutProperty, escrowBalance });
-                console.log(this.state.selectedInProperty, this.state.selectedOutProperty, escrowBalance);
+                const taxBalance = e.taxBalance;
+                const pinNum = e.pinNum;
+                const dateOfSale = e.dateOfSale;
+                const intrestRate = e.intrestRate;
+                const buyersName = e.buyersName;
+                const faceAmount = e.faceAmount;
+                const intrestFace = e.intrestFace;
+                const accuredIntrest = e.accuredIntrest;
+                const faceValue = e.faceValue;
+                this.setState({
+                    taxBalance, pinNum, dateOfSale, intrestRate, buyersName, faceAmount,
+                    intrestFace, accuredIntrest, faceValue
+                });
             }
         });
     }
@@ -121,7 +108,7 @@ class Tax extends Component {
                                         <Form onSubmit={this.checkProperty}>
                                             <ReactAutosuggest
                                                 placeholder="Search By Certificate Number"
-                                                data={certificateData}
+                                                data={propertyData}
                                                 onChange={values => {
                                                     this.state.property = values;
                                                 }}
@@ -180,40 +167,123 @@ class Tax extends Component {
                         <Card className="mb-4">
                             <CardBody>
                                 <CardTitle>
-                                    <IntlMessages id="escrow.ballance" />
+                                    <IntlMessages id="tax.info" />
                                 </CardTitle>
 
                                 <Form>
-                                    <Label className="form-group has-top-label" >
-                                        <Input type="text" disabled value={this.state.escrowBalance} />
-                                        <IntlMessages id="escrow.ballance" />
-                                    </Label>
-                                    <Label className="form-group has-top-label">
-                                        <Input type="number" />
-                                        <IntlMessages id="escrow.amount" />
-                                    </Label>
-                                    <Label className="form-group has-top-label">
-                                        <Input type="date" />
-                                        <IntlMessages id="escrow.due" />
-                                    </Label>
-                                    <Label className="form-group has-top-label">
-                                        <Input type="date" />
-                                        <IntlMessages id="escrow.pay-day" />
-                                    </Label>
-                                    <Button color="primary">
+                                    <Row>
+                                        <Colxx xxs="6">
+                                            <Label className="form-group has-top-label" >
+                                                <Input type="text" disabled value={this.state.taxBalance} />
+                                                <IntlMessages id="tax.year" />
+                                            </Label>
+                                        </Colxx>
+                                        <Colxx xxs="6">
+                                            <Label className="form-group has-top-label">
+                                                <Input type="number" disabled value={this.state.pinNum} />
+                                                <IntlMessages id="tax.pin" />
+                                            </Label>
+                                        </Colxx>
+                                    </Row>
+                                    <Row>
+                                        <Colxx xxs="6">
+                                            <Label className="form-group has-top-label" >
+                                                <Input type="text" disabled value={this.state.dateOfSale} />
+                                                <IntlMessages id="tax.date" />
+                                            </Label>
+                                        </Colxx>
+                                        <Colxx xxs="6">
+                                            <Label className="form-group has-top-label">
+                                                <Input type="number" disabled value={this.state.intrestRate} />
+                                                <IntlMessages id="tax.intrest" />
+                                            </Label>
+                                        </Colxx>
+                                    </Row>
+                                    <Row>
+                                        <Colxx xxs="6">
+                                            <Label className="form-group has-top-label" >
+                                                <Input type="text" disabled value={this.state.buyersName} />
+                                                <IntlMessages id="tax.buyer" />
+                                            </Label>
+                                        </Colxx>
+                                        <Colxx xxs="6">
+                                            <Label className="form-group has-top-label">
+                                                <Input type="text" disabled value={this.state.faceAmount} />
+                                                <IntlMessages id="tax.face" />
+                                            </Label>
+                                        </Colxx>
+                                    </Row>
+                                    <Row>
+                                        <Colxx xxs="6">
+                                            <Label className="form-group has-top-label" >
+                                                <Input type="text" disabled value={this.state.intrestFace} />
+                                                <IntlMessages id="tax.rate" />
+                                            </Label>
+                                        </Colxx>
+                                        <Colxx xxs="6">
+                                            <Label className="form-group has-top-label">
+                                                <Input type="text" disabled value={this.state.accuredIntrest} />
+                                                <IntlMessages id="tax.accured" />
+                                            </Label>
+                                        </Colxx>
+                                    </Row>
+                                    <Row>
+                                        <Colxx xxs="6">
+                                            <Label className="form-group has-top-label" >
+                                                <Input type="text" disabled value={this.state.faceValue} />
+                                                <IntlMessages id="tax.total" />
+                                            </Label>
+                                        </Colxx>
+                                        <Colxx xxs="6">
+                                            <Label className="form-group has-top-label">
+                                                <Input type="text" disabled value={this.state.property} />
+                                                <IntlMessages id="tax.certificate-number" />
+                                            </Label>
+                                        </Colxx>
+                                    </Row>
+                                    {/* <Button color="primary">
                                         <IntlMessages id="forms.submit" />
-                                    </Button>
+                                    </Button> */}
                                 </Form>
                             </CardBody>
                         </Card>
                     </Colxx>
                 </Row>
                 <Row>
-                    <Colxx xxs="12" lg="5">
-                        <EscrowGrid
-                            Data={this.state.selectedInProperty}
-                            columns={dataTableColumns}
-                        />
+                    <Colxx xxs="12" lg="5" className="h-100">
+                        <Card >
+                            <CardBody>
+                                <CardTitle>
+                                    <IntlMessages id="tax.info" />
+                                </CardTitle>
+                                <Form>
+                                    <Colxx xxs="12" className="mb-5">
+                                        <Label className="form-group has-top-label" >
+                                            <Input type="text" disabled value={this.state.escrowBalance} />
+                                            <IntlMessages id="tax.estimate" />
+                                        </Label>
+                                    </Colxx>
+                                    <Colxx xxs="12" className="mb-5">
+                                        <Label className="form-group has-top-label">
+                                            <Input type="number" disabled />
+                                            <IntlMessages id="tax.redemption" />
+                                        </Label>
+                                    </Colxx>
+                                    <Colxx xxs="12" className="mb-5">
+                                        <Label className="form-group has-top-label" >
+                                            <Input type="text" disabled value={this.state.escrowBalance} />
+                                            <IntlMessages id="tax.increase-change" />
+                                        </Label>
+                                    </Colxx>
+                                    <Colxx xxs="12" className="mb-5">
+                                        <Label className="form-group has-top-label">
+                                            <Input type="number" disabled />
+                                            <IntlMessages id="tax.certificate" />
+                                        </Label>
+                                    </Colxx>
+                                </Form>
+                            </CardBody>
+                        </Card>
                     </Colxx>
                     <Colxx xxs="12" lg="7">
                         <EscrowGrid
@@ -230,23 +300,23 @@ class Tax extends Component {
 
 export default Tax;
 
-const certificateData = [
+const propertyData = [
     {
-        propertyNumber: "1409276011KANE"
+        propertyNumber: "1409276011KANE201500020"
     },
     {
-        propertyNumber: "0326304016BOONE"
+        propertyNumber: "1409276011KANE201500022"
     },
     {
-        propertyNumber: "1404276011KANE"
+        propertyNumber: "1409276011KANE201500025"
     },
     {
-        propertyNumber: "1409276021KANE"
+        propertyNumber: "1409276011KANE201500033"
     },
     {
-        propertyNumber: "0326304026BOONE"
+        propertyNumber: "1409276011KANE201500036"
     },
     {
-        propertyNumber: "1405276021KANE"
+        propertyNumber: "1409276011KANE201500049"
     },
 ];
