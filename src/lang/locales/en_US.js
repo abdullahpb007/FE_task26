@@ -222,7 +222,7 @@ module.exports = {
   "report.escrowAccountSurePay": "Escrow Account Sure Pay",
 
   //custom dashboard
-  "menu.custom": "Custom Dashboard",
+  "menu.custom": "Dashboard",
   "dashboards.pending-payments": "Pending Payments",
   "dashboards.pending-payments-week": "Payments This Week",
   "dashboards.upcomming-renewals": "Upcomming Renewals",
