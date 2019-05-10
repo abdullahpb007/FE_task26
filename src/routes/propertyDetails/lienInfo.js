@@ -11,6 +11,8 @@ import ViewModal from "./lieninfo/viewModal.jsx";
 import AddModal from "./lieninfo/addModal.jsx";
 import EditModal from "./lieninfo/editModal.jsx";
 
+import { NotificationManager } from "Components/ReactNotifications";
+
 import mouseTrap from "react-mousetrap";
 
 class PropertyDetails extends Component {
@@ -151,6 +153,14 @@ class PropertyDetails extends Component {
     lienData.push(payload);
     this.toggleAddLien();
     this.setState({ lienData });
+    NotificationManager.success(
+      "",
+      "New Lien Added",
+      3000,
+      null,
+      null,
+      "primary filled"
+    );
   };
 
   handleEditSubmit = values => {
@@ -163,6 +173,14 @@ class PropertyDetails extends Component {
     lienData[index] = { ...updatedLien };
     this.toggleEditLien();
     this.setState({ lienData });
+    NotificationManager.info(
+      "",
+      "Changes Successfully Updated",
+      3000,
+      null,
+      null,
+      "info filled"
+    );
   };
 
   toggleAddLien = () => {
