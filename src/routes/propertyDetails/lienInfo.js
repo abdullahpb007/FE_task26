@@ -26,8 +26,6 @@ class PropertyDetails extends Component {
         {
           id: 1,
           propertyNumber: "0326302355BOONE",
-
-          propertyNumber: "0302178049BOONE",
           creditor: "Jay",
           amount: "20000",
           paymentAmount: "12000"

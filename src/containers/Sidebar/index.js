@@ -296,7 +296,7 @@ class Sidebar extends Component {
                   })}
                 >
                   <NavLink
-                    to="/app/dashboards/default"
+                    to="/app/dashboards/custom"
                     onClick={e => this.openSubMenu(e, "dashboards")}
                   >
                     <i className="iconsminds-shop-4" />{" "}

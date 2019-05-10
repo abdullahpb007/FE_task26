@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from "react";
 import IntlMessages from "Util/IntlMessages";
-import { injectIntl} from 'react-intl';
+import { injectIntl } from "react-intl";
 import {
   Row,
   Card,
@@ -39,9 +39,6 @@ import {
   smallChartData4
 } from "Constants/chartConfig";
 
-
-
-
 import BigCalendar from "react-big-calendar";
 import moment from "moment";
 import ReactTable from "react-table";
@@ -67,7 +64,7 @@ import cakeData from "Data/dashboard.cakes.json";
 
 Chart.defaults.global.plugins.datalabels.display = false;
 
-const localizer = BigCalendar.momentLocalizer(moment) 
+const localizer = BigCalendar.momentLocalizer(moment);
 
 const selectData = [
   { label: "Chocolate", value: "chocolate", key: 0 },
@@ -138,7 +135,7 @@ class DefaultDashboard extends Component {
   };
 
   render() {
-    const {messages} = this.props.intl;
+    const { messages } = this.props.intl;
     return (
       <Fragment>
         <Row>
@@ -815,7 +812,10 @@ class DefaultDashboard extends Component {
                     <Label>
                       <IntlMessages id="dashboards.keyword" />
                     </Label>
-                    <Input type="text" placeholder={messages["dashboards.keyword"]} />
+                    <Input
+                      type="text"
+                      placeholder={messages["dashboards.keyword"]}
+                    />
                   </FormGroup>
                   <FormGroup>
                     <CustomInput

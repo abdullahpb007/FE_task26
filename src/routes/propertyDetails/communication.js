@@ -90,7 +90,7 @@ class PropertyDetails extends Component {
                 <div className="col-6">
                   <Form onSubmit={this.handlePropertySearch}>
                     <ReactAutosuggest
-                      placeholder="Search By Property Number ex: 1409276022Sans"
+                      placeholder="Search By Property Number ex: 0326302355BOONE"
                       data={clientDetails}
                       onChange={value => {
                         this.state.propertyNumber = value;
@@ -178,44 +178,44 @@ export default injectIntl(mouseTrap(PropertyDetails));
 
 const clientDetails = [
   {
-    propertyNumber: "1409276022Sans",
-    phone: "12345678912",
-    email: "abdul@mail.com",
+    propertyNumber: "0326302355BOONE",
+    phone: "15417543010",
+    email: "sam@gmail.com",
     alert: [
       {
         timestamp: "20/12/2019 9:00",
         alertType: "Email",
-        contact: "abdul@mail.com",
+        contact: "sam@gmail.com",
         description: "None"
       },
       {
         timestamp: "22/12/2019 9:00",
         alertType: "Text",
-        contact: "12345678912",
+        contact: "15417543010",
         description: "Auto Payment Alert"
       }
     ],
     attachments: [
-      { fileName: "Doc1.pdf" },
-      { fileName: "Doc2.pdf" },
-      { fileName: "Doc3.pdf" }
+      { fileName: "property.pdf" },
+      { fileName: "assessee.pdf" },
+      { fileName: "petition.pdf" }
     ]
   },
   {
-    propertyNumber: "1401026022Sans",
-    phone: "23456789123",
-    email: "abdul@garena.com",
+    propertyNumber: "0326306351BOONE",
+    phone: "15417253080",
+    email: "simon@gmail.com",
     alert: [
       {
         timestamp: "20/12/2019 9:00",
         alertType: "Email",
-        contact: "abdul@garena.com",
+        contact: "simon@gmail.com",
         description: "None"
       },
       {
         timestamp: "20/12/2019 9:00",
         alertType: "Text",
-        contact: "23456789123",
+        contact: "15417253080",
         description: "Payment Due Alert"
       }
     ],
@@ -226,20 +226,20 @@ const clientDetails = [
     ]
   },
   {
-    propertyNumber: "1409273201Kane",
-    phone: "34567891234",
-    email: "abdul@zohomail.com",
+    propertyNumber: "0326304563BOONE",
+    phone: "15423553580",
+    email: "mark@gmail.com",
     alert: [
       {
         timestamp: "20/12/2019 9:00",
         alertType: "Email",
-        contact: "abdul@zohomail.com",
+        contact: "mark@gmail.com",
         description: "None"
       },
       {
         timestamp: "20/12/2019 9:00",
         alertType: "Text",
-        contact: "34567891234",
+        contact: "15423553580",
         description: "Payment OverDue Alert"
       }
     ],
@@ -250,20 +250,20 @@ const clientDetails = [
     ]
   },
   {
-    propertyNumber: "1420316022Kane",
-    phone: "45678912345",
-    email: "abdul@yahoomail.com",
+    propertyNumber: "0526401266BOONE",
+    phone: "15422303423",
+    email: "paul@gmail.com",
     alert: [
       {
         timestamp: "20/12/2019 9:00",
         alertType: "Email",
-        contact: "abdul@yahoomail.com",
+        contact: "paul@gmail.com",
         description: "None"
       },
       {
         timestamp: "20/12/2019 9:00",
         alertType: "Text",
-        contact: "45678912345",
+        contact: "15422303423",
         description: "Auto Payment Alert"
       }
     ],
@@ -274,20 +274,20 @@ const clientDetails = [
     ]
   },
   {
-    propertyNumber: "1203276022Sans",
-    phone: "56789123456",
-    email: "abdullah@gmail.com",
+    propertyNumber: "0526479863BOONE",
+    phone: "15886045423",
+    email: "daniel@gmail.com",
     alert: [
       {
         timestamp: "20/12/2019 9:00",
         alertType: "Email",
-        contact: "abdullah@gmail.com",
+        contact: "daniel@gmail.com",
         description: "None"
       },
       {
         timestamp: "20/12/2019 9:00",
         alertType: "Text",
-        contact: "56789123456",
+        contact: "15886045423",
         description: "None"
       }
     ],
