@@ -5,6 +5,7 @@ import details from "./details";
 import lienInfo from "./lienInfo";
 import Escrow from "./escrow";
 import communication from "./communication";
+import Tax from './tax';
 
 const PropertyDetails = ({ match }) => (
   <div className="dashboard-wrapper">
@@ -14,6 +15,7 @@ const PropertyDetails = ({ match }) => (
       <Route path={`${match.url}/lieninfo`} component={lienInfo} />
       <Route path={`${match.url}/escrow`} component={Escrow} />
       <Route path={`${match.url}/communication`} component={communication} />
+      <Route path={`${match.url}/tax`} component={Tax} />
       <Redirect to="/error" />
     </Switch>
   </div>

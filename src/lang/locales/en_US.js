@@ -105,6 +105,12 @@ module.exports = {
   "escrow.payments-out": "Payments Out Of Escrow",
   "escrow.pay": "Easy Pay",
 
+  // Property Tax Details
+  "tax.title": "Tax Details",
+  "menu.tax": "Tax Details",
+  "tax.certificate-number": "Certificate Number",
+  "tax.fees": "Fees",
+
   /* Dates Details */
   "dates.add-modal-title": "Add Dates",
   "dates.edit-modal-title": "Edit Dates",
@@ -125,7 +131,7 @@ module.exports = {
   /* Assessee */
   "assessee.title": "Assessee",
   "assessee.edit-title": "Edit Assessee",
-  "assessee.popup": "Add New",
+  "assessee.popup": "Add New Assessee",
   "assessee.popupTitle": "Add New",
   "assessee.view": "View",
   "assessee.edit": "Edit",
