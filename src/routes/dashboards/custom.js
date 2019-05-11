@@ -19,9 +19,12 @@ import Select from "react-select";
 import PerfectScrollbar from "react-perfect-scrollbar";
 import CustomSelectInput from "Components/CustomSelectInput";
 import IntlMessages from "Util/IntlMessages";
-
+import { CalendarToolbar } from "Components/Calendar/CalendarToolbar";
 import logsData from "Data/logs.json";
+import eventsData from "Data/events.json";
 import BreadcrumbContainer from "Components/BreadcrumbContainer";
+import BigCalendar from "react-big-calendar";
+import moment from "moment";
 import ReactSiemaCarousel from "Components/ReactSiema/ReactSiemaCarousel";
 import ChartComponent, { Chart } from "react-chartjs-2";
 import { barChartDashConfig, lineChartConfig } from "Constants/chartConfig";
@@ -29,6 +32,7 @@ import { barChartDashConfig, lineChartConfig } from "Constants/chartConfig";
 import { BarShadow, LineShadow } from "Components/Charts";
 
 const logs = logsData.data;
+const localizer = BigCalendar.momentLocalizer(moment);
 
 const selectData = [
   { label: "Chocolate", value: "chocolate", key: 0 },
@@ -44,6 +48,9 @@ const selectDataType = [
   { label: "Cupcake", value: "cupcake", key: 1 },
   { label: "Dessert", value: "dessert", key: 2 }
 ];
+const events = eventsData.data;
+
+BigCalendar.momentLocalizer(moment);
 
 class custom extends Component {
   constructor(props) {
@@ -180,6 +187,24 @@ class custom extends Component {
                 <div className="chart-container">
                   <BarShadow {...barChartDashConfig} />
                 </div>
+              </CardBody>
+            </Card>
+          </Colxx>
+          <Colxx xl="6" lg="12" className="mb-4">
+            <Card>
+              <CardBody>
+                <CardTitle>
+                  <IntlMessages id="dashboards.calendar" />
+                </CardTitle>
+                <BigCalendar
+                  localizer={localizer}
+                  style={{ minHeight: "500px" }}
+                  events={events}
+                  views={["month"]}
+                  components={{
+                    toolbar: CalendarToolbar
+                  }}
+                />
               </CardBody>
             </Card>
           </Colxx>
@@ -321,7 +346,7 @@ class custom extends Component {
                                 <span
                                   className={`log-indicator align-middle ${
                                     log.color
-                                  }`}
+                                    }`}
                                 />
                               </td>
                               <td>
