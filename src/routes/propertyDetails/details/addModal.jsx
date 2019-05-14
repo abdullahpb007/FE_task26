@@ -3,23 +3,386 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import {
   Row,
   Button,
+  Card,
+  CardBody,
+  CardHeader,
   FormGroup,
   Modal,
-  ModalHeader,
   ModalBody,
   ModalFooter,
+  Nav,
+  NavItem,
+  TabContent,
+  TabPane,
   Label
 } from "reactstrap";
+
+import classnames from "classnames";
+import { NavLink } from "react-router-dom";
 
 import * as Yup from "yup";
 
 import IntlMessages from "Util/IntlMessages";
 import { Colxx } from "Components/CustomBootstrap";
 
-const SignupSchema = Yup.object().shape({
+class AddModal extends Component {
+  constructor(props) {
+    super(props);
+
+    this.toggleFirstTab = this.toggleFirstTab.bind(this);
+    this.state = {
+      activeFirstTab: "1",
+      propertyDetailMap: [
+        { name: "street", size: 4, type: "text", text: "property." },
+        { name: "city", size: 4, type: "text", text: "property." },
+        { name: "county", size: 4, type: "text", text: "property." },
+        { name: "state", size: 4, type: "text", text: "property." },
+        { name: "zip", size: 4, type: "number", text: "property." },
+        { name: "township", size: 4, type: "text", text: "property." },
+        { name: "classCode", size: 4, type: "number", text: "property." },
+        { name: "assessedValue", size: 4, type: "number", text: "property." },
+        { name: "marketValue", size: 4, type: "number", text: "property." },
+        { name: "taxesPerYear", size: 4, type: "number", text: "property." },
+        { name: "preeqexm", size: 4, type: "number", text: "property." },
+        { name: "homeOwner", size: 4, type: "number", text: "property." },
+        { name: "seniorExemption", size: 4, type: "number", text: "property." },
+        { name: "seniorFreeze", size: 4, type: "number", text: "property." },
+        { name: "totalAcres", size: 4, type: "number", text: "property." },
+        { name: "legalDescription", size: 6, type: "text", text: "property." },
+        { name: "googleMapView", size: 6, type: "text", text: "property." }
+      ],
+      lienInfoMap: [
+        { name: "creditor", size: 4, type: "text", text: "lien." },
+        { name: "amount", size: 4, type: "number", text: "lien." },
+        { name: "paymentAmount", size: 4, type: "number", text: "lien." }
+      ],
+      assesseeMap: [
+        { name: "name", size: 4, type: "text", text: "assessee." },
+        { name: "address", size: 4, type: "text", text: "assessee." },
+        { name: "city", size: 4, type: "text", text: "assessee." },
+        { name: "state", size: 4, type: "text", text: "assessee." },
+        { name: "zip", size: 4, type: "number", text: "assessee." }
+      ],
+      datesMap: [
+        { name: "actualEstimatedDate", size: 4, type: "date", text: "dates." },
+        { name: "firstInstallmentDate", size: 4, type: "date", text: "dates." },
+        {
+          name: "secondInstallmentDate",
+          size: 4,
+          type: "date",
+          text: "dates."
+        },
+        { name: "petitionFiledDate", size: 4, type: "date", text: "dates." },
+        { name: "extentionDate", size: 4, type: "date", text: "dates." },
+        { name: "expirationDate", size: 4, type: "date", text: "dates." },
+        { name: "assignmentCallDate", size: 4, type: "date", text: "dates." },
+        { name: "proveUpDate", size: 4, type: "date", text: "dates." },
+        { name: "orderOfDate", size: 4, type: "date", text: "dates." },
+        { name: "dateOfTaxDeed", size: 4, type: "date", text: "dates." }
+      ]
+    };
+  }
+
+  render() {
+    return (
+      <Modal
+        isOpen={this.props.modalAddHandler}
+        toggle={this.props.toggleModalAdd}
+        size="lg"
+      >
+        <ModalBody>
+          <CardHeader className="pl-0 pr-0 bg-light">
+            <Nav tabs className="card-header-tabs  ml-0 mr-0">
+              <NavItem className="w-25 text-center">
+                <NavLink
+                  className={classnames({
+                    active: this.state.activeFirstTab === "1",
+                    "nav-link": true
+                  })}
+                  onClick={() => {
+                    this.toggleFirstTab("1");
+                  }}
+                  to="#"
+                >
+                  Property Details
+                </NavLink>
+              </NavItem>
+              <NavItem className="w-25 text-center">
+                <NavLink
+                  className={classnames({
+                    active: this.state.activeFirstTab === "2",
+                    "nav-link": true
+                  })}
+                  onClick={() => {
+                    this.toggleFirstTab("2");
+                  }}
+                  to="#"
+                >
+                  Lien Info
+                </NavLink>
+              </NavItem>
+              <NavItem className="w-25 text-center">
+                <NavLink
+                  className={classnames({
+                    active: this.state.activeFirstTab === "3",
+                    "nav-link": true
+                  })}
+                  onClick={() => {
+                    this.toggleFirstTab("3");
+                  }}
+                  to="#"
+                >
+                  Assessee
+                </NavLink>
+              </NavItem>
+              <NavItem className="w-25 text-center">
+                <NavLink
+                  className={classnames({
+                    active: this.state.activeFirstTab === "4",
+                    "nav-link": true
+                  })}
+                  onClick={() => {
+                    this.toggleFirstTab("4");
+                  }}
+                  to="#"
+                >
+                  Dates
+                </NavLink>
+              </NavItem>
+            </Nav>
+          </CardHeader>
+
+          <TabContent activeTab={this.state.activeFirstTab}>
+            <TabPane tabId="1">
+              <Row>
+                <Colxx sm="12">
+                  <CardBody>
+                    <Formik
+                      initialValues={{
+                        propertyNumber: "",
+                        county: "",
+                        pin: "",
+                        street: "",
+                        city: "",
+                        state: "",
+                        zip: "",
+                        township: "",
+                        classCode: "",
+                        assessedValue: "",
+                        marketValue: "",
+                        taxesPerYear: "",
+                        preeqexm: "",
+                        homeOwner: "",
+                        seniorExemption: "",
+                        seniorFreeze: "",
+                        totalAcres: "",
+                        legalDescription: "",
+                        googleMapView: ""
+                      }}
+                      validationSchema={propertyDetailsSchema}
+                      onSubmit={values => {
+                        this.props.onSubmit(values);
+                      }}
+                    >
+                      {({ errors, touched }) => (
+                        <Form>
+                          <Row>
+                            {this.fieldMapper(
+                              this.state.propertyDetailMap,
+                              errors,
+                              touched
+                            )}
+                          </Row>
+                        </Form>
+                      )}
+                    </Formik>
+                    <Button
+                      outline
+                      onClick={() => {
+                        this.toggleFirstTab("2");
+                      }}
+                      size="sm"
+                      color="primary"
+                    >
+                      Next
+                    </Button>
+                  </CardBody>
+                </Colxx>
+              </Row>
+            </TabPane>
+            <TabPane tabId="2">
+              <Row>
+                <Colxx sm="12">
+                  <CardBody>
+                    <Formik
+                      initialValues={{
+                        creditor: "",
+                        amount: "",
+                        paymentAmount: ""
+                      }}
+                      validationSchema={lienSchema}
+                      onSubmit={values => {
+                        this.props.onSubmit(values);
+                      }}
+                    >
+                      {({ errors, touched }) => (
+                        <Form>
+                          <Row>
+                            {this.fieldMapper(
+                              this.state.lienInfoMap,
+                              errors,
+                              touched
+                            )}
+                          </Row>
+                        </Form>
+                      )}
+                    </Formik>
+                    <Button
+                      outline
+                      onClick={() => {
+                        this.toggleFirstTab("3");
+                      }}
+                      size="sm"
+                      color="primary"
+                    >
+                      Next
+                    </Button>
+                  </CardBody>
+                </Colxx>
+              </Row>
+            </TabPane>
+            <TabPane tabId="3">
+              <Row>
+                <Colxx sm="12">
+                  <CardBody>
+                    <Formik
+                      initialValues={{
+                        name: "",
+                        address: "",
+                        city: "",
+                        state: "",
+                        zip: ""
+                      }}
+                      validationSchema={assesseeSchema}
+                      onSubmit={values => {
+                        this.props.onSubmit(values);
+                      }}
+                    >
+                      {({ errors, touched }) => (
+                        <Form>
+                          <Row>
+                            {this.fieldMapper(
+                              this.state.assesseeMap,
+                              errors,
+                              touched
+                            )}
+                          </Row>
+                        </Form>
+                      )}
+                    </Formik>
+                    <Button
+                      outline
+                      onClick={() => {
+                        this.toggleFirstTab("4");
+                      }}
+                      size="sm"
+                      color="primary"
+                    >
+                      Next
+                    </Button>
+                  </CardBody>
+                </Colxx>
+              </Row>
+            </TabPane>
+            <TabPane tabId="4">
+              <Row>
+                <Colxx sm="12">
+                  <CardBody>
+                    <Formik
+                      initialValues={{
+                        actualEstimatedDate: "",
+                        firstInstallmentDate: "",
+                        secondInstallmentDate: "",
+                        petitionFiledDate: "",
+                        extentionDate: "",
+                        expirationDate: "",
+                        assignmentCallDate: "",
+                        proveUpDate: "",
+                        orderOfDate: "",
+                        dateOfTaxDeed: ""
+                      }}
+                      validationSchema={dateSchema}
+                      onSubmit={values => {
+                        this.props.onSubmit(values);
+                      }}
+                    >
+                      {({ errors, touched }) => (
+                        <Form>
+                          <Row>
+                            {this.fieldMapper(
+                              this.state.datesMap,
+                              errors,
+                              touched
+                            )}
+                          </Row>
+                        </Form>
+                      )}
+                    </Formik>
+                    <Button outline size="sm" color="primary">
+                      Submit
+                    </Button>
+                  </CardBody>
+                </Colxx>
+              </Row>
+            </TabPane>
+          </TabContent>
+        </ModalBody>
+      </Modal>
+    );
+  }
+
+  toggleFirstTab(tab) {
+    if (this.state.activeTab !== tab) {
+      this.setState({
+        activeFirstTab: tab
+      });
+    }
+  }
+
+  fieldMapper = (arr, errors, touched) => {
+    return arr.map((e, i) => {
+      return (
+        <Colxx key={i} xxs={e.size}>
+          <FormGroup className="form-group has-top-label">
+            <Label
+              className={errors[e.name] && touched[e.name] ? "text-danger" : ""}
+            >
+              <IntlMessages id={e.text + e.name} />
+            </Label>
+            <Field
+              className={
+                "form-control" +
+                (errors[e.name] && touched[e.name] ? " border-danger" : "")
+              }
+              type="text"
+              name={e.name}
+            />
+            {errors[e.name] && touched[e.name] ? (
+              <small className="text-danger">{errors[e.name]}</small>
+            ) : (
+              ""
+            )}
+          </FormGroup>
+        </Colxx>
+      );
+    });
+  };
+}
+
+const propertyDetailsSchema = Yup.object().shape({
   propertyNumber: Yup.string().required("Required"),
   county: Yup.string().required("Required"),
-  address: Yup.string().required("Required"),
+  street: Yup.string().required("Required"),
   city: Yup.string().required("Required"),
   state: Yup.string().required("Required"),
   zip: Yup.number().required("Required"),
@@ -33,400 +396,37 @@ const SignupSchema = Yup.object().shape({
   seniorExemption: Yup.number().required("Required"),
   seniorFreeze: Yup.number().required("Required"),
   totalAcres: Yup.number().required("Required"),
-  legalDescription: Yup.string().required("Required")
+  legalDescription: Yup.string().required("Required"),
+  googleMapView: Yup.string().required("Required")
 });
 
-class AddModal extends Component {
-  render() {
-    return (
-      <Modal
-        isOpen={this.props.modalAddHandler}
-        toggle={this.props.toggleModalAdd}
-        size="lg"
-      >
-        <ModalHeader toggle={this.props.toggleModalAdd}>
-          <IntlMessages id="property.add-modal-title" />
-        </ModalHeader>
+const lienSchema = Yup.object().shape({
+  propertyNumber: Yup.string().required("Required"),
+  creditor: Yup.string().required("Required"),
+  amount: Yup.number().required("Required"),
+  paymentAmount: Yup.number().required("Required")
+});
 
-        <Formik
-          initialValues={{
-            propertyNumber: "",
-            county: "",
-            pin: "",
-            address: "",
-            city: "",
-            state: "",
-            zip: "",
-            township: "",
-            classCode: "",
-            assessedValue: "",
-            marketValue: "",
-            taxesPerYear: "",
-            preeqexm: "",
-            homeOwner: "",
-            seniorExemption: "",
-            seniorFreeze: "",
-            totalAcres: "",
-            legalDescription: ""
-          }}
-          validationSchema={SignupSchema}
-          onSubmit={values => {
-            this.props.onSubmit(values);
-          }}
-        >
-          {({ errors, touched }) => (
-            <Form>
-              <ModalBody>
-                <Row>
-                  <Colxx xxs="4">
-                    <FormGroup className="form-group has-top-label">
-                      <Label
-                        className={
-                          errors.propertyNumber && touched.propertyNumber
-                            ? "text-danger"
-                            : ""
-                        }
-                      >
-                        <IntlMessages id="property.propertyNumber" />
-                      </Label>
-                      <Field
-                        className={
-                          "form-control" +
-                          (errors.propertyNumber && touched.propertyNumber
-                            ? " border-danger"
-                            : "")
-                        }
-                        type="text"
-                        name="propertyNumber"
-                      />
-                      {errors.propertyNumber && touched.propertyNumber ? (
-                        <small className="text-danger">
-                          {errors.propertyNumber}
-                        </small>
-                      ) : (
-                        ""
-                      )}
-                    </FormGroup>
-                  </Colxx>
+const assesseeSchema = Yup.object().shape({
+  name: Yup.string().required("Required"),
+  address: Yup.string().required("Required"),
+  city: Yup.string().required("Required"),
+  state: Yup.string().required("Required"),
+  zip: Yup.number().required("Required")
+});
 
-                  <Colxx xxs="4">
-                    <FormGroup className="form-group has-top-label">
-                      <Label>
-                        <IntlMessages id="property.pin" />
-                      </Label>
-                      <Field
-                        className="form-control"
-                        type="text"
-                        name="pin"
-                        disabled
-                      />
-                    </FormGroup>
-                  </Colxx>
-
-                  <Colxx xxs="4">
-                    <FormGroup className="form-group has-top-label">
-                      <Label>
-                        <IntlMessages id="property.county" />
-                      </Label>
-                      <Field
-                        className="form-control"
-                        type="text"
-                        name="county"
-                      />
-                      {errors.county && touched.county ? (
-                        <div className="invalid-feedback d-block">
-                          {errors.county}
-                        </div>
-                      ) : null}
-                    </FormGroup>
-                  </Colxx>
-
-                  <Colxx xxs="6">
-                    <FormGroup className="form-group has-top-label">
-                      <Label>
-                        <IntlMessages id="property.address" />
-                      </Label>
-                      <Field
-                        className="form-control"
-                        type="text"
-                        name="address"
-                      />
-                      {errors.address && touched.address ? (
-                        <div className="invalid-feedback d-block">
-                          {errors.address}
-                        </div>
-                      ) : null}
-                    </FormGroup>
-                  </Colxx>
-
-                  <Colxx xxs="3">
-                    <FormGroup className="form-group has-top-label">
-                      <Label>
-                        <IntlMessages id="property.city" />
-                      </Label>
-                      <Field className="form-control" type="text" name="city" />
-                      {errors.city && touched.city ? (
-                        <div className="invalid-feedback d-block">
-                          {errors.city}
-                        </div>
-                      ) : null}
-                    </FormGroup>
-                  </Colxx>
-
-                  <Colxx xxs="3">
-                    <FormGroup className="form-group has-top-label">
-                      <Label>
-                        <IntlMessages id="property.state" />
-                      </Label>
-                      <Field
-                        className="form-control"
-                        type="text"
-                        name="state"
-                      />
-                      {errors.state && touched.state ? (
-                        <div className="invalid-feedback d-block">
-                          {errors.state}
-                        </div>
-                      ) : null}
-                    </FormGroup>
-                  </Colxx>
-
-                  <Colxx xxs="2">
-                    <FormGroup className="form-group has-top-label">
-                      <Label>
-                        <IntlMessages id="property.zip" />
-                      </Label>
-                      <Field
-                        className="form-control"
-                        type="number"
-                        name="zip"
-                      />
-                      {errors.zip && touched.zip ? (
-                        <div className="invalid-feedback d-block">
-                          {errors.zip}
-                        </div>
-                      ) : null}
-                    </FormGroup>
-                  </Colxx>
-
-                  <Colxx xxs="4">
-                    <FormGroup className="form-group has-top-label">
-                      <Label>
-                        <IntlMessages id="property.township" />
-                      </Label>
-                      <Field
-                        className="form-control"
-                        type="text"
-                        name="township"
-                      />
-                      {errors.township && touched.township ? (
-                        <div className="invalid-feedback d-block">
-                          {errors.township}
-                        </div>
-                      ) : null}
-                    </FormGroup>
-                  </Colxx>
-
-                  <Colxx xxs="6">
-                    <FormGroup className="form-group has-top-label">
-                      <Label>
-                        <IntlMessages id="property.classCode" />
-                      </Label>
-                      <Field
-                        className="form-control"
-                        type="number"
-                        name="classCode"
-                      />
-                      {errors.classCode && touched.classCode ? (
-                        <div className="invalid-feedback d-block">
-                          {errors.classCode}
-                        </div>
-                      ) : null}
-                    </FormGroup>
-                  </Colxx>
-
-                  <Colxx xxs="4">
-                    <FormGroup className="form-group has-top-label">
-                      <Label>
-                        <IntlMessages id="property.assessedValue" />
-                      </Label>
-                      <Field
-                        className="form-control"
-                        type="number"
-                        name="assessedValue"
-                      />
-                      {errors.assessedValue && touched.assessedValue ? (
-                        <div className="invalid-feedback d-block">
-                          {errors.assessedValue}
-                        </div>
-                      ) : null}
-                    </FormGroup>
-                  </Colxx>
-
-                  <Colxx xxs="4">
-                    <FormGroup className="form-group has-top-label">
-                      <Label>
-                        <IntlMessages id="property.marketValue" />
-                      </Label>
-                      <Field
-                        className="form-control"
-                        type="number"
-                        name="marketValue"
-                      />
-                      {errors.marketValue && touched.marketValue ? (
-                        <div className="invalid-feedback d-block">
-                          {errors.marketValue}
-                        </div>
-                      ) : null}
-                    </FormGroup>
-                  </Colxx>
-
-                  <Colxx xxs="4">
-                    <FormGroup className="form-group has-top-label">
-                      <Label>
-                        <IntlMessages id="property.taxesPerYear" />
-                      </Label>
-                      <Field
-                        className="form-control"
-                        type="number"
-                        name="taxesPerYear"
-                      />
-                      {errors.taxesPerYear && touched.taxesPerYear ? (
-                        <div className="invalid-feedback d-block">
-                          {errors.taxesPerYear}
-                        </div>
-                      ) : null}
-                    </FormGroup>
-                  </Colxx>
-
-                  <Colxx xxs="4">
-                    <FormGroup className="form-group has-top-label">
-                      <Label>
-                        <IntlMessages id="property.preeqexm" />
-                      </Label>
-                      <Field
-                        className="form-control"
-                        type="number"
-                        name="preeqexm"
-                      />
-                      {errors.preeqexm && touched.preeqexm ? (
-                        <div className="invalid-feedback d-block">
-                          {errors.preeqexm}
-                        </div>
-                      ) : null}
-                    </FormGroup>
-                  </Colxx>
-
-                  <Colxx xxs="4">
-                    <FormGroup className="form-group has-top-label">
-                      <Label>
-                        <IntlMessages id="property.homeOwner" />
-                      </Label>
-                      <Field
-                        className="form-control"
-                        type="number"
-                        name="homeOwner"
-                      />
-                      {errors.homeOwner && touched.homeOwner ? (
-                        <div className="invalid-feedback d-block">
-                          {errors.homeOwner}
-                        </div>
-                      ) : null}
-                    </FormGroup>
-                  </Colxx>
-
-                  <Colxx xxs="4">
-                    <FormGroup className="form-group has-top-label">
-                      <Label>
-                        <IntlMessages id="property.seniorExemption" />
-                      </Label>
-                      <Field
-                        className="form-control"
-                        type="number"
-                        name="seniorExemption"
-                      />
-                      {errors.seniorExemption && touched.seniorExemption ? (
-                        <div className="invalid-feedback d-block">
-                          {errors.seniorExemption}
-                        </div>
-                      ) : null}
-                    </FormGroup>
-                  </Colxx>
-
-                  <Colxx xxs="6">
-                    <FormGroup className="form-group has-top-label">
-                      <Label>
-                        <IntlMessages id="property.seniorFreeze" />
-                      </Label>
-                      <Field
-                        className="form-control"
-                        type="number"
-                        name="seniorFreeze"
-                      />
-                      {errors.seniorFreeze && touched.seniorFreeze ? (
-                        <div className="invalid-feedback d-block">
-                          {errors.seniorFreeze}
-                        </div>
-                      ) : null}
-                    </FormGroup>
-                  </Colxx>
-
-                  <Colxx xxs="6">
-                    <FormGroup className="form-group has-top-label">
-                      <Label>
-                        <IntlMessages id="property.totalAcres" />
-                      </Label>
-                      <Field
-                        className="form-control"
-                        type="number"
-                        name="totalAcres"
-                      />
-                      {errors.totalAcres && touched.totalAcres ? (
-                        <div className="invalid-feedback d-block">
-                          {errors.totalAcres}
-                        </div>
-                      ) : null}
-                    </FormGroup>
-                  </Colxx>
-
-                  <Colxx xxs="12">
-                    <FormGroup className="form-group has-top-label">
-                      <Label>
-                        <IntlMessages id="property.legalDescription" />
-                      </Label>
-                      <Field
-                        className="form-control"
-                        type="text"
-                        component="textarea"
-                        name="legalDescription"
-                      />
-                      {errors.legalDescription && touched.legalDescription ? (
-                        <div className="invalid-feedback d-block">
-                          {errors.legalDescription}
-                        </div>
-                      ) : null}
-                    </FormGroup>
-                  </Colxx>
-                </Row>
-              </ModalBody>
-              <ModalFooter>
-                <Button
-                  color="secondary"
-                  outline
-                  onClick={this.props.toggleModalAdd}
-                >
-                  <IntlMessages id="pages.cancel" />
-                </Button>
-                <Button color="primary" type="submit">
-                  <IntlMessages id="pages.submit" />
-                </Button>{" "}
-              </ModalFooter>
-            </Form>
-          )}
-        </Formik>
-      </Modal>
-    );
-  }
-}
+const dateSchema = Yup.object().shape({
+  propertyNumber: Yup.string().required("Required"),
+  actualEstimatedDate: Yup.string().required("Required"),
+  firstInstallmentDate: Yup.string().required("Required"),
+  secondInstallmentDate: Yup.string().required("Required"),
+  petitionFiledDate: Yup.string().required("Required"),
+  extentionDate: Yup.string().required("Required"),
+  expirationDate: Yup.string().required("Required"),
+  assignmentCallDate: Yup.string().required("Required"),
+  proveUpDate: Yup.string().required("Required"),
+  orderOfDate: Yup.string().required("Required"),
+  dateOfTaxDeed: Yup.string().required("Required")
+});
 
 export default AddModal;

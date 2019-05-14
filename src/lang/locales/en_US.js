@@ -60,7 +60,7 @@ module.exports = {
   "property.propertyNumber": "Property Number",
   "property.county": "County",
   "property.pin": "Pin",
-  "property.address": "Address",
+  "property.street": "Street",
   "property.city": "City",
   "property.state": "State",
   "property.zip": "Zip",
@@ -75,6 +75,7 @@ module.exports = {
   "property.seniorFreeze": "Senior Freeze",
   "property.totalAcres": "Total Acres",
   "property.legalDescription": "Legal Description",
+  "property.googleMapView": "Google Map View",
   "property.viewbtn": "View",
   "property.editbtn": "Edit",
   "property.details": "Details",
@@ -124,7 +125,6 @@ module.exports = {
   "tax.redemption": "Redemption Amount",
   "tax.increase-change": "Next Change Increase Date",
   "tax.certificate": "Certificate Status",
-
 
   /* Dates Details */
   "dates.add-modal-title": "Add Dates",
