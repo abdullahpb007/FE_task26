@@ -1,86 +1,120 @@
 import React, { Component } from "react";
 
 import IntlMessages from "Util/IntlMessages";
-import { Row, Card, Button, ButtonGroup } from "reactstrap";
+import {
+  Row,
+  Card,
+  Button,
+  ButtonGroup,
+  DropdownToggle,
+  DropdownMenu,
+  DropdownItem,
+  ButtonDropdown
+} from "reactstrap";
 import { Colxx } from "Components/CustomBootstrap";
 import ReactTable from "react-table";
 import DataTablePagination from "Components/DataTables/pagination";
 
 class PropertyGrid extends Component {
-  state = {
-    propertyColumn: [
-      {
-        Header: "Pin",
-        accessor: "pin",
-        sortable: true,
-        filterable: true,
-        style: {
-          margin: "auto"
+  constructor(props) {
+    super(props);
+    this.nestingToggle = this.nestingToggle.bind(this);
+    this.state = {
+      nestingDropdownOpen: false,
+      propertyColumn: [
+        {
+          Header: "Pin",
+          accessor: "pin",
+          sortable: true,
+          filterable: true,
+          style: {
+            margin: "auto"
+          }
+        },
+        {
+          Header: "Address",
+          accessor: "address",
+          sortable: true,
+          filterable: true,
+          style: {
+            margin: "auto"
+          }
+        },
+        {
+          Header: "City",
+          accessor: "city",
+          sortable: true,
+          filterable: true,
+          style: {
+            margin: "auto"
+          }
+        },
+        {
+          Header: "State",
+          accessor: "state",
+          sortable: true,
+          filterable: true,
+          style: {
+            margin: "auto"
+          }
+        },
+        {
+          Header: "County",
+          accessor: "county",
+          sortable: true,
+          filterable: true,
+          style: {
+            margin: "auto"
+          }
+        },
+        {
+          Header: "",
+          Cell: props => {
+            return (
+              <ButtonGroup className="m-auto">
+                <Button
+                  outline
+                  color="primary"
+                  size="sm"
+                  onClick={() => this.props.viewBtnHandler(props.original)}
+                >
+                  <IntlMessages id="property.viewbtn" />
+                </Button>
+                <Button
+                  outline
+                  color="secondary"
+                  size="sm"
+                  onClick={() => this.props.editBtnHandler(props.original)}
+                >
+                  <IntlMessages id="property.editbtn" />
+                </Button>
+                {/* <ButtonDropdown
+                  isOpen={this.state.nestingDropdownOpen}
+                  toggle={this.nestingToggle}
+                >
+                  <DropdownToggle caret>Action</DropdownToggle>
+                  <DropdownMenu>
+                    <DropdownItem>
+                      <IntlMessages id="button.dropdown-link" />
+                    </DropdownItem>
+                    <DropdownItem>
+                      <IntlMessages id="button.dropdown-link" />
+                    </DropdownItem>
+                  </DropdownMenu>
+                </ButtonDropdown> */}
+              </ButtonGroup>
+            );
+          }
         }
-      },
-      {
-        Header: "Address",
-        accessor: "address",
-        sortable: true,
-        filterable: true,
-        style: {
-          margin: "auto"
-        }
-      },
-      {
-        Header: "City",
-        accessor: "city",
-        sortable: true,
-        filterable: true,
-        style: {
-          margin: "auto"
-        }
-      },
-      {
-        Header: "State",
-        accessor: "state",
-        sortable: true,
-        filterable: true,
-        style: {
-          margin: "auto"
-        }
-      },
-      {
-        Header: "County",
-        accessor: "county",
-        sortable: true,
-        filterable: true,
-        style: {
-          margin: "auto"
-        }
-      },
-      {
-        Header: "",
-        Cell: props => {
-          return (
-            <ButtonGroup className="m-auto">
-              <Button
-                outline
-                color="primary"
-                size="sm"
-                onClick={() => this.props.viewBtnHandler(props.original)}
-              >
-                <IntlMessages id="property.viewbtn" />
-              </Button>
-              <Button
-                outline
-                color="secondary"
-                size="sm"
-                onClick={() => this.props.editBtnHandler(props.original)}
-              >
-                <IntlMessages id="property.editbtn" />
-              </Button>
-            </ButtonGroup>
-          );
-        }
-      }
-    ]
-  };
+      ]
+    };
+  }
+  nestingToggle() {
+    this.setState({
+      nestingDropdownOpen: !this.state.nestingDropdownOpen
+    });
+  }
+
   render() {
     return (
       <Row>

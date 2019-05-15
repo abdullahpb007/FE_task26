@@ -12,7 +12,8 @@ import {
 } from "reactstrap";
 
 import * as Yup from "yup";
-
+import ReactAutosuggest from "Components/ReactAutosuggest";
+// import countyJson from "./countyCleark_JSON.json";
 import IntlMessages from "Util/IntlMessages";
 import { Colxx } from "Components/CustomBootstrap";
 
@@ -35,6 +36,18 @@ const SignupSchema = Yup.object().shape({
   totalAcres: Yup.number().required("Required"),
   legalDescription: Yup.string().required("Required")
 });
+
+const countyJson = [
+  {
+    name: "Adams"
+  },
+  {
+    name: "Alexander"
+  },
+  {
+    name: "Bond"
+  }
+];
 
 class AddModal extends Component {
   render() {
@@ -133,6 +146,22 @@ class AddModal extends Component {
                         type="text"
                         name="county"
                       />
+                      {/* <ReactAutosuggest
+                        placeholder="County"
+                        data={countyJson}
+                        onChange={value => {}}
+                      /> */}
+                      {/* <Select
+                        components={{ Input: CustomSelectInput }}
+                        className="react-select"
+                        classNamePrefix="react-select"
+                        name="form-field-name"
+                        value={this.state.selectedOption}
+                        onChange={this.handleChange}
+                        options={SELECT_DATA}
+                      /> */}
+
+                      {console.log(countyJson)}
                       {errors.county && touched.county ? (
                         <div className="invalid-feedback d-block">
                           {errors.county}
