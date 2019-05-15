@@ -490,6 +490,12 @@ class Sidebar extends Component {
                   </NavLink>
                 </NavItem>
                 <NavItem>
+                  <NavLink to="/app/propertyDetails/detailsform">
+                    <i className="simple-icon-briefcase" />{" "}
+                    <IntlMessages id="property.detailsForm" />
+                  </NavLink>
+                </NavItem>
+                <NavItem>
                   <NavLink to="/app/propertyDetails/lieninfo">
                     <i className="simple-icon-briefcase" />{" "}
                     <IntlMessages id="property.lienInfo" />
