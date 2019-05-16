@@ -14,11 +14,14 @@ import EditModal from "./details/editModal.jsx";
 import { NotificationManager } from "Components/ReactNotifications";
 import mouseTrap from "react-mousetrap";
 
+import { Redirect } from "react-router-dom";
+
 class PropertyDetails extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
+      redirect: false,
       modalAddProperty: false,
       modalEditProperty: false,
       modalViewProperty: false,
@@ -203,14 +206,17 @@ class PropertyDetails extends Component {
                 </h1>
 
                 <div className="float-sm-right">
-                  <Button
-                    color="success"
-                    size="lg"
-                    className="default"
-                    onClick={this.toggleAddProperty}
-                  >
-                    <IntlMessages id="property.add-modal-title" />
-                  </Button>
+                  <div>
+                    {this.renderRedirect()}
+                    <Button
+                      color="success"
+                      size="lg"
+                      className="default"
+                      onClick={this.setRedirect}
+                    >
+                      <IntlMessages id="property.add-modal-title" />
+                    </Button>
+                  </div>
                   {"  "}
                 </div>
 
@@ -247,6 +253,18 @@ class PropertyDetails extends Component {
       </Fragment>
     );
   }
+
+  renderRedirect = () => {
+    if (this.state.redirect) {
+      return <Redirect to="/app/propertyDetails/detailsform" />;
+    }
+  };
+
+  setRedirect = () => {
+    this.setState({
+      redirect: true
+    });
+  };
 
   //PropertyDetails
   handleSubmit = values => {

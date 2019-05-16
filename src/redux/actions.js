@@ -5,3 +5,4 @@ export * from "./todo/actions";
 export * from "./chat/actions";
 export * from "./surveyList/actions";
 export * from "./surveyDetail/actions";
+export * from "./propertyDetails/actions";

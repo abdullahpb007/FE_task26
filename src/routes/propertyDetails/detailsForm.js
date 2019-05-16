@@ -21,6 +21,9 @@ import * as Yup from "yup";
 import IntlMessages from "Util/IntlMessages";
 import { Colxx } from "Components/CustomBootstrap";
 
+import { connect } from "react-redux";
+import { addPropertyDetails } from "Redux/propertyDetails/_axios";
+
 class DetailsForm extends Component {
   render() {
     return (
@@ -33,9 +36,6 @@ class DetailsForm extends Component {
                   active: this.state.activeFirstTab === "1",
                   "nav-link": true
                 })}
-                onClick={() => {
-                  this.toggleFirstTab("1");
-                }}
                 to="#"
               >
                 Property Details
@@ -47,9 +47,6 @@ class DetailsForm extends Component {
                   active: this.state.activeFirstTab === "2",
                   "nav-link": true
                 })}
-                onClick={() => {
-                  this.toggleFirstTab("2");
-                }}
                 to="#"
               >
                 Lien Info
@@ -61,9 +58,6 @@ class DetailsForm extends Component {
                   active: this.state.activeFirstTab === "3",
                   "nav-link": true
                 })}
-                onClick={() => {
-                  this.toggleFirstTab("3");
-                }}
                 to="#"
               >
                 Assessee
@@ -75,9 +69,6 @@ class DetailsForm extends Component {
                   active: this.state.activeFirstTab === "4",
                   "nav-link": true
                 })}
-                onClick={() => {
-                  this.toggleFirstTab("4");
-                }}
                 to="#"
               >
                 Dates
@@ -93,7 +84,7 @@ class DetailsForm extends Component {
                 <CardBody>
                   <Formik
                     initialValues={{
-                      propertyNumber: "",
+                      pin: "",
                       county: "",
                       pin: "",
                       street: "",
@@ -115,7 +106,8 @@ class DetailsForm extends Component {
                     }}
                     validationSchema={propertyDetailsSchema}
                     onSubmit={values => {
-                      this.props.onSubmit(values);
+                      addPropertyDetails(values);
+                      this.toggleFirstTab("2");
                     }}
                   >
                     {({ errors, touched }) => (
@@ -127,19 +119,17 @@ class DetailsForm extends Component {
                             touched
                           )}
                         </Row>
+                        <Button
+                          className="btn-block"
+                          type="submit"
+                          size="sm"
+                          color="primary"
+                        >
+                          Next
+                        </Button>
                       </Form>
                     )}
                   </Formik>
-                  <Button
-                    className="btn-block"
-                    onClick={() => {
-                      this.toggleFirstTab("2");
-                    }}
-                    size="sm"
-                    color="primary"
-                  >
-                    Next
-                  </Button>
                 </CardBody>
               </Colxx>
             </Row>
@@ -156,7 +146,7 @@ class DetailsForm extends Component {
                     }}
                     validationSchema={lienSchema}
                     onSubmit={values => {
-                      this.props.onSubmit(values);
+                      console.log(values);
                     }}
                   >
                     {({ errors, touched }) => (
@@ -171,15 +161,8 @@ class DetailsForm extends Component {
                       </Form>
                     )}
                   </Formik>
-                  <Button
-                    className="btn-block"
-                    onClick={() => {
-                      this.toggleFirstTab("3");
-                    }}
-                    size="sm"
-                    color="primary"
-                  >
-                    Next
+                  <Button color="primary" type="submit">
+                    <IntlMessages id="pages.submit" />
                   </Button>
                 </CardBody>
               </Colxx>
@@ -279,6 +262,7 @@ class DetailsForm extends Component {
     this.state = {
       activeFirstTab: "1",
       propertyDetailMap: [
+        { name: "pin", size: 4, type: "text", text: "property." },
         { name: "street", size: 4, type: "text", text: "property." },
         { name: "city", size: 4, type: "text", text: "property." },
         { name: "county", size: 4, type: "text", text: "property." },
@@ -294,8 +278,8 @@ class DetailsForm extends Component {
         { name: "seniorExemption", size: 4, type: "number", text: "property." },
         { name: "seniorFreeze", size: 4, type: "number", text: "property." },
         { name: "totalAcres", size: 4, type: "number", text: "property." },
-        { name: "legalDescription", size: 6, type: "text", text: "property." },
-        { name: "googleMapView", size: 6, type: "text", text: "property." }
+        { name: "legalDescription", size: 4, type: "text", text: "property." },
+        { name: "googleMapView", size: 4, type: "text", text: "property." }
       ],
       lienInfoMap: [
         { name: "creditor", size: 4, type: "text", text: "lien." },
@@ -330,6 +314,7 @@ class DetailsForm extends Component {
   }
 
   toggleFirstTab = tab => {
+    console.log(this.props);
     if (this.state.activeTab !== tab) {
       this.setState({
         activeFirstTab: tab
@@ -341,7 +326,12 @@ class DetailsForm extends Component {
     return arr.map((e, i) => {
       return (
         <Colxx key={i} xxs={e.size}>
-          <FormGroup className="form-group has-top-label">
+          <FormGroup
+            className={
+              "form-group has-top-label" +
+              (errors[e.name] && touched[e.name] ? " border-danger m-0" : "")
+            }
+          >
             <Label
               className={errors[e.name] && touched[e.name] ? "text-danger" : ""}
             >
@@ -368,8 +358,8 @@ class DetailsForm extends Component {
 }
 
 const propertyDetailsSchema = Yup.object().shape({
-  propertyNumber: Yup.string().required("Required"),
   county: Yup.string().required("Required"),
+  pin: Yup.string().required("Required"),
   street: Yup.string().required("Required"),
   city: Yup.string().required("Required"),
   state: Yup.string().required("Required"),
@@ -389,7 +379,6 @@ const propertyDetailsSchema = Yup.object().shape({
 });
 
 const lienSchema = Yup.object().shape({
-  propertyNumber: Yup.string().required("Required"),
   creditor: Yup.string().required("Required"),
   amount: Yup.number().required("Required"),
   paymentAmount: Yup.number().required("Required")
@@ -404,7 +393,6 @@ const assesseeSchema = Yup.object().shape({
 });
 
 const dateSchema = Yup.object().shape({
-  propertyNumber: Yup.string().required("Required"),
   actualEstimatedDate: Yup.string().required("Required"),
   firstInstallmentDate: Yup.string().required("Required"),
   secondInstallmentDate: Yup.string().required("Required"),
@@ -417,4 +405,9 @@ const dateSchema = Yup.object().shape({
   dateOfTaxDeed: Yup.string().required("Required")
 });
 
-export default DetailsForm;
+const mapStateToProps = state => {
+  console.log(state);
+  return { state };
+};
+
+export default connect(mapStateToProps)(DetailsForm);

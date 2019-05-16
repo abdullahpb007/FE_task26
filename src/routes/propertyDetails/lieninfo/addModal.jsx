@@ -46,6 +46,7 @@ class AddModal extends Component {
           validationSchema={lienSchema}
           onSubmit={values => {
             this.props.onSubmit(values);
+            console.log(values);
           }}
         >
           {({ errors, touched }) => (
