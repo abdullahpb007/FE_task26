@@ -70,6 +70,7 @@ export const ADD_LIEN = "ADD_LIEN";
 export const ADD_IMPORTANT_DATES = "ADD_IMPORTANT_DATES";
 export const CHANGE_FORM_TYPE = "CHANGE_FORM_TYPE";
 export const SELECTED_DATA = "SELECTED_DATA";
+export const GET_PROPERTY_DATA = "GET_PROPERTY_DATA";
 
 /* FORM TYPES */
 export const FORM_ADD = "FORM_ADD";

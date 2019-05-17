@@ -7,8 +7,17 @@ import {
   FORM_ADD,
   FORM_VIEW,
   FORM_EDIT,
-  SELECTED_DATA
+  SELECTED_DATA,
+  GET_PROPERTY_DATA
 } from "Constants/actionTypes";
+
+/********** ADD NEW ACTIONS **********/
+export const GetPropertyData = data => {
+  return {
+    type: GET_PROPERTY_DATA,
+    payload: data
+  };
+};
 
 /********** ADD NEW ACTIONS **********/
 export const AddNewPropertyDetails = data => {

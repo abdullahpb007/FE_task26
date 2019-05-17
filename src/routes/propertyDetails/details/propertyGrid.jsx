@@ -6,8 +6,37 @@ import { Colxx } from "Components/CustomBootstrap";
 import ReactTable from "react-table";
 import DataTablePagination from "Components/DataTables/pagination";
 
+import { Redirect } from "react-router-dom";
+
+import { connect } from "react-redux";
+import * as apiCallCreator from "Redux/propertyDetails/_axios";
+import * as actionCreator from "Redux/propertyDetails/actions";
+
 class PropertyGrid extends Component {
+  componentWillMount() {
+    apiCallCreator.getPropertyData(0, 5, this.props.getPropertyDatas);
+  }
+
+  renderRedirect = () => {
+    if (this.state.redirect) {
+      return <Redirect to="/app/propertyDetails/detailsform" />;
+    }
+  };
+
+  setRedirect = val => {
+    this.props.selectProperty(val);
+    this.setState({
+      redirect: true
+    });
+  };
+
+  clickEvent = val => {
+    this.props.selectProperty(val);
+    this.setRedirect();
+  };
+
   state = {
+    redirect: false,
     propertyColumn: [
       {
         Header: "Pin",
@@ -59,11 +88,12 @@ class PropertyGrid extends Component {
         Cell: props => {
           return (
             <ButtonGroup className="m-auto">
+              {this.renderRedirect()}
               <Button
                 outline
                 color="primary"
                 size="sm"
-                onClick={() => this.props.viewBtnHandler(props.original)}
+                onClick={() => this.setRedirect(props.original)}
               >
                 <IntlMessages id="property.viewbtn" />
               </Button>
@@ -71,7 +101,7 @@ class PropertyGrid extends Component {
                 outline
                 color="secondary"
                 size="sm"
-                onClick={() => this.props.editBtnHandler(props.original)}
+                onClick={() => this.setRedirect(props.original)}
               >
                 <IntlMessages id="property.editbtn" />
               </Button>
@@ -82,6 +112,7 @@ class PropertyGrid extends Component {
     ]
   };
   render() {
+    console.log(this.props);
     return (
       <Row>
         <Colxx xxs="12" className="mb-3">
@@ -90,7 +121,7 @@ class PropertyGrid extends Component {
               <div className="card-body align-self-center d-flex flex-column flex-lg-row justify-content-between min-width-zero align-items-lg-center">
                 <ReactTable
                   className="w-100"
-                  data={this.props.data}
+                  data={this.props.propertyDetails.propertyData}
                   columns={this.state.propertyColumn}
                   noDataText={"No Records Found !"}
                   defaultPageSize={5}
@@ -100,6 +131,14 @@ class PropertyGrid extends Component {
                     return row[filter.id]
                       .toLowerCase()
                       .includes(filter.value.toLowerCase());
+                  }}
+                  manual
+                  onFetchData={(state, instance) => {
+                    apiCallCreator.getPropertyData(
+                      state.page,
+                      state.pageSize,
+                      this.props.getPropertyDatas
+                    );
                   }}
                 />
               </div>
@@ -111,4 +150,18 @@ class PropertyGrid extends Component {
   }
 }
 
-export default PropertyGrid;
+const mapStateToProps = state => {
+  return state;
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    getPropertyDatas: val => dispatch(actionCreator.GetPropertyData(val)),
+    selectProperty: val => dispatch(actionCreator.SelectedData(val))
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(PropertyGrid);

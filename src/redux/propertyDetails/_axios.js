@@ -59,3 +59,27 @@ export function addImportantDate(data, callback) {
     .then(() => callback())
     .catch(error => console.log(error));
 }
+
+/* Grid Data Loader */
+export function getPropertyData(pageNo = 0, pageSize = 5, callback) {
+  let headers = {
+    "Content-Type": "application/json",
+    Authorization: "Bearer " + localStorage.getItem("user_id")
+  };
+  let resData = [];
+  axios
+    .post(
+      "https://cors-anywhere.herokuapp.com/http://139.59.36.120/propertyDataList",
+      {
+        pageNo: pageNo,
+        pageSize: pageSize
+      },
+      { headers: headers }
+    )
+    .then(res => {
+      res.data.docs.map(data => {
+        resData.push(data);
+      });
+      callback(resData);
+    });
+}
