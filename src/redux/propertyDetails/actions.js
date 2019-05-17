@@ -8,7 +8,8 @@ import {
   FORM_VIEW,
   FORM_EDIT,
   SELECTED_DATA,
-  GET_PROPERTY_DATA
+  GET_PROPERTY_DATA,
+  SINGLE_RECORD
 } from "Constants/actionTypes";
 
 /********** ADD NEW ACTIONS **********/
@@ -62,5 +63,12 @@ export const SelectedData = payload => {
   return {
     type: SELECTED_DATA,
     payload: payload
+  };
+};
+
+export const SingleRecordData = payload => {
+  return {
+    type: SINGLE_RECORD,
+    payload: payload.data
   };
 };

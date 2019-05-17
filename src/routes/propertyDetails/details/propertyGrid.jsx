@@ -11,6 +11,7 @@ import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import * as apiCallCreator from "Redux/propertyDetails/_axios";
 import * as actionCreator from "Redux/propertyDetails/actions";
+import { FORM_VIEW, FORM_EDIT } from "Constants/actionTypes";
 
 class PropertyGrid extends Component {
   componentWillMount() {
@@ -19,20 +20,24 @@ class PropertyGrid extends Component {
 
   renderRedirect = () => {
     if (this.state.redirect) {
-      return <Redirect to="/app/propertyDetails/detailsform" />;
+      return <Redirect push to="/app/propertyDetails/detailsform" />;
     }
   };
 
-  setRedirect = val => {
+  setEditRedirect = val => {
+    this.props.changeFormType(FORM_EDIT);
     this.props.selectProperty(val);
     this.setState({
       redirect: true
     });
   };
 
-  clickEvent = val => {
+  setViewRedirect = val => {
+    this.props.changeFormType(FORM_VIEW);
     this.props.selectProperty(val);
-    this.setRedirect();
+    this.setState({
+      redirect: true
+    });
   };
 
   state = {
@@ -48,8 +53,8 @@ class PropertyGrid extends Component {
         }
       },
       {
-        Header: "Address",
-        accessor: "address",
+        Header: "Street",
+        accessor: "street",
         sortable: true,
         filterable: true,
         style: {
@@ -93,7 +98,7 @@ class PropertyGrid extends Component {
                 outline
                 color="primary"
                 size="sm"
-                onClick={() => this.setRedirect(props.original)}
+                onClick={() => this.setViewRedirect(props.original)}
               >
                 <IntlMessages id="property.viewbtn" />
               </Button>
@@ -101,7 +106,7 @@ class PropertyGrid extends Component {
                 outline
                 color="secondary"
                 size="sm"
-                onClick={() => this.setRedirect(props.original)}
+                onClick={() => this.setEditRedirect(props.original)}
               >
                 <IntlMessages id="property.editbtn" />
               </Button>
@@ -157,7 +162,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     getPropertyDatas: val => dispatch(actionCreator.GetPropertyData(val)),
-    selectProperty: val => dispatch(actionCreator.SelectedData(val))
+    selectProperty: val => dispatch(actionCreator.SelectedData(val)),
+    changeFormType: val => dispatch(actionCreator.ChangeFormType(val))
   };
 };
 

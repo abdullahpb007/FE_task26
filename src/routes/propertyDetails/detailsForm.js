@@ -31,12 +31,19 @@ import * as actionCreator from "Redux/propertyDetails/actions";
 import { FORM_ADD, FORM_VIEW, FORM_EDIT } from "Constants/actionTypes";
 
 class DetailsForm extends Component {
+  componentWillMount() {
+    apiCallCreator.getDetails(
+      this.props.propertyDetails.id,
+      this.props.propertyDetails.propertyNumber
+    );
+  }
+
   render() {
     const pdprops = this.props.propertyDetails;
-    const selectedProperty = pdprops.selectedData.propertyDetails;
-    const selectedLien = pdprops.selectedData.lienDetails;
-    const selectedAssessee = pdprops.selectedData.assesseeDetails;
-    const selectedDates = pdprops.selectedData.datesDetails;
+    const selectedProperty = pdprops.propertyDetails;
+    const selectedLien = pdprops.lienDetails;
+    const selectedAssessee = pdprops.assesseeDetails;
+    const selectedDates = pdprops.datesDetails;
     console.log(this.props);
     return (
       <div>
@@ -44,7 +51,7 @@ class DetailsForm extends Component {
           <Colxx xxs="12">
             <div className="mb-2">
               <h1>
-                <IntlMessages id="property.addNew" />
+                <IntlMessages id="property.propertyNumber" />
                 {pdprops.propertyNumber != null
                   ? " : " + pdprops.propertyNumber
                   : ""}

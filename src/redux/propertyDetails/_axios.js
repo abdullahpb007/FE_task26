@@ -83,3 +83,59 @@ export function getPropertyData(pageNo = 0, pageSize = 5, callback) {
       callback(resData);
     });
 }
+
+/* Get Details */
+function getPropertyDetails(id, propertyNumber) {
+  let headers = {
+    "Content-Type": "application/json",
+    Authorization: "Bearer " + localStorage.getItem("user_id")
+  };
+  return axios.get(
+    `https://cors-anywhere.herokuapp.com/http://139.59.36.120/propertyRecord/${id}?propertyNumber=${propertyNumber}`,
+    { headers: headers }
+  );
+}
+
+function getLienDetails(id, propertyNumber) {
+  let headers = {
+    "Content-Type": "application/json",
+    Authorization: "Bearer " + localStorage.getItem("user_id")
+  };
+  return axios.get(
+    `https://cors-anywhere.herokuapp.com/http://139.59.36.120/${id}?propertyNumber=${propertyNumber}`,
+    { headers: headers }
+  );
+}
+
+function getAssesseeDetails(id, propertyNumber) {
+  let headers = {
+    "Content-Type": "application/json",
+    Authorization: "Bearer " + localStorage.getItem("user_id")
+  };
+  return axios.get(
+    `https://cors-anywhere.herokuapp.com/http://139.59.36.120/assesseeRecord/${id}?propertyNumber=${propertyNumber}`,
+    { headers: headers }
+  );
+}
+
+function getDateDetails(id, propertyNumber) {
+  let headers = {
+    "Content-Type": "application/json",
+    Authorization: "Bearer " + localStorage.getItem("user_id")
+  };
+  return axios.get(
+    `https://cors-anywhere.herokuapp.com/http://139.59.36.120/${id}?propertyNumber=${propertyNumber}`,
+    { headers: headers }
+  );
+}
+
+export function getDetails(id, propertyNumber, callback) {
+  axios
+    .all([
+      getPropertyDetails(id, propertyNumber)
+      //getLienDetails(),
+      //getAssesseeDetails(id, propertyNumber)
+      //getDateDetails()
+    ])
+    .then(res => console.log(res));
+}

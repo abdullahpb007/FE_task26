@@ -76,3 +76,4 @@ export const GET_PROPERTY_DATA = "GET_PROPERTY_DATA";
 export const FORM_ADD = "FORM_ADD";
 export const FORM_VIEW = "FORM_VIEW";
 export const FORM_EDIT = "FORM_EDIT";
+export const SINGLE_RECORD = "SINGLE_RECORD";
