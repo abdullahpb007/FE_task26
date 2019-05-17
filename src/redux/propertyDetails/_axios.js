@@ -1,12 +1,6 @@
 import axios from "axios";
-import {
-  AddNewPropertyDetails,
-  AddNewAssessee,
-  AddNewLien,
-  AddNewImportantDates
-} from "./actions";
 
-export function addPropertyDetails(data) {
+export function addPropertyDetails(data, callback) {
   let headers = {
     "Content-Type": "application/json",
     Authorization: "Bearer " + localStorage.getItem("user_id")
@@ -17,15 +11,11 @@ export function addPropertyDetails(data) {
       data,
       { headers: headers }
     )
-    .then(function(response) {
-      dispatch(AddNewPropertyDetails(response));
-    })
-    .catch(function(error) {
-      console.log(error);
-    });
+    .then(response => callback(response))
+    .catch(error => console.log(error));
 }
 
-export function addAssessee(data) {
+export function addAssessee(data, callback) {
   let headers = {
     "Content-Type": "application/json",
     Authorization: "Bearer " + localStorage.getItem("user_id")
@@ -36,16 +26,11 @@ export function addAssessee(data) {
       data,
       { headers: headers }
     )
-    .then(function(response) {
-      console.log(response);
-    })
-    .catch(function(error) {
-      console.log(error);
-    });
-  AddNewAssessee();
+    .then(() => callback())
+    .catch(error => console.log(error));
 }
 
-export function addLien(data) {
+export function addLien(data, callback) {
   let headers = {
     "Content-Type": "application/json",
     Authorization: "Bearer " + localStorage.getItem("user_id")
@@ -56,16 +41,11 @@ export function addLien(data) {
       data,
       { headers: headers }
     )
-    .then(function(response) {
-      console.log(response);
-    })
-    .catch(function(error) {
-      console.log(error);
-    });
-  AddNewLien();
+    .then(() => callback())
+    .catch(error => console.log(error));
 }
 
-export function addImportantDate(data) {
+export function addImportantDate(data, callback) {
   let headers = {
     "Content-Type": "application/json",
     Authorization: "Bearer " + localStorage.getItem("user_id")
@@ -76,11 +56,6 @@ export function addImportantDate(data) {
       data,
       { headers: headers }
     )
-    .then(function(response) {
-      console.log(response);
-    })
-    .catch(function(error) {
-      console.log(error);
-    });
-  AddNewImportantDates();
+    .then(() => callback())
+    .catch(error => console.log(error));
 }

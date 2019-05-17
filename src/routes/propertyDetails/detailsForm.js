@@ -22,12 +22,41 @@ import IntlMessages from "Util/IntlMessages";
 import { Colxx } from "Components/CustomBootstrap";
 
 import { connect } from "react-redux";
-import { addPropertyDetails } from "Redux/propertyDetails/_axios";
+import * as apiCallCreator from "Redux/propertyDetails/_axios";
+import * as actionCreator from "Redux/propertyDetails/actions";
 
 class DetailsForm extends Component {
   render() {
+    const pdprops = this.props.propertyDetails;
+    console.log(this.props);
     return (
       <div>
+        <Row>
+          <Colxx xxs="12">
+            <div className="mb-2">
+              <h1>
+                <IntlMessages id="property.addNew" />
+                {pdprops.propertyNumber != null
+                  ? " : " + pdprops.propertyNumber
+                  : ""}
+              </h1>
+
+              <div className="float-sm-right">
+                <div>
+                  <Button
+                    color="success"
+                    size="lg"
+                    className="default"
+                    onClick={() => this.props.changeFormType("FORM_VIEW")}
+                  >
+                    <IntlMessages id="property.add-modal-title" />
+                  </Button>
+                </div>
+                {"  "}
+              </div>
+            </div>
+          </Colxx>
+        </Row>
         <CardHeader className="pl-0 pr-0 bg-white">
           <Nav tabs className="card-header-tabs  ml-0 mr-0">
             <NavItem className="w-25 text-center">
@@ -106,7 +135,10 @@ class DetailsForm extends Component {
                     }}
                     validationSchema={propertyDetailsSchema}
                     onSubmit={values => {
-                      addPropertyDetails(values);
+                      apiCallCreator.addPropertyDetails(
+                        values,
+                        this.props.addNewProperty
+                      );
                       this.toggleFirstTab("2");
                     }}
                   >
@@ -116,7 +148,8 @@ class DetailsForm extends Component {
                           {this.fieldMapper(
                             this.state.propertyDetailMap,
                             errors,
-                            touched
+                            touched,
+                            pdprops.fieldDisable
                           )}
                         </Row>
                         <Button
@@ -140,13 +173,15 @@ class DetailsForm extends Component {
                 <CardBody>
                   <Formik
                     initialValues={{
+                      propertyNumber: pdprops.propertyNumber,
                       creditor: "",
                       amount: "",
                       paymentAmount: ""
                     }}
                     validationSchema={lienSchema}
                     onSubmit={values => {
-                      console.log(values);
+                      this.toggleFirstTab("3");
+                      apiCallCreator.addLien(values, this.props.addNewLien);
                     }}
                   >
                     {({ errors, touched }) => (
@@ -155,15 +190,21 @@ class DetailsForm extends Component {
                           {this.fieldMapper(
                             this.state.lienInfoMap,
                             errors,
-                            touched
+                            touched,
+                            pdprops.fieldDisable
                           )}
                         </Row>
+                        <Button
+                          className="btn-block"
+                          type="submit"
+                          size="sm"
+                          color="primary"
+                        >
+                          Next
+                        </Button>
                       </Form>
                     )}
                   </Formik>
-                  <Button color="primary" type="submit">
-                    <IntlMessages id="pages.submit" />
-                  </Button>
                 </CardBody>
               </Colxx>
             </Row>
@@ -174,6 +215,7 @@ class DetailsForm extends Component {
                 <CardBody>
                   <Formik
                     initialValues={{
+                      propertyNumber: pdprops.propertyNumber,
                       name: "",
                       address: "",
                       city: "",
@@ -182,7 +224,11 @@ class DetailsForm extends Component {
                     }}
                     validationSchema={assesseeSchema}
                     onSubmit={values => {
-                      this.props.onSubmit(values);
+                      apiCallCreator.addAssessee(
+                        values,
+                        this.props.addNewAssessee
+                      );
+                      this.toggleFirstTab("4");
                     }}
                   >
                     {({ errors, touched }) => (
@@ -191,22 +237,21 @@ class DetailsForm extends Component {
                           {this.fieldMapper(
                             this.state.assesseeMap,
                             errors,
-                            touched
+                            touched,
+                            pdprops.fieldDisable
                           )}
                         </Row>
+                        <Button
+                          className="btn-block"
+                          type="submit"
+                          size="sm"
+                          color="primary"
+                        >
+                          Submit
+                        </Button>
                       </Form>
                     )}
                   </Formik>
-                  <Button
-                    className="btn-block"
-                    onClick={() => {
-                      this.toggleFirstTab("4");
-                    }}
-                    size="sm"
-                    color="primary"
-                  >
-                    Next
-                  </Button>
                 </CardBody>
               </Colxx>
             </Row>
@@ -217,6 +262,7 @@ class DetailsForm extends Component {
                 <CardBody>
                   <Formik
                     initialValues={{
+                      propertyNumber: pdprops.propertyNumber,
                       actualEstimatedDate: "",
                       firstInstallmentDate: "",
                       secondInstallmentDate: "",
@@ -230,7 +276,10 @@ class DetailsForm extends Component {
                     }}
                     validationSchema={dateSchema}
                     onSubmit={values => {
-                      this.props.onSubmit(values);
+                      apiCallCreator.addImportantDate(
+                        values,
+                        this.props.addNewDates
+                      );
                     }}
                   >
                     {({ errors, touched }) => (
@@ -239,15 +288,21 @@ class DetailsForm extends Component {
                           {this.fieldMapper(
                             this.state.datesMap,
                             errors,
-                            touched
+                            touched,
+                            pdprops.fieldDisable
                           )}
                         </Row>
+                        <Button
+                          className="btn-block"
+                          type="submit"
+                          size="sm"
+                          color="primary"
+                        >
+                          Next
+                        </Button>
                       </Form>
                     )}
                   </Formik>
-                  <Button className="btn-block" size="sm" color="primary">
-                    Submit
-                  </Button>
                 </CardBody>
               </Colxx>
             </Row>
@@ -314,7 +369,6 @@ class DetailsForm extends Component {
   }
 
   toggleFirstTab = tab => {
-    console.log(this.props);
     if (this.state.activeTab !== tab) {
       this.setState({
         activeFirstTab: tab
@@ -322,7 +376,7 @@ class DetailsForm extends Component {
     }
   };
 
-  fieldMapper = (arr, errors, touched) => {
+  fieldMapper = (arr, errors, touched, fieldStatus) => {
     return arr.map((e, i) => {
       return (
         <Colxx key={i} xxs={e.size}>
@@ -344,6 +398,7 @@ class DetailsForm extends Component {
               }
               type={e.type}
               name={e.name}
+              disabled={fieldStatus}
             />
             {errors[e.name] && touched[e.name] ? (
               <small className="text-danger">{errors[e.name]}</small>
@@ -406,8 +461,20 @@ const dateSchema = Yup.object().shape({
 });
 
 const mapStateToProps = state => {
-  console.log(state);
-  return { state };
+  return { propertyDetails: state.propertyDetails };
 };
 
-export default connect(mapStateToProps)(DetailsForm);
+const mapDispatchToProps = dispatch => {
+  return {
+    addNewProperty: val => dispatch(actionCreator.AddNewPropertyDetails(val)),
+    addNewAssessee: () => dispatch(actionCreator.AddNewAssessee()),
+    addNewLien: () => dispatch(actionCreator.AddNewLien()),
+    addNewDates: () => dispatch(actionCreator.AddNewImportantDates()),
+    changeFormType: val => dispatch(actionCreator.ChangeFormType(val))
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(DetailsForm);
