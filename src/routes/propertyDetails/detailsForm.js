@@ -33,6 +33,10 @@ import { FORM_ADD, FORM_VIEW, FORM_EDIT } from "Constants/actionTypes";
 class DetailsForm extends Component {
   render() {
     const pdprops = this.props.propertyDetails;
+    const selectedProperty = pdprops.selectedData.propertyDetails;
+    const selectedLien = pdprops.selectedData.lienDetails;
+    const selectedAssessee = pdprops.selectedData.assesseeDetails;
+    const selectedDates = pdprops.selectedData.datesDetails;
     console.log(this.props);
     return (
       <div>
@@ -64,7 +68,9 @@ class DetailsForm extends Component {
                       >
                         <IntlMessages id="property.viewDetails" />
                       </DropdownItem>
-                      <DropdownItem>
+                      <DropdownItem
+                        onClick={() => this.props.changeFormType(FORM_EDIT)}
+                      >
                         <IntlMessages id="property.editDetails" />
                       </DropdownItem>
                     </DropdownMenu>
@@ -131,33 +137,25 @@ class DetailsForm extends Component {
                 <CardBody>
                   <Formik
                     initialValues={{
-                      pin: pdprops.selectedData.propertyDetails.pin,
-                      county: pdprops.selectedData.propertyDetails.county,
-                      pin: pdprops.selectedData.propertyDetails.pin,
-                      street: pdprops.selectedData.propertyDetails.street,
-                      city: pdprops.selectedData.propertyDetails.city,
-                      state: pdprops.selectedData.propertyDetails.state,
-                      zip: pdprops.selectedData.propertyDetails.zip,
-                      township: pdprops.selectedData.propertyDetails.township,
-                      classCode: pdprops.selectedData.propertyDetails.classCode,
-                      assessedValue:
-                        pdprops.selectedData.propertyDetails.assessedValue,
-                      marketValue:
-                        pdprops.selectedData.propertyDetails.marketValue,
-                      taxesPerYear:
-                        pdprops.selectedData.propertyDetails.taxesPerYear,
-                      preeqexm: pdprops.selectedData.propertyDetails.preeqexm,
-                      homeOwner: pdprops.selectedData.propertyDetails.homeOwner,
-                      seniorExemption:
-                        pdprops.selectedData.propertyDetails.seniorExemption,
-                      seniorFreeze:
-                        pdprops.selectedData.propertyDetails.seniorFreeze,
-                      totalAcres:
-                        pdprops.selectedData.propertyDetails.totalAcres,
-                      legalDescription:
-                        pdprops.selectedData.propertyDetails.legalDescription,
-                      googleMapView:
-                        pdprops.selectedData.propertyDetails.googleMapView
+                      pin: selectedProperty.pin,
+                      county: selectedProperty.county,
+                      pin: selectedProperty.pin,
+                      street: selectedProperty.street,
+                      city: selectedProperty.city,
+                      state: selectedProperty.state,
+                      zip: selectedProperty.zip,
+                      township: selectedProperty.township,
+                      classCode: selectedProperty.classCode,
+                      assessedValue: selectedProperty.assessedValue,
+                      marketValue: selectedProperty.marketValue,
+                      taxesPerYear: selectedProperty.taxesPerYear,
+                      preeqexm: selectedProperty.preeqexm,
+                      homeOwner: selectedProperty.homeOwner,
+                      seniorExemption: selectedProperty.seniorExemption,
+                      seniorFreeze: selectedProperty.seniorFreeze,
+                      totalAcres: selectedProperty.totalAcres,
+                      legalDescription: selectedProperty.legalDescription,
+                      googleMapView: selectedProperty.googleMapView
                     }}
                     validationSchema={propertyDetailsSchema}
                     onSubmit={values => {
@@ -199,12 +197,10 @@ class DetailsForm extends Component {
                 <CardBody>
                   <Formik
                     initialValues={{
-                      propertyNumber:
-                        pdprops.selectedData.propertyDetails.propertyNumber,
-                      creditor: pdprops.selectedData.propertyDetails.creditor,
-                      amount: pdprops.selectedData.propertyDetails.amount,
-                      paymentAmount:
-                        pdprops.selectedData.propertyDetails.paymentAmount
+                      propertyNumber: selectedLien.propertyNumber,
+                      creditor: selectedLien.creditor,
+                      amount: selectedLien.amount,
+                      paymentAmount: selectedLien.paymentAmount
                     }}
                     validationSchema={lienSchema}
                     onSubmit={values => {
@@ -243,13 +239,12 @@ class DetailsForm extends Component {
                 <CardBody>
                   <Formik
                     initialValues={{
-                      propertyNumber:
-                        pdprops.selectedData.propertyDetails.propertyNumber,
-                      name: pdprops.selectedData.propertyDetails.name,
-                      address: pdprops.selectedData.propertyDetails.address,
-                      city: pdprops.selectedData.propertyDetails.city,
-                      state: pdprops.selectedData.propertyDetails.state,
-                      zip: pdprops.selectedData.propertyDetails.zip
+                      propertyNumber: selectedAssessee.propertyNumber,
+                      name: selectedAssessee.name,
+                      address: selectedAssessee.address,
+                      city: selectedAssessee.city,
+                      state: selectedAssessee.state,
+                      zip: selectedAssessee.zip
                     }}
                     validationSchema={assesseeSchema}
                     onSubmit={values => {
@@ -291,31 +286,18 @@ class DetailsForm extends Component {
                 <CardBody>
                   <Formik
                     initialValues={{
-                      propertyNumber:
-                        pdprops.selectedData.propertyDetails.propertyNumber,
-                      actualEstimatedDate:
-                        pdprops.selectedData.propertyDetails
-                          .actualEstimatedDate,
-                      firstInstallmentDate:
-                        pdprops.selectedData.propertyDetails
-                          .firstInstallmentDate,
+                      propertyNumber: selectedDates.propertyNumber,
+                      actualEstimatedDate: selectedDates.actualEstimatedDate,
+                      firstInstallmentDate: selectedDates.firstInstallmentDate,
                       secondInstallmentDate:
-                        pdprops.selectedData.propertyDetails
-                          .secondInstallmentDate,
-                      petitionFiledDate:
-                        pdprops.selectedData.propertyDetails.petitionFiledDate,
-                      extentionDate:
-                        pdprops.selectedData.propertyDetails.extentionDate,
-                      expirationDate:
-                        pdprops.selectedData.propertyDetails.expirationDate,
-                      assignmentCallDate:
-                        pdprops.selectedData.propertyDetails.assignmentCallDate,
-                      proveUpDate:
-                        pdprops.selectedData.propertyDetails.proveUpDate,
-                      orderOfDate:
-                        pdprops.selectedData.propertyDetails.orderOfDate,
-                      dateOfTaxDeed:
-                        pdprops.selectedData.propertyDetails.dateOfTaxDeed
+                        selectedDates.secondInstallmentDate,
+                      petitionFiledDate: selectedDates.petitionFiledDate,
+                      extentionDate: selectedDates.extentionDate,
+                      expirationDate: selectedDates.expirationDate,
+                      assignmentCallDate: selectedDates.assignmentCallDate,
+                      proveUpDate: selectedDates.proveUpDate,
+                      orderOfDate: selectedDates.orderOfDate,
+                      dateOfTaxDeed: selectedDates.dateOfTaxDeed
                     }}
                     validationSchema={dateSchema}
                     onSubmit={values => {

@@ -7,12 +7,14 @@ import {
   FORM_ADD,
   FORM_VIEW,
   FORM_EDIT,
-  SELECTED_DATA
+  SELECTED_DATA,
+  GET_PROPERTY_DATA
 } from "Constants/actionTypes";
 
 const INIT_STATE = {
-  propertyResponse: null,
-  propertyNumber: null,
+  propertyResponse: "",
+  propertyNumber: "",
+  propertyData: [],
   formType: FORM_ADD,
   fieldDisable: false,
   selectedData: {
@@ -22,24 +24,24 @@ const INIT_STATE = {
       address: "",
       city: "",
       state: "",
-      zip: 0,
-      township: 0,
-      classCode: 0,
-      assessedValue: 0,
-      marketValue: 0,
-      taxesPerYear: 0,
+      zip: "",
+      township: "",
+      classCode: "",
+      assessedValue: "",
+      marketValue: "",
+      taxesPerYear: "",
       propertyNumber: "",
-      preeqexm: 0,
-      homeOwner: 0,
-      seniorExemption: 0,
-      seniorFreeze: 0,
-      totalAcres: 0,
+      preeqexm: "",
+      homeOwner: "",
+      seniorExemption: "",
+      seniorFreeze: "",
+      totalAcres: "",
       legalDescription: ""
     },
     lienDetails: {
       creditor: "",
-      amount: 0,
-      paymentAmount: 0
+      amount: "",
+      paymentAmount: ""
     },
     assesseeDetails: {
       propertyNumber: "",
@@ -89,7 +91,14 @@ export default (state = INIT_STATE, action) => {
       });
 
     case SELECTED_DATA:
-      return { ...state };
+      return Object.assign({}, state, {
+        propertyNumber: action.payload
+      });
+
+    case GET_PROPERTY_DATA:
+      return Object.assign({}, state, {
+        propertyData: action.payload
+      });
 
     default:
       return { ...state };

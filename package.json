@@ -82,7 +82,6 @@
     "reactstrap": "^6.5.0",
     "redux": "4.0.0",
     "redux-saga": "^0.16.0",
-    "redux-thunk": "^2.3.0",
     "sortablejs": "^1.6.1",
     "video.js": "^7.3.0",
     "yup": "^0.27.0"

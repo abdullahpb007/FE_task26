@@ -12,7 +12,6 @@ import AddModal from "./details/addModal.jsx";
 import EditModal from "./details/editModal.jsx";
 
 import { NotificationManager } from "Components/ReactNotifications";
-import mouseTrap from "react-mousetrap";
 
 import { Redirect } from "react-router-dom";
 
@@ -195,6 +194,7 @@ class PropertyDetails extends Component {
   }
 
   render() {
+    console.log(this.props);
     return (
       <Fragment>
         <div className="disable-text-selection">
@@ -226,7 +226,6 @@ class PropertyDetails extends Component {
             </Colxx>
           </Row>
           <PropertyGrid
-            data={this.state.propertyData}
             viewBtnHandler={this.viewBtnControl}
             editBtnHandler={this.editBtnControl}
           />
@@ -336,4 +335,4 @@ class PropertyDetails extends Component {
   };
 }
 
-export default injectIntl(mouseTrap(PropertyDetails));
+export default PropertyDetails;
