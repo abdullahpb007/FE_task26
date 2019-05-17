@@ -3,9 +3,14 @@ import {
   ADD_ASSESSEE,
   ADD_LIEN,
   ADD_IMPORTANT_DATES,
-  CHANGE_FORM_TYPE
+  CHANGE_FORM_TYPE,
+  FORM_ADD,
+  FORM_VIEW,
+  FORM_EDIT,
+  SELECTED_DATA
 } from "Constants/actionTypes";
 
+/********** ADD NEW ACTIONS **********/
 export const AddNewPropertyDetails = data => {
   return {
     type: ADD_PROPERTY_DETAILS,
@@ -31,8 +36,9 @@ export const AddNewImportantDates = () => {
   };
 };
 
+/********** FORM ACTIONS **********/
 export const ChangeFormType = payload => {
-  let fieldDisable = payload == "FORM_VIEW" ? true : false;
+  let fieldDisable = payload == FORM_VIEW ? true : false;
   let data = {
     formType: payload,
     fieldDisable
@@ -40,5 +46,12 @@ export const ChangeFormType = payload => {
   return {
     type: CHANGE_FORM_TYPE,
     payload: data
+  };
+};
+
+export const SelectedData = payload => {
+  return {
+    type: SELECTED_DATA,
+    payload: payload
   };
 };

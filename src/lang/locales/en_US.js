@@ -82,6 +82,8 @@ module.exports = {
   "property.lienInfo": "Lien Information",
   "property.communication": "Communication",
   "property.detailsForm": "Details Form",
+  "property.editDetails": "Edit Details",
+  "property.viewDetails": "View Details",
   "property.addNew": "Add New",
 
   /* Lien Information */

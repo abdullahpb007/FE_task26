@@ -69,3 +69,9 @@ export const ADD_ASSESSEE = "ADD_ASSESSEE";
 export const ADD_LIEN = "ADD_LIEN";
 export const ADD_IMPORTANT_DATES = "ADD_IMPORTANT_DATES";
 export const CHANGE_FORM_TYPE = "CHANGE_FORM_TYPE";
+export const SELECTED_DATA = "SELECTED_DATA";
+
+/* FORM TYPES */
+export const FORM_ADD = "FORM_ADD";
+export const FORM_VIEW = "FORM_VIEW";
+export const FORM_EDIT = "FORM_EDIT";
