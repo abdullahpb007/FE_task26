@@ -75,7 +75,7 @@ class DetailsForm extends Component {
             </div>
           </Colxx>
         </Row>
-        <CardHeader className="pl-0 pr-0 bg-white">
+        <CardHeader className="pl-0 pr-0 bg-info">
           <Nav tabs className="card-header-tabs  ml-0 mr-0">
             <NavItem className="w-25 text-center">
               <NavLink
