@@ -58,429 +58,429 @@ class DetailsForm extends Component {
     return pdprops.loading == true ? (
       <div className="loading" />
     ) : (
-        <div>
-          <Row>
-            <Colxx xxs="12">
-              <div className="mb-2">
-                <h1>
-                  {pdprops.propertyNumber != ""
-                    ? "Property Number : " + pdprops.propertyNumber
-                    : "ADD NEW"}
-                </h1>
+      <div>
+        <Row>
+          <Colxx xxs="12">
+            <div className="mb-2">
+              <h1>
+                {pdprops.propertyNumber != ""
+                  ? "Property Number : " + pdprops.propertyNumber
+                  : "ADD NEW"}
+              </h1>
 
-                <div className="float-sm-right">
-                  {pdprops.formType != FORM_ADD ? (
-                    <div>
-                      <UncontrolledDropdown>
-                        <DropdownToggle
-                          caret
-                          color="primary"
-                          size="lg"
-                          outline
-                          className="top-right-button top-right-button-single"
+              <div className="float-sm-right">
+                {pdprops.formType != FORM_ADD ? (
+                  <div>
+                    <UncontrolledDropdown>
+                      <DropdownToggle
+                        caret
+                        color="primary"
+                        size="lg"
+                        outline
+                        className="top-right-button top-right-button-single"
+                      >
+                        <IntlMessages id="pages.actions" />
+                      </DropdownToggle>
+                      <DropdownMenu>
+                        <DropdownItem
+                          onClick={() => this.props.changeFormType(FORM_VIEW)}
                         >
-                          <IntlMessages id="pages.actions" />
-                        </DropdownToggle>
-                        <DropdownMenu>
-                          <DropdownItem
-                            onClick={() => this.props.changeFormType(FORM_VIEW)}
-                          >
-                            <IntlMessages id="property.viewDetails" />
-                          </DropdownItem>
-                          <DropdownItem
-                            onClick={() => this.props.changeFormType(FORM_EDIT)}
-                          >
-                            <IntlMessages id="property.editDetails" />
-                          </DropdownItem>
-                        </DropdownMenu>
-                      </UncontrolledDropdown>
-                    </div>
-                  ) : (
-                      ""
-                    )}
-                  {"  "}
-                </div>
+                          <IntlMessages id="property.viewDetails" />
+                        </DropdownItem>
+                        <DropdownItem
+                          onClick={() => this.props.changeFormType(FORM_EDIT)}
+                        >
+                          <IntlMessages id="property.editDetails" />
+                        </DropdownItem>
+                      </DropdownMenu>
+                    </UncontrolledDropdown>
+                  </div>
+                ) : (
+                  ""
+                )}
+                {"  "}
               </div>
-            </Colxx>
-          </Row>
-          <CardHeader className="pl-0 pr-0 bg-white">
-            <Nav tabs className="card-header-tabs  ml-0 mr-0">
-              <NavItem className="w-25 text-center">
-                <NavLink
-                  className={classnames({
-                    active: this.state.activeFirstTab === "1",
-                    "nav-link": true
-                  })}
-                  to="#"
-                  onClick={() => this.toggleFirstTab("1")}
-                >
-                  Property Details
+            </div>
+          </Colxx>
+        </Row>
+        <CardHeader className="pl-0 pr-0 bg-white">
+          <Nav tabs className="card-header-tabs  ml-0 mr-0">
+            <NavItem className="w-25 text-center">
+              <NavLink
+                className={classnames({
+                  active: this.state.activeFirstTab === "1",
+                  "nav-link": true
+                })}
+                to="#"
+                onClick={() => this.toggleFirstTab("1")}
+              >
+                Property Details
               </NavLink>
-              </NavItem>
-              <NavItem className="w-25 text-center">
-                <NavLink
-                  className={classnames({
-                    active: this.state.activeFirstTab === "2",
-                    "nav-link": true
-                  })}
-                  to="#"
-                  onClick={() => this.toggleFirstTab("2")}
-                >
-                  Lien Info
+            </NavItem>
+            <NavItem className="w-25 text-center">
+              <NavLink
+                className={classnames({
+                  active: this.state.activeFirstTab === "2",
+                  "nav-link": true
+                })}
+                to="#"
+                onClick={() => this.toggleFirstTab("2")}
+              >
+                Lien Info
               </NavLink>
-              </NavItem>
-              <NavItem className="w-25 text-center">
-                <NavLink
-                  className={classnames({
-                    active: this.state.activeFirstTab === "3",
-                    "nav-link": true
-                  })}
-                  to="#"
-                  onClick={() => this.toggleFirstTab("3")}
-                >
-                  Assessee
+            </NavItem>
+            <NavItem className="w-25 text-center">
+              <NavLink
+                className={classnames({
+                  active: this.state.activeFirstTab === "3",
+                  "nav-link": true
+                })}
+                to="#"
+                onClick={() => this.toggleFirstTab("3")}
+              >
+                Assessee
               </NavLink>
-              </NavItem>
-              <NavItem className="w-25 text-center">
-                <NavLink
-                  className={classnames({
-                    active: this.state.activeFirstTab === "4",
-                    "nav-link": true
-                  })}
-                  to="#"
-                  onClick={() => this.toggleFirstTab("4")}
-                >
-                  Dates
+            </NavItem>
+            <NavItem className="w-25 text-center">
+              <NavLink
+                className={classnames({
+                  active: this.state.activeFirstTab === "4",
+                  "nav-link": true
+                })}
+                to="#"
+                onClick={() => this.toggleFirstTab("4")}
+              >
+                Dates
               </NavLink>
-              </NavItem>
-            </Nav>
-          </CardHeader>
+            </NavItem>
+          </Nav>
+        </CardHeader>
 
-          <TabContent activeTab={this.state.activeFirstTab}>
-            <TabPane tabId="1">
-              <Row>
-                <Colxx sm="12">
-                  <CardBody>
-                    <Formik
-                      initialValues={{
-                        pin: pdprops.propertyDetails.pin,
-                        county: pdprops.propertyDetails.county,
-                        address: pdprops.propertyDetails.address,
-                        city: pdprops.propertyDetails.city,
-                        state: pdprops.propertyDetails.state,
-                        zip: pdprops.propertyDetails.zip,
-                        township: pdprops.propertyDetails.township,
-                        classCode: pdprops.propertyDetails.classCode,
-                        assessedValue: pdprops.propertyDetails.assessedValue,
-                        marketValue: pdprops.propertyDetails.marketValue,
-                        taxesPerYear: pdprops.propertyDetails.taxesPerYear,
-                        preeqexm: pdprops.propertyDetails.preeqexm,
-                        homeOwner: pdprops.propertyDetails.homeOwner,
-                        seniorExemption: pdprops.propertyDetails.seniorExemption,
-                        seniorFreeze: pdprops.propertyDetails.seniorFreeze,
-                        totalAcres: pdprops.propertyDetails.totalAcres,
-                        legalDescription:
-                          pdprops.propertyDetails.legalDescription,
-                        googleMapView: pdprops.propertyDetails.googleMapView
-                      }}
-                      validationSchema={propertyDetailsSchema}
-                      onSubmit={values => {
-                        if (pdprops.formType == FORM_ADD) {
-                          this.props.loader();
-                          apiCallCreator.addPropertyDetails(
-                            values,
-                            this.props.addNewProperty
-                          );
-                          this.toggleFirstTab("2");
-                        }
-                        if (pdprops.formType == FORM_EDIT) {
-                          apiCallCreator.editPropertyDetails(
-                            values,
-                            pdprops.id,
-                            pdprops.propertyNumber
-                          );
-                          this.toggleFirstTab("2");
-                        }
+        <TabContent activeTab={this.state.activeFirstTab}>
+          <TabPane tabId="1">
+            <Row>
+              <Colxx sm="12">
+                <CardBody>
+                  <Formik
+                    initialValues={{
+                      pin: pdprops.propertyDetails.pin,
+                      county: pdprops.propertyDetails.county,
+                      address: pdprops.propertyDetails.address,
+                      city: pdprops.propertyDetails.city,
+                      state: pdprops.propertyDetails.state,
+                      zip: pdprops.propertyDetails.zip,
+                      township: pdprops.propertyDetails.township,
+                      classCode: pdprops.propertyDetails.classCode,
+                      assessedValue: pdprops.propertyDetails.assessedValue,
+                      marketValue: pdprops.propertyDetails.marketValue,
+                      taxesPerYear: pdprops.propertyDetails.taxesPerYear,
+                      preeqexm: pdprops.propertyDetails.preeqexm,
+                      homeOwner: pdprops.propertyDetails.homeOwner,
+                      seniorExemption: pdprops.propertyDetails.seniorExemption,
+                      seniorFreeze: pdprops.propertyDetails.seniorFreeze,
+                      totalAcres: pdprops.propertyDetails.totalAcres,
+                      legalDescription:
+                        pdprops.propertyDetails.legalDescription,
+                      googleMapView: pdprops.propertyDetails.googleMapView
+                    }}
+                    validationSchema={propertyDetailsSchema}
+                    onSubmit={values => {
+                      if (pdprops.formType == FORM_ADD) {
+                        this.props.loader();
+                        apiCallCreator.addPropertyDetails(
+                          values,
+                          this.props.addNewProperty
+                        );
                         this.toggleFirstTab("2");
-                      }}
-                    >
-                      {({ errors, touched }) => (
-                        <Form>
-                          <Row>
-                            {this.fieldMapper(
-                              this.state.propertyDetailMap,
-                              errors,
-                              touched,
-                              pdprops.fieldDisable
-                            )}
-                          </Row>
-                          {pdprops.formType === FORM_ADD ||
-                            pdprops.formType === FORM_EDIT ? (
-                              <Button
-                                className="btn-block"
-                                type="submit"
-                                size="sm"
-                                color="primary"
-                              >
-                                Next
+                      }
+                      if (pdprops.formType == FORM_EDIT) {
+                        apiCallCreator.editPropertyDetails(
+                          values,
+                          pdprops.id,
+                          pdprops.propertyNumber
+                        );
+                        this.toggleFirstTab("2");
+                      }
+                      this.toggleFirstTab("2");
+                    }}
+                  >
+                    {({ errors, touched }) => (
+                      <Form>
+                        <Row>
+                          {this.fieldMapper(
+                            this.state.propertyDetailMap,
+                            errors,
+                            touched,
+                            pdprops.fieldDisable
+                          )}
+                        </Row>
+                        {pdprops.formType === FORM_ADD ||
+                        pdprops.formType === FORM_EDIT ? (
+                          <Button
+                            className="btn-block"
+                            type="submit"
+                            size="sm"
+                            color="primary"
+                          >
+                            Next
                           </Button>
-                            ) : (
-                              <Button
-                                className="btn-block"
-                                color="secondary"
-                                size="sm"
-                                onClick={() => this.toggleFirstTab("2")}
-                              >
-                                <IntlMessages id="property.next" />
-                              </Button>
-                            )}
-                        </Form>
-                      )}
-                    </Formik>
-                  </CardBody>
-                </Colxx>
-              </Row>
-            </TabPane>
-            <TabPane tabId="2">
-              <Row>
-                <Colxx sm="12">
-                  <CardBody>
-                    <Formik
-                      initialValues={{
-                        propertyNumber: pdprops.propertyNumber,
-                        creditor: pdprops.lienDetails.creditor,
-                        amount: pdprops.lienDetails.amount,
-                        paymentAmount: pdprops.lienDetails.paymentAmount
-                      }}
-                      validationSchema={lienSchema}
-                      onSubmit={values => {
-                        if (pdprops.formType == FORM_ADD) {
-                          this.toggleFirstTab("3");
-                          apiCallCreator.addLien(values, this.props.addNewLien);
-                        }
-                        if (pdprops.formType == FORM_EDIT) {
-                          apiCallCreator.editLien(
-                            values,
-                            pdprops.id,
-                            pdprops.propertyNumber
-                          );
-                          this.toggleFirstTab("3");
-                        }
+                        ) : (
+                          <Button
+                            className="btn-block"
+                            color="secondary"
+                            size="sm"
+                            onClick={() => this.toggleFirstTab("2")}
+                          >
+                            <IntlMessages id="property.next" />
+                          </Button>
+                        )}
+                      </Form>
+                    )}
+                  </Formik>
+                </CardBody>
+              </Colxx>
+            </Row>
+          </TabPane>
+          <TabPane tabId="2">
+            <Row>
+              <Colxx sm="12">
+                <CardBody>
+                  <Formik
+                    initialValues={{
+                      propertyNumber: pdprops.propertyNumber,
+                      creditor: pdprops.lienDetails.creditor,
+                      amount: pdprops.lienDetails.amount,
+                      paymentAmount: pdprops.lienDetails.paymentAmount
+                    }}
+                    validationSchema={lienSchema}
+                    onSubmit={values => {
+                      if (pdprops.formType == FORM_ADD) {
                         this.toggleFirstTab("3");
-                      }}
-                    >
-                      {({ errors, touched }) => (
-                        <Form>
-                          <Row>
-                            {this.fieldMapper(
-                              this.state.lienInfoMap,
-                              errors,
-                              touched,
-                              pdprops.fieldDisable
-                            )}
-                          </Row>
-                          {pdprops.formType === FORM_ADD ||
-                            pdprops.formType === FORM_EDIT ? (
-                              <Button
-                                className="btn-block"
-                                type="submit"
-                                size="sm"
-                                color="primary"
-                              >
-                                Next
+                        apiCallCreator.addLien(values, this.props.addNewLien);
+                      }
+                      if (pdprops.formType == FORM_EDIT) {
+                        apiCallCreator.editLien(
+                          values,
+                          pdprops.id,
+                          pdprops.propertyNumber
+                        );
+                        this.toggleFirstTab("3");
+                      }
+                      this.toggleFirstTab("3");
+                    }}
+                  >
+                    {({ errors, touched }) => (
+                      <Form>
+                        <Row>
+                          {this.fieldMapper(
+                            this.state.lienInfoMap,
+                            errors,
+                            touched,
+                            pdprops.fieldDisable
+                          )}
+                        </Row>
+                        {pdprops.formType === FORM_ADD ||
+                        pdprops.formType === FORM_EDIT ? (
+                          <Button
+                            className="btn-block"
+                            type="submit"
+                            size="sm"
+                            color="primary"
+                          >
+                            Next
                           </Button>
-                            ) : (
-                              <ButtonGroup className="m-auto d-flex">
-                                <Button
-                                  className="w-100"
-                                  color="primary"
-                                  size="sm"
-                                  onClick={() => this.toggleFirstTab("1")}
-                                >
-                                  <IntlMessages id="property.previous" />
-                                </Button>
-                                <Button
-                                  className="w-100"
-                                  color="secondary"
-                                  size="sm"
-                                  onClick={() => this.toggleFirstTab("2")}
-                                >
-                                  <IntlMessages id="property.next" />
-                                </Button>
-                              </ButtonGroup>
-                            )}
-                        </Form>
-                      )}
-                    </Formik>
-                  </CardBody>
-                </Colxx>
-              </Row>
-            </TabPane>
-            <TabPane tabId="3">
-              <Row>
-                <Colxx sm="12">
-                  <CardBody>
-                    <Formik
-                      initialValues={{
-                        propertyNumber: pdprops.propertyNumber,
-                        name: pdprops.assesseeDetails.name,
-                        street: pdprops.assesseeDetails.address,
-                        city: pdprops.assesseeDetails.city,
-                        state: pdprops.assesseeDetails.state,
-                        zip: pdprops.assesseeDetails.zip
-                      }}
-                      validationSchema={assesseeSchema}
-                      onSubmit={values => {
-                        if (pdprops.formType == FORM_ADD) {
-                          apiCallCreator.addAssessee(
-                            values,
-                            this.props.addNewAssessee
-                          );
-                          this.toggleFirstTab("4");
-                        }
-                        if (pdprops.formType == FORM_EDIT) {
-                          apiCallCreator.editAssessee(
-                            values,
-                            pdprops.id,
-                            pdprops.propertyNumber
-                          );
-                          this.toggleFirstTab("4");
-                        }
-                        this.toggleFirstTab("4");
-                      }}
-                    >
-                      {({ errors, touched }) => (
-                        <Form>
-                          <Row>
-                            {this.fieldMapper(
-                              this.state.assesseeMap,
-                              errors,
-                              touched,
-                              pdprops.fieldDisable
-                            )}
-                          </Row>
-                          {pdprops.formType === FORM_ADD ||
-                            pdprops.formType === FORM_EDIT ? (
-                              <Button
-                                className="btn-block"
-                                type="submit"
-                                size="sm"
-                                color="primary"
-                              >
-                                Next
-                          </Button>
-                            ) : (
-                              <ButtonGroup className="m-auto d-flex">
-                                <Button
-                                  className="w-100"
-                                  color="primary"
-                                  size="sm"
-                                  onClick={() => this.toggleFirstTab("2")}
-                                >
-                                  <IntlMessages id="property.previous" />
-                                </Button>
-                                <Button
-                                  className="w-100"
-                                  color="secondary"
-                                  size="sm"
-                                  onClick={() => this.toggleFirstTab("3")}
-                                >
-                                  <IntlMessages id="property.next" />
-                                </Button>
-                              </ButtonGroup>
-                            )}
-                        </Form>
-                      )}
-                    </Formik>
-                  </CardBody>
-                </Colxx>
-              </Row>
-            </TabPane>
-            <TabPane tabId="4">
-              <Row>
-                <Colxx sm="12">
-                  <CardBody>
-                    <Formik
-                      initialValues={{
-                        propertyNumber: pdprops.propertyNumber,
-                        actualEstimatedDate:
-                          pdprops.datesDetails.actualEstimatedDate,
-                        firstInstallmentDate:
-                          pdprops.datesDetails.firstInstallmentDate,
-                        secondInstallmentDate:
-                          pdprops.datesDetails.secondInstallmentDate,
-                        petitionFiledDate: pdprops.datesDetails.petitionFiledDate,
-                        extentionDate: pdprops.datesDetails.extentionDate,
-                        expirationDate: pdprops.datesDetails.expirationDate,
-                        assignmentCallDate:
-                          pdprops.datesDetails.assignmentCallDate,
-                        proveUpDate: pdprops.datesDetails.proveUpDate,
-                        orderOfDate: pdprops.datesDetails.orderOfDate,
-                        dateOfTaxDeed: pdprops.datesDetails.dateOfTaxDeed
-                      }}
-                      validationSchema={dateSchema}
-                      onSubmit={values => {
-                        if (pdprops.formType == FORM_ADD) {
-                          apiCallCreator.addImportantDate(
-                            values,
-                            this.props.addNewDates
-                          );
-                          this.setRedirect();
-                          setTimeout(this.renderRedirect(), 3000);
-                        }
-                        if (pdprops.formType == FORM_EDIT) {
-                          apiCallCreator.editImportantDate(
-                            values,
-                            pdprops.id,
-                            pdprops.propertyNumber
-                          );
-                          this.setRedirect();
-                        }
-                      }}
-                    >
-                      {({ errors, touched }) => (
-                        <Form>
-                          <Row>
-                            {this.fieldMapper(
-                              this.state.datesMap,
-                              errors,
-                              touched,
-                              pdprops.fieldDisable
-                            )}
-                          </Row>
-                          {pdprops.formType === FORM_ADD ||
-                            pdprops.formType === FORM_EDIT ? (
-                              <div>
-                                {this.renderRedirect()}
-                                <Button
-                                  className="btn-block"
-                                  type="submit"
-                                  size="sm"
-                                  color="primary"
-                                >
-                                  Submit
+                        ) : (
+                          <ButtonGroup className="m-auto d-flex">
+                            <Button
+                              className="w-100"
+                              color="primary"
+                              size="sm"
+                              onClick={() => this.toggleFirstTab("1")}
+                            >
+                              <IntlMessages id="property.previous" />
                             </Button>
-                              </div>
-                            ) : (
-                              <Button
-                                className="btn-block"
-                                color="secondary"
-                                size="sm"
-                                onClick={() => this.toggleFirstTab("3")}
-                              >
-                                <IntlMessages id="property.previous" />
-                              </Button>
-                            )}
-                        </Form>
-                      )}
-                    </Formik>
-                  </CardBody>
-                </Colxx>
-              </Row>
-            </TabPane>
-          </TabContent>
-        </div>
-      );
+                            <Button
+                              className="w-100"
+                              color="secondary"
+                              size="sm"
+                              onClick={() => this.toggleFirstTab("2")}
+                            >
+                              <IntlMessages id="property.next" />
+                            </Button>
+                          </ButtonGroup>
+                        )}
+                      </Form>
+                    )}
+                  </Formik>
+                </CardBody>
+              </Colxx>
+            </Row>
+          </TabPane>
+          <TabPane tabId="3">
+            <Row>
+              <Colxx sm="12">
+                <CardBody>
+                  <Formik
+                    initialValues={{
+                      propertyNumber: pdprops.propertyNumber,
+                      name: pdprops.assesseeDetails.name,
+                      street: pdprops.assesseeDetails.address,
+                      city: pdprops.assesseeDetails.city,
+                      state: pdprops.assesseeDetails.state,
+                      zip: pdprops.assesseeDetails.zip
+                    }}
+                    validationSchema={assesseeSchema}
+                    onSubmit={values => {
+                      if (pdprops.formType == FORM_ADD) {
+                        apiCallCreator.addAssessee(
+                          values,
+                          this.props.addNewAssessee
+                        );
+                        this.toggleFirstTab("4");
+                      }
+                      if (pdprops.formType == FORM_EDIT) {
+                        apiCallCreator.editAssessee(
+                          values,
+                          pdprops.id,
+                          pdprops.propertyNumber
+                        );
+                        this.toggleFirstTab("4");
+                      }
+                      this.toggleFirstTab("4");
+                    }}
+                  >
+                    {({ errors, touched }) => (
+                      <Form>
+                        <Row>
+                          {this.fieldMapper(
+                            this.state.assesseeMap,
+                            errors,
+                            touched,
+                            pdprops.fieldDisable
+                          )}
+                        </Row>
+                        {pdprops.formType === FORM_ADD ||
+                        pdprops.formType === FORM_EDIT ? (
+                          <Button
+                            className="btn-block"
+                            type="submit"
+                            size="sm"
+                            color="primary"
+                          >
+                            Next
+                          </Button>
+                        ) : (
+                          <ButtonGroup className="m-auto d-flex">
+                            <Button
+                              className="w-100"
+                              color="primary"
+                              size="sm"
+                              onClick={() => this.toggleFirstTab("2")}
+                            >
+                              <IntlMessages id="property.previous" />
+                            </Button>
+                            <Button
+                              className="w-100"
+                              color="secondary"
+                              size="sm"
+                              onClick={() => this.toggleFirstTab("3")}
+                            >
+                              <IntlMessages id="property.next" />
+                            </Button>
+                          </ButtonGroup>
+                        )}
+                      </Form>
+                    )}
+                  </Formik>
+                </CardBody>
+              </Colxx>
+            </Row>
+          </TabPane>
+          <TabPane tabId="4">
+            <Row>
+              <Colxx sm="12">
+                <CardBody>
+                  <Formik
+                    initialValues={{
+                      propertyNumber: pdprops.propertyNumber,
+                      actualEstimatedDate:
+                        pdprops.datesDetails.actualEstimatedDate,
+                      firstInstallmentDate:
+                        pdprops.datesDetails.firstInstallmentDate,
+                      secondInstallmentDate:
+                        pdprops.datesDetails.secondInstallmentDate,
+                      petitionFiledDate: pdprops.datesDetails.petitionFiledDate,
+                      extentionDate: pdprops.datesDetails.extentionDate,
+                      expirationDate: pdprops.datesDetails.expirationDate,
+                      assignmentCallDate:
+                        pdprops.datesDetails.assignmentCallDate,
+                      proveUpDate: pdprops.datesDetails.proveUpDate,
+                      orderOfDate: pdprops.datesDetails.orderOfDate,
+                      dateOfTaxDeed: pdprops.datesDetails.dateOfTaxDeed
+                    }}
+                    validationSchema={dateSchema}
+                    onSubmit={values => {
+                      if (pdprops.formType == FORM_ADD) {
+                        apiCallCreator.addImportantDate(
+                          values,
+                          this.props.addNewDates
+                        );
+                        this.setRedirect();
+                        setTimeout(this.renderRedirect(), 3000);
+                      }
+                      if (pdprops.formType == FORM_EDIT) {
+                        apiCallCreator.editImportantDate(
+                          values,
+                          pdprops.id,
+                          pdprops.propertyNumber
+                        );
+                        this.setRedirect();
+                      }
+                    }}
+                  >
+                    {({ errors, touched }) => (
+                      <Form>
+                        <Row>
+                          {this.fieldMapper(
+                            this.state.datesMap,
+                            errors,
+                            touched,
+                            pdprops.fieldDisable
+                          )}
+                        </Row>
+                        {pdprops.formType === FORM_ADD ||
+                        pdprops.formType === FORM_EDIT ? (
+                          <div>
+                            {this.renderRedirect()}
+                            <Button
+                              className="btn-block"
+                              type="submit"
+                              size="sm"
+                              color="primary"
+                            >
+                              Submit
+                            </Button>
+                          </div>
+                        ) : (
+                          <Button
+                            className="btn-block"
+                            color="secondary"
+                            size="sm"
+                            onClick={() => this.toggleFirstTab("3")}
+                          >
+                            <IntlMessages id="property.previous" />
+                          </Button>
+                        )}
+                      </Form>
+                    )}
+                  </Formik>
+                </CardBody>
+              </Colxx>
+            </Row>
+          </TabPane>
+        </TabContent>
+      </div>
+    );
   }
 
   renderRedirect = () => {
@@ -507,7 +507,7 @@ class DetailsForm extends Component {
       selectedDates: {},
 
       countySpecial: [
-        { name: "county", size: 4, type: "text", text: "property." },
+        { name: "county", size: 4, type: "text", text: "property." }
       ],
 
       propertyDetailMap: [
@@ -572,8 +572,10 @@ class DetailsForm extends Component {
 
   fieldMapper = (arr, errors, touched, fieldStatus) => {
     return arr.map((e, i) => {
-      if (e.name == "county") {
-        console.log("Loggeddd")
+      if (
+        this.props.propertyDetails.formType == FORM_ADD &&
+        e.name == "county"
+      ) {
         return (
           <Colxx key={i} xxs={e.size}>
             <FormGroup
@@ -583,7 +585,9 @@ class DetailsForm extends Component {
               }
             >
               <Label
-                className={errors[e.name] && touched[e.name] ? "text-danger" : ""}
+                className={
+                  errors[e.name] && touched[e.name] ? "text-danger" : ""
+                }
               >
                 <IntlMessages id={e.text + e.name} />
               </Label>
@@ -602,13 +606,12 @@ class DetailsForm extends Component {
               {errors[e.name] && touched[e.name] ? (
                 <small className="text-danger">{errors[e.name]}</small>
               ) : (
-                  ""
-                )}
+                ""
+              )}
             </FormGroup>
           </Colxx>
         );
-      }
-      else {
+      } else {
         return (
           <Colxx key={i} xxs={e.size}>
             <FormGroup
@@ -618,7 +621,9 @@ class DetailsForm extends Component {
               }
             >
               <Label
-                className={errors[e.name] && touched[e.name] ? "text-danger" : ""}
+                className={
+                  errors[e.name] && touched[e.name] ? "text-danger" : ""
+                }
               >
                 <IntlMessages id={e.text + e.name} />
               </Label>
@@ -634,8 +639,8 @@ class DetailsForm extends Component {
               {errors[e.name] && touched[e.name] ? (
                 <small className="text-danger">{errors[e.name]}</small>
               ) : (
-                  ""
-                )}
+                ""
+              )}
             </FormGroup>
           </Colxx>
         );
@@ -712,7 +717,6 @@ export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(DetailsForm);
-
 
 const countyJson = [
   {
@@ -1021,4 +1025,4 @@ const countyJson = [
   {
     propertyNumber: "woodford"
   }
-]
+];
