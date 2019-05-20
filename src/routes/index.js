@@ -5,13 +5,9 @@ import TopNav from "Containers/TopNav";
 import Sidebar from "Containers/Sidebar";
 
 import dashboards from "./dashboards";
-import pages from "./pages";
-import applications from "./applications";
-import ui from "./ui";
 import propertyDetails from "./propertyDetails";
-import datesDetails from "./dates";
 import modalUi from "./assessee";
-import county from './county';
+import county from "./county";
 import { connect } from "react-redux";
 
 class MainApp extends Component {
@@ -24,18 +20,11 @@ class MainApp extends Component {
         <main>
           <div className="container-fluid">
             <Switch>
-              <Route
-                path={`${match.url}/applications`}
-                component={applications}
-              />
               <Route path={`${match.url}/dashboards`} component={dashboards} />
-              <Route path={`${match.url}/pages`} component={pages} />
-              <Route path={`${match.url}/ui`} component={ui} />
               <Route
                 path={`${match.url}/propertyDetails`}
                 component={propertyDetails}
               />
-              <Route path={`${match.url}/dates`} component={datesDetails} />
               <Route path={`${match.url}/assessee`} component={modalUi} />
               <Route path={`${match.url}/county`} component={county} />
               <Redirect to="/error" />

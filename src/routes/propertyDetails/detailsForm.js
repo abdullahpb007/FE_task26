@@ -3,6 +3,7 @@ import { Formik, Form, Field } from "formik";
 import {
   Row,
   Button,
+  ButtonGroup,
   CardBody,
   CardHeader,
   UncontrolledDropdown,
@@ -25,6 +26,8 @@ import * as Yup from "yup";
 import IntlMessages from "Util/IntlMessages";
 import { Colxx } from "Components/CustomBootstrap";
 
+import { Redirect } from "react-router-dom";
+
 import { connect } from "react-redux";
 import * as apiCallCreator from "Redux/propertyDetails/_axios";
 import * as actionCreator from "Redux/propertyDetails/actions";
@@ -32,63 +35,74 @@ import { FORM_ADD, FORM_VIEW, FORM_EDIT } from "Constants/actionTypes";
 
 class DetailsForm extends Component {
   componentWillMount() {
-    apiCallCreator.getDetails(
-      this.props.propertyDetails.id,
-      this.props.propertyDetails.propertyNumber
-    );
+    if (
+      this.props.propertyDetails.formType == FORM_VIEW ||
+      this.props.propertyDetails.formType == FORM_EDIT
+    ) {
+      console.log(
+        this.props.propertyDetails.id,
+        this.props.propertyDetails.propertyNumber
+      );
+      apiCallCreator.getDetails(
+        this.props.propertyDetails.id,
+        this.props.propertyDetails.propertyNumber,
+        this.props.singleRecordData
+      );
+    }
   }
 
   render() {
     const pdprops = this.props.propertyDetails;
-    const selectedProperty = pdprops.propertyDetails;
-    const selectedLien = pdprops.lienDetails;
-    const selectedAssessee = pdprops.assesseeDetails;
-    const selectedDates = pdprops.datesDetails;
     console.log(this.props);
-    return (
+    return pdprops.loading == true ? (
+      <div className="loading" />
+    ) : (
       <div>
         <Row>
           <Colxx xxs="12">
             <div className="mb-2">
               <h1>
-                <IntlMessages id="property.propertyNumber" />
-                {pdprops.propertyNumber != null
-                  ? " : " + pdprops.propertyNumber
-                  : ""}
+                {pdprops.propertyNumber != ""
+                  ? "Property Number : " + pdprops.propertyNumber
+                  : "ADD NEW"}
               </h1>
 
               <div className="float-sm-right">
-                <div>
-                  <UncontrolledDropdown>
-                    <DropdownToggle
-                      caret
-                      color="primary"
-                      size="lg"
-                      outline
-                      className="top-right-button top-right-button-single"
-                    >
-                      <IntlMessages id="pages.actions" />
-                    </DropdownToggle>
-                    <DropdownMenu>
-                      <DropdownItem
-                        onClick={() => this.props.changeFormType(FORM_VIEW)}
+                {pdprops.formType != FORM_ADD ? (
+                  <div>
+                    <UncontrolledDropdown>
+                      <DropdownToggle
+                        caret
+                        color="primary"
+                        size="lg"
+                        outline
+                        className="top-right-button top-right-button-single"
                       >
-                        <IntlMessages id="property.viewDetails" />
-                      </DropdownItem>
-                      <DropdownItem
-                        onClick={() => this.props.changeFormType(FORM_EDIT)}
-                      >
-                        <IntlMessages id="property.editDetails" />
-                      </DropdownItem>
-                    </DropdownMenu>
-                  </UncontrolledDropdown>
-                </div>
+                        <IntlMessages id="pages.actions" />
+                      </DropdownToggle>
+                      <DropdownMenu>
+                        <DropdownItem
+                          onClick={() => this.props.changeFormType(FORM_VIEW)}
+                        >
+                          <IntlMessages id="property.viewDetails" />
+                        </DropdownItem>
+                        <DropdownItem
+                          onClick={() => this.props.changeFormType(FORM_EDIT)}
+                        >
+                          <IntlMessages id="property.editDetails" />
+                        </DropdownItem>
+                      </DropdownMenu>
+                    </UncontrolledDropdown>
+                  </div>
+                ) : (
+                  ""
+                )}
                 {"  "}
               </div>
             </div>
           </Colxx>
         </Row>
-        <CardHeader className="pl-0 pr-0 bg-info">
+        <CardHeader className="pl-0 pr-0 bg-white">
           <Nav tabs className="card-header-tabs  ml-0 mr-0">
             <NavItem className="w-25 text-center">
               <NavLink
@@ -97,6 +111,7 @@ class DetailsForm extends Component {
                   "nav-link": true
                 })}
                 to="#"
+                onClick={() => this.toggleFirstTab("1")}
               >
                 Property Details
               </NavLink>
@@ -108,6 +123,7 @@ class DetailsForm extends Component {
                   "nav-link": true
                 })}
                 to="#"
+                onClick={() => this.toggleFirstTab("2")}
               >
                 Lien Info
               </NavLink>
@@ -119,6 +135,7 @@ class DetailsForm extends Component {
                   "nav-link": true
                 })}
                 to="#"
+                onClick={() => this.toggleFirstTab("3")}
               >
                 Assessee
               </NavLink>
@@ -130,6 +147,7 @@ class DetailsForm extends Component {
                   "nav-link": true
                 })}
                 to="#"
+                onClick={() => this.toggleFirstTab("4")}
               >
                 Dates
               </NavLink>
@@ -144,32 +162,44 @@ class DetailsForm extends Component {
                 <CardBody>
                   <Formik
                     initialValues={{
-                      pin: selectedProperty.pin,
-                      county: selectedProperty.county,
-                      pin: selectedProperty.pin,
-                      street: selectedProperty.street,
-                      city: selectedProperty.city,
-                      state: selectedProperty.state,
-                      zip: selectedProperty.zip,
-                      township: selectedProperty.township,
-                      classCode: selectedProperty.classCode,
-                      assessedValue: selectedProperty.assessedValue,
-                      marketValue: selectedProperty.marketValue,
-                      taxesPerYear: selectedProperty.taxesPerYear,
-                      preeqexm: selectedProperty.preeqexm,
-                      homeOwner: selectedProperty.homeOwner,
-                      seniorExemption: selectedProperty.seniorExemption,
-                      seniorFreeze: selectedProperty.seniorFreeze,
-                      totalAcres: selectedProperty.totalAcres,
-                      legalDescription: selectedProperty.legalDescription,
-                      googleMapView: selectedProperty.googleMapView
+                      pin: pdprops.propertyDetails.pin,
+                      county: pdprops.propertyDetails.county,
+                      address: pdprops.propertyDetails.address,
+                      city: pdprops.propertyDetails.city,
+                      state: pdprops.propertyDetails.state,
+                      zip: pdprops.propertyDetails.zip,
+                      township: pdprops.propertyDetails.township,
+                      classCode: pdprops.propertyDetails.classCode,
+                      assessedValue: pdprops.propertyDetails.assessedValue,
+                      marketValue: pdprops.propertyDetails.marketValue,
+                      taxesPerYear: pdprops.propertyDetails.taxesPerYear,
+                      preeqexm: pdprops.propertyDetails.preeqexm,
+                      homeOwner: pdprops.propertyDetails.homeOwner,
+                      seniorExemption: pdprops.propertyDetails.seniorExemption,
+                      seniorFreeze: pdprops.propertyDetails.seniorFreeze,
+                      totalAcres: pdprops.propertyDetails.totalAcres,
+                      legalDescription:
+                        pdprops.propertyDetails.legalDescription,
+                      googleMapView: pdprops.propertyDetails.googleMapView
                     }}
                     validationSchema={propertyDetailsSchema}
                     onSubmit={values => {
-                      apiCallCreator.addPropertyDetails(
-                        values,
-                        this.props.addNewProperty
-                      );
+                      if (pdprops.formType == FORM_ADD) {
+                        this.props.loader();
+                        apiCallCreator.addPropertyDetails(
+                          values,
+                          this.props.addNewProperty
+                        );
+                        this.toggleFirstTab("2");
+                      }
+                      if (pdprops.formType == FORM_EDIT) {
+                        apiCallCreator.editPropertyDetails(
+                          values,
+                          pdprops.id,
+                          pdprops.propertyNumber
+                        );
+                        this.toggleFirstTab("2");
+                      }
                       this.toggleFirstTab("2");
                     }}
                   >
@@ -183,14 +213,26 @@ class DetailsForm extends Component {
                             pdprops.fieldDisable
                           )}
                         </Row>
-                        <Button
-                          className="btn-block"
-                          type="submit"
-                          size="sm"
-                          color="primary"
-                        >
-                          Next
-                        </Button>
+                        {pdprops.formType === FORM_ADD ||
+                        pdprops.formType === FORM_EDIT ? (
+                          <Button
+                            className="btn-block"
+                            type="submit"
+                            size="sm"
+                            color="primary"
+                          >
+                            Next
+                          </Button>
+                        ) : (
+                          <Button
+                            className="btn-block"
+                            color="secondary"
+                            size="sm"
+                            onClick={() => this.toggleFirstTab("2")}
+                          >
+                            <IntlMessages id="property.next" />
+                          </Button>
+                        )}
                       </Form>
                     )}
                   </Formik>
@@ -204,15 +246,26 @@ class DetailsForm extends Component {
                 <CardBody>
                   <Formik
                     initialValues={{
-                      propertyNumber: selectedLien.propertyNumber,
-                      creditor: selectedLien.creditor,
-                      amount: selectedLien.amount,
-                      paymentAmount: selectedLien.paymentAmount
+                      propertyNumber: pdprops.propertyNumber,
+                      creditor: pdprops.lienDetails.creditor,
+                      amount: pdprops.lienDetails.amount,
+                      paymentAmount: pdprops.lienDetails.paymentAmount
                     }}
                     validationSchema={lienSchema}
                     onSubmit={values => {
+                      if (pdprops.formType == FORM_ADD) {
+                        this.toggleFirstTab("3");
+                        apiCallCreator.addLien(values, this.props.addNewLien);
+                      }
+                      if (pdprops.formType == FORM_EDIT) {
+                        apiCallCreator.editLien(
+                          values,
+                          pdprops.id,
+                          pdprops.propertyNumber
+                        );
+                        this.toggleFirstTab("3");
+                      }
                       this.toggleFirstTab("3");
-                      apiCallCreator.addLien(values, this.props.addNewLien);
                     }}
                   >
                     {({ errors, touched }) => (
@@ -225,14 +278,36 @@ class DetailsForm extends Component {
                             pdprops.fieldDisable
                           )}
                         </Row>
-                        <Button
-                          className="btn-block"
-                          type="submit"
-                          size="sm"
-                          color="primary"
-                        >
-                          Next
-                        </Button>
+                        {pdprops.formType === FORM_ADD ||
+                        pdprops.formType === FORM_EDIT ? (
+                          <Button
+                            className="btn-block"
+                            type="submit"
+                            size="sm"
+                            color="primary"
+                          >
+                            Next
+                          </Button>
+                        ) : (
+                          <ButtonGroup className="m-auto d-flex">
+                            <Button
+                              className="w-100"
+                              color="primary"
+                              size="sm"
+                              onClick={() => this.toggleFirstTab("1")}
+                            >
+                              <IntlMessages id="property.previous" />
+                            </Button>
+                            <Button
+                              className="w-100"
+                              color="secondary"
+                              size="sm"
+                              onClick={() => this.toggleFirstTab("2")}
+                            >
+                              <IntlMessages id="property.next" />
+                            </Button>
+                          </ButtonGroup>
+                        )}
                       </Form>
                     )}
                   </Formik>
@@ -246,19 +321,30 @@ class DetailsForm extends Component {
                 <CardBody>
                   <Formik
                     initialValues={{
-                      propertyNumber: selectedAssessee.propertyNumber,
-                      name: selectedAssessee.name,
-                      address: selectedAssessee.address,
-                      city: selectedAssessee.city,
-                      state: selectedAssessee.state,
-                      zip: selectedAssessee.zip
+                      propertyNumber: pdprops.propertyNumber,
+                      name: pdprops.assesseeDetails.name,
+                      street: pdprops.assesseeDetails.address,
+                      city: pdprops.assesseeDetails.city,
+                      state: pdprops.assesseeDetails.state,
+                      zip: pdprops.assesseeDetails.zip
                     }}
                     validationSchema={assesseeSchema}
                     onSubmit={values => {
-                      apiCallCreator.addAssessee(
-                        values,
-                        this.props.addNewAssessee
-                      );
+                      if (pdprops.formType == FORM_ADD) {
+                        apiCallCreator.addAssessee(
+                          values,
+                          this.props.addNewAssessee
+                        );
+                        this.toggleFirstTab("4");
+                      }
+                      if (pdprops.formType == FORM_EDIT) {
+                        apiCallCreator.editAssessee(
+                          values,
+                          pdprops.id,
+                          pdprops.propertyNumber
+                        );
+                        this.toggleFirstTab("4");
+                      }
                       this.toggleFirstTab("4");
                     }}
                   >
@@ -272,14 +358,36 @@ class DetailsForm extends Component {
                             pdprops.fieldDisable
                           )}
                         </Row>
-                        <Button
-                          className="btn-block"
-                          type="submit"
-                          size="sm"
-                          color="primary"
-                        >
-                          Submit
-                        </Button>
+                        {pdprops.formType === FORM_ADD ||
+                        pdprops.formType === FORM_EDIT ? (
+                          <Button
+                            className="btn-block"
+                            type="submit"
+                            size="sm"
+                            color="primary"
+                          >
+                            Next
+                          </Button>
+                        ) : (
+                          <ButtonGroup className="m-auto d-flex">
+                            <Button
+                              className="w-100"
+                              color="primary"
+                              size="sm"
+                              onClick={() => this.toggleFirstTab("2")}
+                            >
+                              <IntlMessages id="property.previous" />
+                            </Button>
+                            <Button
+                              className="w-100"
+                              color="secondary"
+                              size="sm"
+                              onClick={() => this.toggleFirstTab("3")}
+                            >
+                              <IntlMessages id="property.next" />
+                            </Button>
+                          </ButtonGroup>
+                        )}
                       </Form>
                     )}
                   </Formik>
@@ -293,25 +401,40 @@ class DetailsForm extends Component {
                 <CardBody>
                   <Formik
                     initialValues={{
-                      propertyNumber: selectedDates.propertyNumber,
-                      actualEstimatedDate: selectedDates.actualEstimatedDate,
-                      firstInstallmentDate: selectedDates.firstInstallmentDate,
+                      propertyNumber: pdprops.propertyNumber,
+                      actualEstimatedDate:
+                        pdprops.datesDetails.actualEstimatedDate,
+                      firstInstallmentDate:
+                        pdprops.datesDetails.firstInstallmentDate,
                       secondInstallmentDate:
-                        selectedDates.secondInstallmentDate,
-                      petitionFiledDate: selectedDates.petitionFiledDate,
-                      extentionDate: selectedDates.extentionDate,
-                      expirationDate: selectedDates.expirationDate,
-                      assignmentCallDate: selectedDates.assignmentCallDate,
-                      proveUpDate: selectedDates.proveUpDate,
-                      orderOfDate: selectedDates.orderOfDate,
-                      dateOfTaxDeed: selectedDates.dateOfTaxDeed
+                        pdprops.datesDetails.secondInstallmentDate,
+                      petitionFiledDate: pdprops.datesDetails.petitionFiledDate,
+                      extentionDate: pdprops.datesDetails.extentionDate,
+                      expirationDate: pdprops.datesDetails.expirationDate,
+                      assignmentCallDate:
+                        pdprops.datesDetails.assignmentCallDate,
+                      proveUpDate: pdprops.datesDetails.proveUpDate,
+                      orderOfDate: pdprops.datesDetails.orderOfDate,
+                      dateOfTaxDeed: pdprops.datesDetails.dateOfTaxDeed
                     }}
                     validationSchema={dateSchema}
                     onSubmit={values => {
-                      apiCallCreator.addImportantDate(
-                        values,
-                        this.props.addNewDates
-                      );
+                      if (pdprops.formType == FORM_ADD) {
+                        apiCallCreator.addImportantDate(
+                          values,
+                          this.props.addNewDates
+                        );
+                        this.setRedirect();
+                        setTimeout(this.renderRedirect(), 3000);
+                      }
+                      if (pdprops.formType == FORM_EDIT) {
+                        apiCallCreator.editImportantDate(
+                          values,
+                          pdprops.id,
+                          pdprops.propertyNumber
+                        );
+                        this.setRedirect();
+                      }
                     }}
                   >
                     {({ errors, touched }) => (
@@ -324,14 +447,29 @@ class DetailsForm extends Component {
                             pdprops.fieldDisable
                           )}
                         </Row>
-                        <Button
-                          className="btn-block"
-                          type="submit"
-                          size="sm"
-                          color="primary"
-                        >
-                          Next
-                        </Button>
+                        {pdprops.formType === FORM_ADD ||
+                        pdprops.formType === FORM_EDIT ? (
+                          <div>
+                            {this.renderRedirect()}
+                            <Button
+                              className="btn-block"
+                              type="submit"
+                              size="sm"
+                              color="primary"
+                            >
+                              Submit
+                            </Button>
+                          </div>
+                        ) : (
+                          <Button
+                            className="btn-block"
+                            color="secondary"
+                            size="sm"
+                            onClick={() => this.toggleFirstTab("3")}
+                          >
+                            <IntlMessages id="property.previous" />
+                          </Button>
+                        )}
                       </Form>
                     )}
                   </Formik>
@@ -344,9 +482,22 @@ class DetailsForm extends Component {
     );
   }
 
+  renderRedirect = () => {
+    if (this.state.redirect) {
+      return <Redirect push to="/app/propertyDetails/details" />;
+    }
+  };
+
+  setRedirect = () => {
+    this.setState({
+      redirect: true
+    });
+  };
+
   constructor(props) {
     super(props);
     this.state = {
+      redirect: false,
       activeFirstTab: "1",
 
       selectedProperty: {},
@@ -356,7 +507,7 @@ class DetailsForm extends Component {
 
       propertyDetailMap: [
         { name: "pin", size: 4, type: "text", text: "property." },
-        { name: "street", size: 4, type: "text", text: "property." },
+        { name: "address", size: 4, type: "text", text: "property." },
         { name: "city", size: 4, type: "text", text: "property." },
         { name: "county", size: 4, type: "text", text: "property." },
         { name: "state", size: 4, type: "text", text: "property." },
@@ -381,7 +532,7 @@ class DetailsForm extends Component {
       ],
       assesseeMap: [
         { name: "name", size: 4, type: "text", text: "assessee." },
-        { name: "address", size: 4, type: "text", text: "assessee." },
+        { name: "street", size: 4, type: "text", text: "assessee." },
         { name: "city", size: 4, type: "text", text: "assessee." },
         { name: "state", size: 4, type: "text", text: "assessee." },
         { name: "zip", size: 4, type: "number", text: "assessee." }
@@ -406,13 +557,13 @@ class DetailsForm extends Component {
     };
   }
 
-  toggleFirstTab = tab => {
+  toggleFirstTab(tab) {
     if (this.state.activeTab !== tab) {
       this.setState({
         activeFirstTab: tab
       });
     }
-  };
+  }
 
   fieldMapper = (arr, errors, touched, fieldStatus) => {
     return arr.map((e, i) => {
@@ -453,7 +604,7 @@ class DetailsForm extends Component {
 const propertyDetailsSchema = Yup.object().shape({
   county: Yup.string().required("Required"),
   pin: Yup.string().required("Required"),
-  street: Yup.string().required("Required"),
+  address: Yup.string().required("Required"),
   city: Yup.string().required("Required"),
   state: Yup.string().required("Required"),
   zip: Yup.number().required("Required"),
@@ -479,7 +630,7 @@ const lienSchema = Yup.object().shape({
 
 const assesseeSchema = Yup.object().shape({
   name: Yup.string().required("Required"),
-  address: Yup.string().required("Required"),
+  street: Yup.string().required("Required"),
   city: Yup.string().required("Required"),
   state: Yup.string().required("Required"),
   zip: Yup.number().required("Required")
@@ -508,7 +659,9 @@ const mapDispatchToProps = dispatch => {
     addNewAssessee: () => dispatch(actionCreator.AddNewAssessee()),
     addNewLien: () => dispatch(actionCreator.AddNewLien()),
     addNewDates: () => dispatch(actionCreator.AddNewImportantDates()),
-    changeFormType: val => dispatch(actionCreator.ChangeFormType(val))
+    changeFormType: val => dispatch(actionCreator.ChangeFormType(val)),
+    singleRecordData: val => dispatch(actionCreator.SingleRecordData(val)),
+    loader: () => dispatch(actionCreator.LoaderState())
   };
 };
 

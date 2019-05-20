@@ -9,8 +9,16 @@ import {
   FORM_EDIT,
   SELECTED_DATA,
   GET_PROPERTY_DATA,
-  SINGLE_RECORD
+  SINGLE_RECORD,
+  LOADER_STATE,
+  VIEW_SELECTED_DATA
 } from "Constants/actionTypes";
+
+export const LoaderState = () => {
+  return {
+    type: LOADER_STATE
+  };
+};
 
 /********** ADD NEW ACTIONS **********/
 export const GetPropertyData = data => {
@@ -69,6 +77,6 @@ export const SelectedData = payload => {
 export const SingleRecordData = payload => {
   return {
     type: SINGLE_RECORD,
-    payload: payload.data
+    payload: payload
   };
 };

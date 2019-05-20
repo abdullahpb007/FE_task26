@@ -9,12 +9,15 @@ import {
   FORM_EDIT,
   SELECTED_DATA,
   GET_PROPERTY_DATA,
-  SINGLE_RECORD
+  SINGLE_RECORD,
+  LOADER_STATE,
+  VIEW_SELECTED_DATA
 } from "Constants/actionTypes";
 
 const INIT_STATE = {
   propertyResponse: "",
   propertyNumber: "",
+  loading: false,
   id: "",
   propertyData: [],
   formType: FORM_ADD,
@@ -31,7 +34,6 @@ const INIT_STATE = {
     assessedValue: "",
     marketValue: "",
     taxesPerYear: "",
-    propertyNumber: "",
     preeqexm: "",
     homeOwner: "",
     seniorExemption: "",
@@ -40,6 +42,7 @@ const INIT_STATE = {
     legalDescription: ""
   },
   lienDetails: {
+    propertyNumber: "",
     creditor: "",
     amount: "",
     paymentAmount: ""
@@ -71,6 +74,7 @@ export default (state = INIT_STATE, action) => {
   switch (action.type) {
     case ADD_PROPERTY_DETAILS:
       return Object.assign({}, state, {
+        loading: false,
         propertyResponse: action.payload,
         propertyNumber: action.payload.propertyNumber
       });
@@ -88,7 +92,11 @@ export default (state = INIT_STATE, action) => {
       if (action.payload.formType == FORM_ADD) {
         return Object.assign({}, state, {
           propertyNumber: INIT_STATE.propertyNumber,
-          selectedData: INIT_STATE.selectedData,
+          id: INIT_STATE.id,
+          propertyDetails: INIT_STATE.propertyDetails,
+          lienDetails: INIT_STATE.lienDetails,
+          assesseeDetails: INIT_STATE.assesseeDetails,
+          datesDetails: INIT_STATE.datesDetails,
           formType: INIT_STATE.formType,
           fieldDisable: INIT_STATE.fieldDisable
         });
@@ -112,7 +120,16 @@ export default (state = INIT_STATE, action) => {
 
     case SINGLE_RECORD:
       return Object.assign({}, state, {
-        propertyDetails: action.payload
+        loading: false,
+        propertyDetails: action.payload[0].data,
+        lienDetails: action.payload[1].data,
+        assesseeDetails: action.payload[2].data,
+        datesDetails: action.payload[3].data
+      });
+
+    case LOADER_STATE:
+      return Object.assign({}, state, {
+        loading: true
       });
 
     default:
