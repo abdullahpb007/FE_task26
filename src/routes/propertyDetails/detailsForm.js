@@ -40,10 +40,6 @@ class DetailsForm extends Component {
       this.props.propertyDetails.formType == FORM_VIEW ||
       this.props.propertyDetails.formType == FORM_EDIT
     ) {
-      console.log(
-        this.props.propertyDetails.id,
-        this.props.propertyDetails.propertyNumber
-      );
       apiCallCreator.getDetails(
         this.props.propertyDetails.id,
         this.props.propertyDetails.propertyNumber,
@@ -54,7 +50,6 @@ class DetailsForm extends Component {
 
   render() {
     const pdprops = this.props.propertyDetails;
-    console.log("pdprops" + this.pdprops);
     return pdprops.loading == true ? (
       <div className="loading" />
     ) : (
