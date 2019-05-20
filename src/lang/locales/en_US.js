@@ -60,7 +60,7 @@ module.exports = {
   "property.propertyNumber": "Property Number",
   "property.county": "County",
   "property.pin": "Pin",
-  "property.street": "Street",
+  "property.address": "Address",
   "property.city": "City",
   "property.state": "State",
   "property.zip": "Zip",
@@ -85,6 +85,8 @@ module.exports = {
   "property.editDetails": "Edit Details",
   "property.viewDetails": "View Details",
   "property.addNew": "Add New",
+  "property.previous": "Previous",
+  "property.next": "Next",
 
   /* Lien Information */
   "lien.add-modal-title": "Add New Lien",
@@ -156,6 +158,7 @@ module.exports = {
   "assessee.edit": "Edit",
   "assessee.name": "Name",
   "assessee.address": "Address",
+  "assessee.street": "Street",
   "assessee.city": "City",
   "assessee.state": "State",
   "assessee.zip": "Zip",

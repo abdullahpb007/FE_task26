@@ -26,6 +26,7 @@ class PropertyGrid extends Component {
 
   setEditRedirect = val => {
     this.props.changeFormType(FORM_EDIT);
+    this.props.loader();
     this.props.selectProperty(val);
     this.setState({
       redirect: true
@@ -34,6 +35,7 @@ class PropertyGrid extends Component {
 
   setViewRedirect = val => {
     this.props.changeFormType(FORM_VIEW);
+    this.props.loader();
     this.props.selectProperty(val);
     this.setState({
       redirect: true
@@ -53,8 +55,8 @@ class PropertyGrid extends Component {
         }
       },
       {
-        Header: "Street",
-        accessor: "street",
+        Header: "Address",
+        accessor: "address",
         sortable: true,
         filterable: true,
         style: {
@@ -163,7 +165,8 @@ const mapDispatchToProps = dispatch => {
   return {
     getPropertyDatas: val => dispatch(actionCreator.GetPropertyData(val)),
     selectProperty: val => dispatch(actionCreator.SelectedData(val)),
-    changeFormType: val => dispatch(actionCreator.ChangeFormType(val))
+    changeFormType: val => dispatch(actionCreator.ChangeFormType(val)),
+    loader: () => dispatch(actionCreator.LoaderState())
   };
 };
 
