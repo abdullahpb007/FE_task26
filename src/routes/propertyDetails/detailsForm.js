@@ -441,8 +441,8 @@ class DetailsForm extends Component {
             {errors[e.name] && touched[e.name] ? (
               <small className="text-danger">{errors[e.name]}</small>
             ) : (
-              ""
-            )}
+                ""
+              )}
           </FormGroup>
         </Colxx>
       );
